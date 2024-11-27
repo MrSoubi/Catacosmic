@@ -16,9 +16,14 @@ public class RUI_Game : MonoBehaviour
     private Button buttonFortuneWheelPopUp;
     private Button buttonQuestsPopUp;
 
-    private void OnEnable()
+    [SerializeField] VisualTreeAsset m_ListEntryTemplate;
+
+    void OnEnable()
     {
         var uiDocument = GetComponent<UIDocument>();
+
+        var upgradeListController = new UpgradeListController();
+        upgradeListController.InitializeCharacterList(uiDocument.rootVisualElement, m_ListEntryTemplate);
 
         buttonGiftsPopUp = uiDocument.rootVisualElement.Q("Button_Gifts") as Button;
         buttonFortuneWheelPopUp = uiDocument.rootVisualElement.Q("Button_FortuneWheel") as Button;
