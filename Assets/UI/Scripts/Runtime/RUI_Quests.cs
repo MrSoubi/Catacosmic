@@ -36,13 +36,11 @@ public class RUI_Quests : MonoBehaviour
 
     void ShutPopUp(ClickEvent clickEvent)
     {
-        Debug.Log("Close Quests");
         uiDocument.rootVisualElement.visible = false;
     }
 
     void ShutPopUp()
     {
-        Debug.Log("Close Quests");
         uiDocument.rootVisualElement.visible = false;
     }
 
