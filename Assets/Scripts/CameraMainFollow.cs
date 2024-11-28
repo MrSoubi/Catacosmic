@@ -6,6 +6,9 @@ public class CameraMainFollow : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+        if(target != null && target.childCount > 0)
+        {
+            transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+        } 
     }
 }

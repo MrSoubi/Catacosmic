@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(joyStick.joystickVec.y != 0)
+        if(joyStick != null && joyStick.joystickVec.y != 0)
         {
             rb.linearVelocity = new Vector2(joyStick.joystickVec.x * speed, joyStick.joystickVec.y * speed);
         }
