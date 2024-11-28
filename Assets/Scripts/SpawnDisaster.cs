@@ -1,63 +1,52 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnDisaster : MonoBehaviour
 {
-    public Transform target;
-    public GameObject prefab;
-    public GameObject prefab2;
+    public PlayerTarget playerTarget;
 
-    private int index;
-    private GameObject current;
+    public List<GameObject> disasterPrefabs = new List<GameObject>();
 
-    public void PressDisaster1()
+    private int currentIndex = -1;
+    private GameObject currentDisaster;
+
+    /// <summary>
+    /// Destroy the Disaster
+    /// </summary>
+    private void DestroyCurrentDisaster()
     {
-        if (index == 1)
+        if (currentDisaster != null)
         {
-            index = 0;
-
-            if (current != null)
-            {
-                Destroy(current);
-            }
-        }
-        else
-        {
-            index = 1;
-
-            if (current != null)
-            {
-                Destroy(current);
-            }
-
-            current = Instantiate(prefab);
-            current.transform.parent = target;
-            current.transform.position = target.position;
+            Destroy(currentDisaster);
+            currentDisaster = null;
         }
     }
 
-    public void PressDisaster2()
+    /// <summary>
+    /// Spawn Disaster
+    /// </summary>
+    /// <param name="disasterIndex"></param>
+    private void ToggleDisaster(int disasterIndex)
     {
-        if (index == 2)
+        if (currentIndex == disasterIndex)
         {
-            index = 0;
-
-            if (current != null)
-            {
-                Destroy(current);
-            }
+            currentIndex = -1;
+            DestroyCurrentDisaster();
         }
         else
         {
-            index = 2;
-
-            if (current != null)
-            {
-                Destroy(current);
-            }
-
-            current = Instantiate(prefab2);
-            current.transform.parent = target;
-            current.transform.position = target.position;
+            currentIndex = disasterIndex;
+            DestroyCurrentDisaster();
+            currentDisaster = Instantiate(disasterPrefabs[disasterIndex], playerTarget.location.position, Quaternion.identity, playerTarget.location);
         }
+    }
+
+
+    /// <summary>
+    /// Press Disaster
+    /// </summary>
+    public void PressDisaster(int disasterIndex)
+    {
+        ToggleDisaster(disasterIndex);
     }
 }

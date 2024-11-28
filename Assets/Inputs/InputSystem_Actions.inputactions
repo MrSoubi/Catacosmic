@@ -6,24 +6,35 @@
             "id": "af377c97-5c05-42a7-8c67-9ad0888b5a26",
             "actions": [
                 {
-                    "name": "Drag",
+                    "name": "Press",
                     "type": "Button",
                     "id": "425e7045-4422-40b2-907b-f5bac8072724",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "4503bba9-b682-4e6f-8891-fb4ac77f59e9",
+                    "id": "c3e6d91c-4e42-461c-b8ff-7773f6473dbd",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drag",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4503bba9-b682-4e6f-8891-fb4ac77f59e9",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -55,7 +66,7 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

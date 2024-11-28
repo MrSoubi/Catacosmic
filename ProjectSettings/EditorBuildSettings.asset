@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Killian_JoyStick.unity
-    guid: d4045305cb4cc044d9af8d3f13060e5e
-  - enabled: 1
     path: Assets/Scenes/Killian_Click.unity
     guid: 95a1da87f2ac7f243a20e3b418fffba0
+  - enabled: 1
+    path: Assets/Scenes/Killian_JoyStick.unity
+    guid: d4045305cb4cc044d9af8d3f13060e5e
   - enabled: 1
     path: Assets/UI/UI_TestScene.unity
     guid: 06f767240dc444a4da7b5b6da86c4455
