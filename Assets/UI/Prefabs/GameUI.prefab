@@ -70,3 +70,4 @@ MonoBehaviour:
   shutGiftsPopUp: {fileID: 11400000, guid: 6c5eb0837f7c5114cbd77f8d1d2d2412, type: 2}
   shutQuestsPopUp: {fileID: 11400000, guid: babe31d37ced3b541986ffc5c3c0cd09, type: 2}
   shutFortuneWheelPopUp: {fileID: 11400000, guid: 212d1f076cc4c474b99b4a64dcbaebda, type: 2}
+  m_ListEntryTemplate: {fileID: 9197481963319205126, guid: 5514302c08a4ae84e9098dcd5b9061e9, type: 3}
