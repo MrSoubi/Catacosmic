@@ -19,7 +19,7 @@ public class PointerClick : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(Input.GetMouseButton(0) && !IsPointerOverUIObject())
+        if(Input.GetMouseButton(0) && !IsPointerOverUIObject() && transform.childCount > 0)
         {
             target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             target.z = transform.position.z;
