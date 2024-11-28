@@ -12,6 +12,8 @@ public class RUI_Game : MonoBehaviour
     public RSE_ShutQuestsPopUp shutQuestsPopUp;
     public RSE_ShutFortuneWheelPopUp shutFortuneWheelPopUp;
 
+    private VisualElement root;
+
     private Button buttonGiftsPopUp;
     private Button buttonFortuneWheelPopUp;
     private Button buttonQuestsPopUp;
@@ -25,6 +27,11 @@ public class RUI_Game : MonoBehaviour
         var upgradeListController = new UpgradeListController();
         upgradeListController.InitializeCharacterList(uiDocument.rootVisualElement, m_ListEntryTemplate);
 
+        root = uiDocument.rootVisualElement;
+
+        root.RegisterCallback<PointerDownEvent>(GetPointerPosition);
+        root.RegisterCallback<PointerMoveEvent>(GetPointerPosition);
+
         buttonGiftsPopUp = uiDocument.rootVisualElement.Q("Button_Gifts") as Button;
         buttonFortuneWheelPopUp = uiDocument.rootVisualElement.Q("Button_FortuneWheel") as Button;
         buttonQuestsPopUp = uiDocument.rootVisualElement.Q("Button_Quests") as Button;
@@ -36,9 +43,23 @@ public class RUI_Game : MonoBehaviour
 
     private void OnDisable()
     {
+        root.UnregisterCallback<PointerDownEvent>(GetPointerPosition);
+        root.UnregisterCallback<PointerMoveEvent>(GetPointerPosition);
+
         buttonGiftsPopUp.UnregisterCallback<ClickEvent>(CallGiftsPopUp);
         buttonFortuneWheelPopUp.UnregisterCallback<ClickEvent>(CallFortuneWheelPopUp);
         buttonQuestsPopUp.UnregisterCallback<ClickEvent>(CallQuestsPopUp);
+    }
+
+    void GetPointerPosition(PointerDownEvent pointerDownEvent)
+    {
+        Debug.Log(pointerDownEvent.position);
+    }
+
+    void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
+    {
+        if (pointerMoveEvent.pressedButtons == 0) return;
+        Debug.Log(pointerMoveEvent.position);
     }
 
     void CallGiftsPopUp(ClickEvent clickEvent)
