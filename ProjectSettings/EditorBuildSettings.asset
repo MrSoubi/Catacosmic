@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Killian_Click.unity
     guid: 95a1da87f2ac7f243a20e3b418fffba0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Killian_JoyStick.unity
     guid: d4045305cb4cc044d9af8d3f13060e5e
   - enabled: 1
