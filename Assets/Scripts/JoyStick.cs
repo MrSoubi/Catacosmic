@@ -35,6 +35,10 @@ public class JoyStick : MonoBehaviour
         joystickTouchPos = joystickOriginalPos;
     }
 
+    /// <summary>
+    /// Move the Camera
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator CameraMove()
     {
         while (isJoyStickMove)
