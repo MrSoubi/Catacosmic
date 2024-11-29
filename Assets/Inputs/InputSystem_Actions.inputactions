@@ -6,13 +6,22 @@
             "id": "af377c97-5c05-42a7-8c67-9ad0888b5a26",
             "actions": [
                 {
+                    "name": "TouchPosition",
+                    "type": "Value",
+                    "id": "7fea58e7-2dea-4232-9fef-00c14cffa2a4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Press",
                     "type": "Button",
                     "id": "425e7045-4422-40b2-907b-f5bac8072724",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Zoom",
@@ -55,6 +64,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3728ed6e-9659-4d6e-b610-71e13de217e9",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5aa2ddc6-36c2-45f3-9927-65f4ae9c168b",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

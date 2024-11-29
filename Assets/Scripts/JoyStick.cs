@@ -1,20 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class JoyStick : MonoBehaviour
 {
+    public Transform cam;
+    public Transform player;
+    public float speedCam;
+
     public GameObject joystick;
     public GameObject joystickBG;
 
     public Vector2 joystickVec;
-
-    private Vector2 joystickOriginalPos;
-
-    private Vector2 joystickTouchPos;
-    private float joystickRadius;
-
+    private Vector3 joystickOriginalPos;
+    private Vector3 touchPress;
+    private Vector3 joystickTouchPos;
     private Vector2 joystickDist;
+    private float joystickRadius;
+    private bool isPressed;
+    private bool isJoyStickMove;
+
+    private Coroutine coroutine;
 
     private void Start()
     {
@@ -25,35 +35,91 @@ public class JoyStick : MonoBehaviour
         joystickTouchPos = joystickOriginalPos;
     }
 
-    /// <summary>
-    /// Touch Down
-    /// </summary>
-    public void PointerDown()
+    private IEnumerator CameraMove()
     {
-        Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        joystickTouchPos = touchPos;
+        while (isJoyStickMove)
+        {
+            Vector3 targetPosition = cam.position + new Vector3(joystickVec.x, joystickVec.y, 0);
 
-        joystickBG.transform.position = joystickTouchPos;
+            cam.position = Vector3.Lerp(cam.position, targetPosition, speedCam * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
     /// <summary>
-    /// Touch Drag
+    /// Touch Position
     /// </summary>
-    /// <param name="baseEventData"></param>
-    public void Drag(BaseEventData baseEventData)
+    /// <param name="ctx"></param>
+    public void TouchPos(InputAction.CallbackContext ctx)
     {
-        joystickTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - joystickBG.transform.position;
+        touchPress = ctx.ReadValue<Vector2>();
 
-        joystickVec = Vector2.ClampMagnitude(joystickTouchPos, 1);
-        joystickDist = Vector2.ClampMagnitude(joystickTouchPos * joystickRadius, joystickRadius);
+        if (ctx.performed && isJoyStickMove)
+        {
+            joystickTouchPos = Camera.main.ScreenToWorldPoint(new Vector3(touchPress.x, touchPress.y, 0)) - joystickBG.transform.position;
 
-        joystick.GetComponent<RectTransform>().anchoredPosition = joystickDist;
+            joystickVec = Vector2.ClampMagnitude(joystickTouchPos, 1);
+            joystickDist = Vector2.ClampMagnitude(joystickTouchPos * joystickRadius, joystickRadius);
+
+            joystick.GetComponent<RectTransform>().anchoredPosition = joystickDist;
+
+            if(coroutine == null)
+            {
+                coroutine = StartCoroutine(CameraMove());
+            }
+        }
     }
 
     /// <summary>
-    /// Touch Up
+    /// Verify if UI on Top
     /// </summary>
-    public void PointerUp()
+    /// <returns></returns>
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = touchPress
+        };
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, raycastResults);
+
+        bool overUI = false;
+
+        foreach (RaycastResult result in raycastResults)
+        {
+            if(result.gameObject.CompareTag("UI"))
+            {
+                overUI = true;
+            }     
+        }
+
+        return overUI;
+    }
+
+    /// <summary>
+    /// Move the JoyStick with a Frame Delay
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator MoveJoyStick()
+    {
+        yield return null;
+
+        if(!IsPointerOverUIObject())
+        {
+            joystickTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
+            joystickTouchPos.z = 0;
+            joystickBG.transform.position = joystickTouchPos;
+
+            isJoyStickMove = true;
+        }
+    }
+
+    /// <summary>
+    /// Reset the JoyStick Position
+    /// </summary>
+    private void ResetJoyStickPos()
     {
         joystickTouchPos = Vector2.zero;
         joystickVec = Vector2.zero;
@@ -61,5 +127,32 @@ public class JoyStick : MonoBehaviour
 
         joystick.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         joystickBG.GetComponent<RectTransform>().anchoredPosition = joystickOriginalPos;
+
+        isJoyStickMove = false;
+        
+        if(coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        } 
+    }
+
+    /// <summary>
+    /// Touch Down
+    /// </summary>
+    public void TouchDown(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && !isPressed)
+        {
+            isPressed = ctx.started || ctx.performed;
+
+            StartCoroutine(MoveJoyStick());
+        }
+        else if (ctx.canceled)
+        {
+            isPressed = false;
+
+            ResetJoyStickPos();
+        }
     }
 }

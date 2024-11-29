@@ -3,7 +3,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public JoyStick joyStick;
-    public Transform cam;
 
     public float speed;
 
@@ -16,7 +15,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(joyStick != null && joyStick.joystickVec.y != 0)
+        if(joyStick != null && (joyStick.joystickVec.x != 0 || joyStick.joystickVec.y != 0))
         {
             rb.linearVelocity = new Vector2(joyStick.joystickVec.x * speed, joyStick.joystickVec.y * speed);
         }
@@ -24,7 +23,5 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
         }
-
-        cam.position = new Vector3(transform.position.x, transform.position.y, cam.position.z);
     }
 }
