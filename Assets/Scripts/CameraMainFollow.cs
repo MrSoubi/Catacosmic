@@ -17,6 +17,7 @@ public class CameraMainFollow : MonoBehaviour
     private Vector3 difference;
 
     private bool isDragging;
+    private bool isZooming;
 
     /// <summary>
     /// Verify if UI on Top
@@ -33,6 +34,25 @@ public class CameraMainFollow : MonoBehaviour
         EventSystem.current.RaycastAll(pointerData, raycastResults);
 
         return raycastResults.Count > 0;
+    }
+
+    /// <summary>
+    /// Scroll with Mouse
+    /// </summary>
+    /// <param name="ctx"></param>
+    public void ScrollZoom(InputAction.CallbackContext ctx)
+    {
+        if (ctx.control.device is Mouse && !isZooming && !IsPointerOverUIObject())
+        {
+            isZooming = ctx.started || ctx.performed;
+            float scrollValue = ctx.ReadValue<float>();
+
+            Zoom(scrollValue * zoomSpeed * 10);
+        }
+        else if (ctx.canceled)
+        {
+            isZooming = false;
+        }
     }
 
     /// <summary>
