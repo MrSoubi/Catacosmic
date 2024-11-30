@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,8 +14,8 @@ public class JoyStick : MonoBehaviour
 
     [Header("Zoom")]
     public float speedCam;
-    public int zoomMax;
-    public int zoomMin;
+    public float zoomMax;
+    public float zoomMin;
     public float speedZoomCam;
     public float zoomChangeMin;
 
@@ -81,6 +82,8 @@ public class JoyStick : MonoBehaviour
 
             if (isOnScreen)
             {
+                //cam.position = Vector3.Lerp(cam.position, targetPosition, speedCam * Time.deltaTime);
+
                 // BOUND LIMIT
                 Vector3 newPosition = Vector3.Lerp(cam.position, targetPosition, speedCam * Time.deltaTime);
 
@@ -243,6 +246,8 @@ public class JoyStick : MonoBehaviour
     private void Zoom(float increment)
     {
         cam.GetComponent<CinemachineCamera>().Lens.OrthographicSize = Mathf.Clamp(cam.GetComponent<CinemachineCamera>().Lens.OrthographicSize - increment, zoomMax, zoomMin);
+        cam.GetComponent<CinemachineConfiner2D>().InvalidateBoundingShapeCache();
+        cam.GetComponent<CinemachineConfiner2D>().InvalidateLensCache();
     }
 
     /// <summary>
@@ -258,6 +263,7 @@ public class JoyStick : MonoBehaviour
             float scrollValue = ctx.ReadValue<float>();
 
             Zoom(scrollValue * speedZoomCam);
+            
         }
         else if (ctx.canceled)
         {
