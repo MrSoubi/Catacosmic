@@ -1,42 +1,70 @@
-using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Transform cam;
+    [Header("Targets")]
+    public Transform cameraTarget;
 
+    [Header("Default Disaster")]
+    public GameObject prefab;
+
+    [Header("Speed")]
     public float speed;
 
-    private Rigidbody2D rb;
+    [Header("RigidBody")]
+    public Rigidbody2D rb;
+
+    private bool isNeedToMove;
+    private GameObject currentDisaster;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        SpawnDisater(prefab);
     }
 
     private void Update()
     {
-        if (cam != null)
-        {
-            Vector2 currentPosition = rb.position;
-            Vector2 targetPosition = new Vector2(cam.position.x, cam.position.y);
-            Vector2 direction = (targetPosition - currentPosition).normalized;
-
-            if (Vector2.Distance(currentPosition, targetPosition) > 0.1f)
-            {
-                rb.linearVelocity = direction * speed;
-            }
-            else
-            {
-                rb.linearVelocity = Vector2.zero;
-            }
-        }
+        MoveToCamera();
     }
 
-    private void OnDrawGizmosSelected()
+    /// <summary>
+    /// Destroy Disaster & Spawn the new Disaster
+    /// </summary>
+    /// <param name="disaster"></param>
+    private void SpawnDisater(GameObject disaster)
     {
-        Gizmos.color = Color.red;
+        if(currentDisaster != null)
+        {
+            Destroy(currentDisaster);
+        }
 
-        Gizmos.DrawSphere(transform.position, 1f);
+        currentDisaster = Instantiate(disaster, transform.position, Quaternion.identity, transform);
+    }
+
+    /// <summary>
+    /// Move the Player to the Circle of the Camera
+    /// </summary>
+    private void MoveToCamera()
+    {
+        if (cameraTarget == null) return;
+
+        Vector2 targetPosition = cameraTarget.position;
+        float distance = Vector2.Distance(rb.position, targetPosition);
+
+        if (distance > 0.05f)
+        {
+            isNeedToMove = true;
+
+            Vector2 direction = (targetPosition - rb.position).normalized;
+
+            rb.linearVelocity = direction * speed;
+        }
+        else if (isNeedToMove)
+        {
+            isNeedToMove = false;
+
+            rb.linearVelocity = Vector2.zero;
+            transform.position = targetPosition;
+        }
     }
 }
