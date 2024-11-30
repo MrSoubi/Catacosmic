@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c7ea3cf0a4c16234d9b81026585f9aee
+guid: c797bcb543f033c4382a65790fe30e80
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1404028623067837608
-    second: Logo_0
+      213: 222584402926523741
+    second: JoyStickBG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Logo_0
+      name: JoyStickBG_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 37
-        width: 182
-        height: 182
+        x: 0
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a47074089c1c7310800000000000000
-      internalID: 1404028623067837608
+      spriteID: d555afcc557c61300800000000000000
+      internalID: 222584402926523741
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 53640ddc98c0d8a4b83dac4f6e575bdb
+    spriteID: 1a58fee0237a2d0468b26ad47e61e7be
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Logo_0: 1404028623067837608
+      JoyStickBG_0: 222584402926523741
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

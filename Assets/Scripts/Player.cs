@@ -1,8 +1,9 @@
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public JoyStick joyStick;
+    public Transform cam;
 
     public float speed;
 
@@ -13,15 +14,29 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if(joyStick != null && (joyStick.joystickVec.x != 0 || joyStick.joystickVec.y != 0))
+        if (cam != null)
         {
-            rb.linearVelocity = new Vector2(joyStick.joystickVec.x * speed, joyStick.joystickVec.y * speed);
+            Vector2 currentPosition = rb.position;
+            Vector2 targetPosition = new Vector2(cam.position.x, cam.position.y);
+            Vector2 direction = (targetPosition - currentPosition).normalized;
+
+            if (Vector2.Distance(currentPosition, targetPosition) > 0.1f)
+            {
+                rb.linearVelocity = direction * speed;
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
         }
-        else
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawSphere(transform.position, 1f);
     }
 }
