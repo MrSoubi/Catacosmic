@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         SpawnDisater(prefab);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MoveToCamera();
     }
