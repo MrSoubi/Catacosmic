@@ -21,9 +21,9 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
-    m_path: Assets/Scenes/Killian_JoyStick.unity
+    m_path: Assets/Scenes/Killian_LockPress.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Killian_Click.unity
+    m_path: Assets/Scenes/Killian_JoyStick.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:

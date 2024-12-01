@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class JoyStick : MonoBehaviour
+public class LockPress : MonoBehaviour
 {
     [Header("Targets")]
     public Transform player;
@@ -17,52 +17,22 @@ public class JoyStick : MonoBehaviour
     public float speedZoomCam;
     public float zoomChangeMin;
 
-    [Header("JoyStickUI")]
-    public GameObject joystick;
-    public GameObject joystickBG;
-    public RectTransform joystickRectTransform;
-    public RectTransform joystickBGRectTransform;
-
     [Header("Cinemachine")]
     public CinemachineCamera cinemachineCamera;
     public CinemachineConfiner2D cinemachineConfiner;
 
-    private Vector3 joystickVec;
-    private Vector3 joystickOriginalPos;
+    private Vector3 lockPressVec;
     private Vector3 touchPress;
-    private Vector3 joystickTouchPos;
-    private Vector3 joystickDist;
+    private Vector3 lockPressTouchPos;
     private Vector3 touch1Press;
     private Vector3 touch2Press;
 
-    private float joystickRadius;
-
     private bool isPressed;
-    private bool isJoyStickMove;
     private bool isTouchPress1;
     private bool isZooming;
 
     private Coroutine moveCoroutine;
     private Coroutine zoomCoroutine;
-
-    private void Start()
-    {
-        Initialisation();
-    }
-
-    /// <summary>
-    /// Initialise the JoyStick Values
-    /// </summary>
-    private void Initialisation()
-    {
-        if (joystickBG == null) return;
-
-        joystickRadius = joystickBGRectTransform.sizeDelta.y / 4;
-
-        joystickOriginalPos = joystickBGRectTransform.anchoredPosition;
-
-        joystickTouchPos = joystickOriginalPos;
-    }
 
     /// <summary>
     /// Lock the Camera for Always see the Player
@@ -121,21 +91,27 @@ public class JoyStick : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CameraMove()
     {
-        while (isJoyStickMove)
+        yield return null;
+
+        if (!IsPointerOverUIObject())
         {
-            if (isInsideCameraBorder())
+            while (isPressed && !isZooming)
             {
-                if(Mathf.Abs(joystickVec.x) > 0.1f || Mathf.Abs(joystickVec.y) > 0.1f)
+                if (isInsideCameraBorder())
                 {
-                    Vector3 targetPosition = transform.position + new Vector3(joystickVec.x, joystickVec.y, 0);
+                    lockPressTouchPos = Camera.main.ScreenToWorldPoint(new Vector3(touchPress.x, touchPress.y, 0)) - transform.position;
+
+                    lockPressVec = Vector2.ClampMagnitude(lockPressTouchPos, 1);
+
+                    Vector3 targetPosition = transform.position + new Vector3(lockPressVec.x, lockPressVec.y, 0);
 
                     Vector3 newPosition = Vector3.Lerp(transform.position, targetPosition, speedCam * Time.deltaTime);
 
                     transform.position = LockToCameraBorder(newPosition);
                 }
-            }
 
-            yield return null;
+                yield return null;
+            }
         }
     }
 
@@ -157,87 +133,12 @@ public class JoyStick : MonoBehaviour
     }
 
     /// <summary>
-    /// Move the JoyStick with a Frame Delay
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator MoveJoyStick()
-    {
-        yield return null;
-
-        if (!IsPointerOverUIObject())
-        {
-            joystickTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
-            joystickTouchPos.z = 0;
-
-            if (joystickBG != null)
-            {
-                joystickBG.transform.position = joystickTouchPos;
-            }
-
-            isJoyStickMove = true;
-        }
-    }
-
-    /// <summary>
-    /// Reset the JoyStick Position
-    /// </summary>
-    private void ResetJoyStickPos()
-    {
-        joystickTouchPos = Vector3.zero;
-        joystickVec = Vector3.zero;
-        joystickDist = Vector3.zero;
-
-        isJoyStickMove = false;
-
-        if (joystickBG != null)
-        {
-            joystickRectTransform.anchoredPosition = Vector2.zero;
-            joystickBGRectTransform.anchoredPosition = joystickOriginalPos;
-        }
-
-        if (moveCoroutine != null)
-        {
-            StopCoroutine(moveCoroutine);
-            moveCoroutine = null;
-        }
-    }
-
-    /// <summary>
     /// Touch Position
     /// </summary>
     /// <param name="ctx"></param>
     public void TouchPos(InputAction.CallbackContext ctx)
     {
         touchPress = ctx.ReadValue<Vector2>();
-
-        if (ctx.performed && isJoyStickMove && !isZooming)
-        {
-            Vector3 backgroundJoyStick = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-
-            if (joystickBG != null)
-            {
-                backgroundJoyStick = joystickBG.transform.position;
-            }
-
-            joystickTouchPos = Camera.main.ScreenToWorldPoint(new Vector3(touchPress.x, touchPress.y, 0)) - backgroundJoyStick;
-
-            joystickVec = Vector2.ClampMagnitude(joystickTouchPos, 1);
-            joystickDist = Vector2.ClampMagnitude(joystickTouchPos * joystickRadius, joystickRadius);
-
-            if (joystickBG != null)
-            {
-                joystickRectTransform.anchoredPosition = joystickDist;
-            }
-
-            if(moveCoroutine == null)
-            {
-                moveCoroutine = StartCoroutine(CameraMove());
-            }
-        }
-        else if(ctx.performed && isJoyStickMove && isZooming)
-        {
-            ResetJoyStickPos();
-        }
     }
 
     /// <summary>
@@ -245,17 +146,24 @@ public class JoyStick : MonoBehaviour
     /// </summary>
     public void TouchDown(InputAction.CallbackContext ctx)
     {
-        if (ctx.started && !isPressed)
+        if (ctx.started && !isZooming)
         {
             isPressed = true;
 
-            StartCoroutine(MoveJoyStick());
+            if (moveCoroutine == null)
+            {
+                moveCoroutine = StartCoroutine(CameraMove());
+            }
         }
         else if (ctx.canceled)
         {
             isPressed = false;
 
-            ResetJoyStickPos();
+            if (moveCoroutine != null)
+            {
+                StopCoroutine(moveCoroutine);
+                moveCoroutine = null;
+            }
         }
     }
 
@@ -266,7 +174,7 @@ public class JoyStick : MonoBehaviour
     private void Zoom(float increment)
     {
         cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(transform.GetComponent<CinemachineCamera>().Lens.OrthographicSize - increment, zoomMax, zoomMin);
-        
+
         cinemachineConfiner.InvalidateBoundingShapeCache();
         cinemachineConfiner.InvalidateLensCache();
     }
@@ -281,10 +189,7 @@ public class JoyStick : MonoBehaviour
         {
             isZooming = true;
 
-            ResetJoyStickPos();
-
             Zoom(ctx.ReadValue<float>() * speedZoomCam);
-            
         }
         else if (ctx.canceled)
         {
@@ -302,8 +207,6 @@ public class JoyStick : MonoBehaviour
 
         float previousDistance = 0f;
         float distance = 0f;
-
-        ResetJoyStickPos();
 
         while (isZooming && isTouchPress1)
         {
@@ -369,13 +272,13 @@ public class JoyStick : MonoBehaviour
     /// <param name="ctx"></param>
     public void ZoomStart(InputAction.CallbackContext ctx)
     {
-        if(ctx.started && !isZooming)
+        if (ctx.started && !isZooming)
         {
             isZooming = true;
 
             zoomCoroutine = StartCoroutine(ZoomDetection());
         }
-        else if(ctx.canceled)
+        else if (ctx.canceled)
         {
             isZooming = false;
 
@@ -388,7 +291,7 @@ public class JoyStick : MonoBehaviour
     /// </summary>
     private void ZoomStop()
     {
-        if(zoomCoroutine != null)
+        if (zoomCoroutine != null)
         {
             StopCoroutine(zoomCoroutine);
             zoomCoroutine = null;
