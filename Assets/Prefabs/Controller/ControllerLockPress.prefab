@@ -619,8 +619,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5631430650699380609}
   - {fileID: 3360101359399008086}
+  - {fileID: 5631430650699380609}
   m_Father: {fileID: 7215168071807640266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -781,7 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5f7fde67c47754ba31d3bc65d72eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Killian_JoyStick
+  levelName1: Killian_JoyStick
+  levelName2: Killian_FreePress
 --- !u!1 &3681165581383378845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1072,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5301567331708381439}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: PressButton
+        m_MethodName: PressButton2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1239,7 +1240,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5301567331708381439}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: PressButton
+        m_MethodName: PressButton1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

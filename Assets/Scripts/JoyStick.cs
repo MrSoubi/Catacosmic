@@ -129,7 +129,7 @@ public class JoyStick : MonoBehaviour
                 {
                     Vector3 targetPosition = transform.position + new Vector3(joystickVec.x, joystickVec.y, 0);
 
-                    Vector3 newPosition = Vector3.Lerp(transform.position, targetPosition, speedCam * Time.deltaTime);
+                    Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, speedCam * Time.deltaTime);
 
                     transform.position = LockToCameraBorder(newPosition);
                 }

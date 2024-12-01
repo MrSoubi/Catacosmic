@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5f7fde67c47754ba31d3bc65d72eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Killian_LockPress
+  levelName1: Killian_LockPress
+  levelName2: Killian_FreePress
 --- !u!1 &586633200750049892
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +395,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4545119961404327324}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: PressButton
+        m_MethodName: PressButton2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1182,7 +1183,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4545119961404327324}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: PressButton
+        m_MethodName: PressButton1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
