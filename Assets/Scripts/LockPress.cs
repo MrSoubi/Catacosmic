@@ -100,8 +100,10 @@ public class LockPress : MonoBehaviour
                 if (isInsideCameraBorder())
                 {
                     lockPressTouchPos = Camera.main.ScreenToWorldPoint(new Vector3(touchPress.x, touchPress.y, 0)) - transform.position;
+                    lockPressTouchPos.z = -10;
 
                     lockPressVec = Vector2.ClampMagnitude(lockPressTouchPos, 1);
+                    lockPressVec.z = -10;
 
                     Vector3 targetPosition = transform.position + new Vector3(lockPressVec.x, lockPressVec.y, 0);
 
@@ -139,6 +141,22 @@ public class LockPress : MonoBehaviour
     public void TouchPos(InputAction.CallbackContext ctx)
     {
         touchPress = ctx.ReadValue<Vector2>();
+        touchPress.z = -10;
+    }
+
+    /// <summary>
+    /// Reset when stop Touch
+    /// </summary>
+    private void ResetTouch()
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+            moveCoroutine = null;
+        }
+
+        lockPressVec = Vector3.zero;
+        lockPressTouchPos = Vector3.zero;
     }
 
     /// <summary>
@@ -159,11 +177,7 @@ public class LockPress : MonoBehaviour
         {
             isPressed = false;
 
-            if (moveCoroutine != null)
-            {
-                StopCoroutine(moveCoroutine);
-                moveCoroutine = null;
-            }
+            ResetTouch();
         }
     }
 
@@ -239,6 +253,7 @@ public class LockPress : MonoBehaviour
     public void TouchPosition1(InputAction.CallbackContext ctx)
     {
         touch1Press = ctx.ReadValue<Vector2>();
+        touch1Press.z = -10;
     }
 
     /// <summary>
@@ -248,6 +263,7 @@ public class LockPress : MonoBehaviour
     public void TouchPosition2(InputAction.CallbackContext ctx)
     {
         touch2Press = ctx.ReadValue<Vector2>();
+        touch2Press.z = -10;
     }
 
     /// <summary>
@@ -263,6 +279,8 @@ public class LockPress : MonoBehaviour
         else if (ctx.canceled)
         {
             isTouchPress1 = false;
+
+            touch1Press = Vector3.zero;
         }
     }
 
@@ -281,6 +299,8 @@ public class LockPress : MonoBehaviour
         else if (ctx.canceled)
         {
             isZooming = false;
+
+            touch2Press = Vector3.zero;
 
             ZoomStop();
         }

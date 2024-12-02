@@ -20,7 +20,7 @@ public class FreePress : MonoBehaviour
     public CinemachineCamera cinemachineCamera;
     public CinemachineConfiner2D cinemachineConfiner;
 
-    private Vector3 lockPressVec;
+    private Vector3 freePressVec;
     private Vector3 touchPress;
     private Vector3 freePressTouchPos;
     private Vector3 freePressDist;
@@ -129,6 +129,21 @@ public class FreePress : MonoBehaviour
     }
 
     /// <summary>
+    /// Reset when stop Touch
+    /// </summary>
+    private void ResetTouch()
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+            moveCoroutine = null;
+        }
+
+        freePressTouchPos = Vector3.zero;
+        freePressDist = Vector3.zero;
+    }
+
+    /// <summary>
     /// Touch Down
     /// </summary>
     public void TouchDown(InputAction.CallbackContext ctx)
@@ -146,16 +161,7 @@ public class FreePress : MonoBehaviour
         {
             isPressed = false;
 
-            if (moveCoroutine != null)
-            {
-                isPressed = false;
-
-                StopCoroutine(moveCoroutine);
-                moveCoroutine = null;
-            }
-
-            freePressTouchPos = Vector3.zero;
-            freePressDist = Vector3.zero;
+            ResetTouch();
         }
     }
 
@@ -231,6 +237,7 @@ public class FreePress : MonoBehaviour
     public void TouchPosition1(InputAction.CallbackContext ctx)
     {
         touch1Press = ctx.ReadValue<Vector2>();
+        touch1Press.z = -10;
     }
 
     /// <summary>
@@ -240,6 +247,7 @@ public class FreePress : MonoBehaviour
     public void TouchPosition2(InputAction.CallbackContext ctx)
     {
         touch2Press = ctx.ReadValue<Vector2>();
+        touch2Press.z = -10;
     }
 
     /// <summary>
@@ -255,6 +263,8 @@ public class FreePress : MonoBehaviour
         else if (ctx.canceled)
         {
             isTouchPress1 = false;
+
+            touch1Press = Vector3.zero;
         }
     }
 
@@ -273,6 +283,8 @@ public class FreePress : MonoBehaviour
         else if (ctx.canceled)
         {
             isZooming = false;
+
+            touch2Press = Vector3.zero;
 
             ZoomStop();
         }
