@@ -11,7 +11,6 @@ public class FreePress : MonoBehaviour
     public Transform player;
 
     [Header("Zoom")]
-    public float speedCam;
     public float zoomMax;
     public float zoomMin;
     public float speedZoomCam;
@@ -76,25 +75,25 @@ public class FreePress : MonoBehaviour
         yield return null;
 
         freePressTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
-        freePressTouchPos.z = 0;
+        freePressTouchPos.z = -10;
 
         if (!IsPointerOverUIObject())
         {
             while (!isZooming && isPressed)
             {
                 Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
-                currentTouchPos.z = 0;
+                currentTouchPos.z = -10;
 
                 freePressDist = freePressTouchPos - currentTouchPos;
-                freePressDist.z = 0;
+                freePressDist.z = -10;
 
-                lockPressVec = Vector2.ClampMagnitude(freePressDist, 1);
+                Vector3 targetPosition = transform.position + freePressDist;
 
-                Vector3 targetPosition = transform.position + lockPressVec;
+                targetPosition = LockToCameraBorder(targetPosition);
 
-                Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, speedCam * Time.deltaTime);
+                Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, 1);
 
-                transform.position = LockToCameraBorder(newPosition);
+                transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
                 yield return null;
             }
@@ -126,6 +125,7 @@ public class FreePress : MonoBehaviour
     public void TouchPos(InputAction.CallbackContext ctx)
     {
         touchPress = ctx.ReadValue<Vector2>();
+        touchPress.z = -10;
     }
 
     /// <summary>
@@ -133,16 +133,8 @@ public class FreePress : MonoBehaviour
     /// </summary>
     public void TouchDown(InputAction.CallbackContext ctx)
     {
-        if (ctx.started && !isZooming)
+        if (ctx.performed && !isZooming)
         {
-            if (moveCoroutine != null)
-            {
-                isPressed = false;
-
-                StopCoroutine(moveCoroutine);
-                moveCoroutine = null;
-            }
-
             isPressed = true;
 
             if (moveCoroutine == null)
@@ -153,6 +145,17 @@ public class FreePress : MonoBehaviour
         else if (ctx.canceled)
         {
             isPressed = false;
+
+            if (moveCoroutine != null)
+            {
+                isPressed = false;
+
+                StopCoroutine(moveCoroutine);
+                moveCoroutine = null;
+            }
+
+            freePressTouchPos = Vector3.zero;
+            freePressDist = Vector3.zero;
         }
     }
 

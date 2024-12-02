@@ -7370,7 +7370,7 @@ PrefabInstance:
       objectReference: {fileID: 1602275404}
     - target: {fileID: 5412708397839633035, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: speedCam
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
