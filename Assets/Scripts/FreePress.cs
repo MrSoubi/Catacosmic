@@ -91,7 +91,7 @@ public class FreePress : MonoBehaviour
 
                 targetPosition = LockToCameraBorder(targetPosition);
 
-                Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, 1);
+                Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, freePressDist.magnitude * Time.deltaTime * 5);
 
                 transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
