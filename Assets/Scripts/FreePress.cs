@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -22,12 +23,13 @@ public class FreePress : MonoBehaviour
     public CinemachineConfiner2D cinemachineConfiner;
 
     private Vector3 velocity;
-    private Vector3 freePressVec;
     private Vector3 touchPress;
     private Vector3 freePressTouchPos;
     private Vector3 freePressDist;
     private Vector3 touch1Press;
     private Vector3 touch2Press;
+
+    private Vector2 boundsSize;
 
     private bool isPressed;
     private bool isDecelerating;
@@ -38,6 +40,17 @@ public class FreePress : MonoBehaviour
     private Coroutine deceleratingCoroutine;
     private Coroutine zoomCoroutine;
 
+    private void Start()
+    {
+        Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
+
+        if(confinerCollider != null)
+        {
+            boundsSize.x = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.x;
+            boundsSize.y = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.y;
+        }
+    }
+
     /// <summary>
     /// Lock the Camera inside the Border
     /// </summary>
@@ -45,11 +58,11 @@ public class FreePress : MonoBehaviour
     /// <returns></returns>
     private Vector3 LockToCameraBorder(Vector3 newPosition)
     {
-        Collider2D confinerCollider = transform.GetComponent<CinemachineConfiner2D>().BoundingShape2D;
+        Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
         if (confinerCollider != null && player != null)
         {
-            Vector2 confinerBounds = new Vector2(153.6f, 153.6f);
+            Vector2 confinerBounds = boundsSize;
             Vector2 confinerCenter = confinerCollider.bounds.center;
 
             Vector2 val = player.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
@@ -128,8 +141,9 @@ public class FreePress : MonoBehaviour
             {
                 isDecelerating = false;
 
-                //freePressTouchPos = Vector3.zero;
-                //freePressDist = Vector3.zero;
+                velocity = Vector3.zero;
+                freePressTouchPos = Vector3.zero;
+                freePressDist = Vector3.zero;
             }
 
             yield return null;
@@ -219,7 +233,7 @@ public class FreePress : MonoBehaviour
     /// <param name="increment"></param>
     private void Zoom(float increment)
     {
-        cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(transform.GetComponent<CinemachineCamera>().Lens.OrthographicSize - increment, zoomMax, zoomMin);
+        cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(cinemachineCamera.Lens.OrthographicSize - increment, zoomMax, zoomMin);
 
         cinemachineConfiner.InvalidateBoundingShapeCache();
         cinemachineConfiner.InvalidateLensCache();

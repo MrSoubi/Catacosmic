@@ -2867,7 +2867,7 @@ Transform:
   m_GameObject: {fileID: 920116249}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 60, y: 60, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7464,6 +7464,7 @@ MonoBehaviour:
   zoomMax: 25
   zoomMin: 149.999
   speedZoomCam: 4
+  smoothTime: 0.3
   zoomChangeMin: 5
   cinemachineCamera: {fileID: 6576009241701469165}
   cinemachineConfiner: {fileID: 6611452892933765291}
