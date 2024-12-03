@@ -24,6 +24,7 @@ public class FreePress : MonoBehaviour
 
     private Vector3 velocity;
     private Vector3 touchPress;
+    private Vector3 freePressTouch;
     private Vector3 freePressTouchPos;
     private Vector3 freePressDist;
     private Vector3 touch1Press;
@@ -122,9 +123,9 @@ public class FreePress : MonoBehaviour
 
     private IEnumerator Temp()
     {
-        while (isDecelerating)
+        while (isDecelerating && !isZooming)
         {
-            Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
+            Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(freePressTouch);
             currentTouchPos.z = -10;
 
             freePressDist = freePressTouchPos - currentTouchPos;
@@ -158,7 +159,7 @@ public class FreePress : MonoBehaviour
     {
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
-            position = touchPress
+            position = freePressTouch
         };
 
         List<RaycastResult> raycastResults = new List<RaycastResult>();
@@ -174,11 +175,8 @@ public class FreePress : MonoBehaviour
     /// <param name="ctx"></param>
     public void TouchPos(InputAction.CallbackContext ctx)
     {
-        if(isPressed)
-        {
-            touchPress = ctx.ReadValue<Vector2>();
-            touchPress.z = -10;
-        }
+        touchPress = ctx.ReadValue<Vector2>();
+        touchPress.z = -10;
     }
 
     /// <summary>
@@ -190,6 +188,13 @@ public class FreePress : MonoBehaviour
         {
             isPressed = true;
             isDecelerating = false;
+
+            velocity = Vector3.zero;
+            freePressTouchPos = Vector3.zero;
+            freePressDist = Vector3.zero;
+
+            freePressTouch = touchPress;
+            freePressTouch.z = -10;
 
             if (moveCoroutine != null)
             {
@@ -224,6 +229,8 @@ public class FreePress : MonoBehaviour
             {
                 deceleratingCoroutine = StartCoroutine(Temp());
             }
+
+            freePressTouch = touchPress;
         }
     }
 
@@ -247,9 +254,17 @@ public class FreePress : MonoBehaviour
     {
         if (ctx.started && !isZooming && !IsPointerOverUIObject())
         {
+            float increment = ctx.ReadValue<float>() * speedZoomCam;
+            float newZoom = cinemachineCamera.Lens.OrthographicSize - increment;
+
             isZooming = true;
 
-            Zoom(ctx.ReadValue<float>() * speedZoomCam);
+            if((increment > 0 && newZoom <= zoomMax) || (increment < 0 && newZoom >= zoomMin))
+            {
+                return;
+            }
+
+            Zoom(increment);
         }
         else if (ctx.canceled)
         {
@@ -274,13 +289,15 @@ public class FreePress : MonoBehaviour
 
             float distanceChange = Mathf.Abs(distance - previousDistance);
 
+            isZooming = true;
+
             if (distanceChange >= zoomChangeMin)
             {
-                if (distance > previousDistance && previousDistance > 0)
+                if (distance > previousDistance && previousDistance > 0 && cinemachineCamera.Lens.OrthographicSize > zoomMax)
                 {
                     Zoom(1 * speedZoomCam);
                 }
-                else if (distance < previousDistance)
+                else if (distance < previousDistance && cinemachineCamera.Lens.OrthographicSize < zoomMin)
                 {
                     Zoom(-1 * speedZoomCam);
                 }
