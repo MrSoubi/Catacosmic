@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 public class JoyStick : MonoBehaviour
 {
+    [Header("ScriptableObjects")]
+    public MapInfos mapInfos;
+
     [Header("Targets")]
     public Transform player;
 
@@ -132,6 +135,8 @@ public class JoyStick : MonoBehaviour
                     Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, speedCam * Time.deltaTime);
 
                     transform.position = LockToCameraBorder(newPosition);
+
+                    mapInfos.CameraTransform = transform.position;
                 }
             }
 

@@ -591,9 +591,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
+  player: {fileID: 0}
+  speedCam: 10
   zoomMax: 25
   speedZoomCam: 4
-  smoothTime: 0.3
+  smoothTime: 0.2
   zoomChangeMin: 5
   circleCamera: {fileID: 6843042190284816401}
   cinemachineCamera: {fileID: 1025714566204047620}
@@ -1249,7 +1251,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
 --- !u!114 &7052469880901620820
 MonoBehaviour:
   m_ObjectHideFlags: 0

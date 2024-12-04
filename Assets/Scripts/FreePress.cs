@@ -14,6 +14,7 @@ public class FreePress : MonoBehaviour
     public Transform player;
 
     [Header("Zoom")]
+    public float speedCam;
     public float zoomMax;
     private float zoomMin;
     public float speedZoomCam;
@@ -141,7 +142,7 @@ public class FreePress : MonoBehaviour
 
                 targetPosition.z = -10;
 
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5);
+                transform.position = Vector3.Lerp(transform.position, targetPosition, speedCam * Time.deltaTime);
 
                 mapInfos.CameraTransform = transform.position;
 
@@ -224,13 +225,6 @@ public class FreePress : MonoBehaviour
             isPressed = true;
             isDecelerating = false;
 
-            velocity = Vector3.zero;
-            freePressTouchPos = Vector3.zero;
-            freePressDist = Vector3.zero;
-
-            freePressTouch = touchPress;
-            freePressTouch.z = -10;
-
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);
@@ -243,6 +237,13 @@ public class FreePress : MonoBehaviour
                 deceleratingCoroutine = null;
             }
 
+            velocity = Vector3.zero;
+            freePressTouchPos = Vector3.zero;
+            freePressDist = Vector3.zero;
+
+            freePressTouch = touchPress;
+            freePressTouch.z = -10;
+
             if (moveCoroutine == null)
             {
                 moveCoroutine = StartCoroutine(CameraMove());
@@ -254,13 +255,13 @@ public class FreePress : MonoBehaviour
 
             isDecelerating = true;
 
-            freePressTouch = touchPress;
-
             if (deceleratingCoroutine != null)
             {
                 StopCoroutine(deceleratingCoroutine);
                 deceleratingCoroutine = null;
             }
+
+            freePressTouch = touchPress;
 
             if (deceleratingCoroutine == null)
             {

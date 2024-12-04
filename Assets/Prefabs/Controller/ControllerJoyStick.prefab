@@ -516,6 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fac2c0fe82132b4fb8491a23cd0046b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
   player: {fileID: 0}
   speedCam: 10
   zoomMax: 25
@@ -1034,6 +1035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 733247175640162624}
+  - component: {fileID: 7486733303066236400}
   m_Layer: 0
   m_Name: ControllerJoyStick
   m_TagString: Untagged
@@ -1060,6 +1062,19 @@ Transform:
   - {fileID: 3571964803798699301}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7486733303066236400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7140704341388060465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593f387eecd9e6843b9e1ffad91e8aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
 --- !u!1 &7702752029683021905
 GameObject:
   m_ObjectHideFlags: 0
