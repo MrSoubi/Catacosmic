@@ -7,32 +7,80 @@ using UnityEngine.InputSystem;
 
 public class FreePress : MonoBehaviour
 {
-    [Header("Targets")]
+    [Header("ScriptableObjects")]
+    public MapInfos mapInfos;
+
+    [Header("Target")]
     public Transform player;
 
     [Header("Zoom")]
     public float zoomMax;
-    public float zoomMin;
+    private float zoomMin;
     public float speedZoomCam;
+    public float smoothTime;
     public float zoomChangeMin;
+
+    [Header("Camera Circle")]
+    public Transform circleCamera;
 
     [Header("Cinemachine")]
     public CinemachineCamera cinemachineCamera;
     public CinemachineConfiner2D cinemachineConfiner;
 
-    private Vector3 freePressVec;
+    private Vector3 velocity;
     private Vector3 touchPress;
+    private Vector3 freePressTouch;
     private Vector3 freePressTouchPos;
     private Vector3 freePressDist;
     private Vector3 touch1Press;
     private Vector3 touch2Press;
 
+    private Vector2 boundsSize;
+
     private bool isPressed;
+    private bool isDecelerating;
     private bool isTouchPress1;
     private bool isZooming;
 
     private Coroutine moveCoroutine;
+    private Coroutine deceleratingCoroutine;
     private Coroutine zoomCoroutine;
+
+    private void OnValidate()
+    {
+        if (zoomMax < 10)
+        {
+            zoomMax = 10;
+        }
+
+        if(speedZoomCam < 0)
+        {
+            speedZoomCam = 0;
+        }
+
+        if (smoothTime < 0)
+        {
+            smoothTime = 0;
+        }
+
+        if (zoomChangeMin < 0)
+        {
+            zoomChangeMin = 0;
+        }
+    }
+
+    private void Start()
+    {
+        Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
+
+        if (confinerCollider != null)
+        {
+            boundsSize.x = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.x;
+            boundsSize.y = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.y;
+
+            zoomMin = confinerCollider.bounds.size.y / 2;
+        }
+    }
 
     /// <summary>
     /// Lock the Camera inside the Border
@@ -41,14 +89,14 @@ public class FreePress : MonoBehaviour
     /// <returns></returns>
     private Vector3 LockToCameraBorder(Vector3 newPosition)
     {
-        Collider2D confinerCollider = transform.GetComponent<CinemachineConfiner2D>().BoundingShape2D;
+        Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
         if (confinerCollider != null && player != null)
         {
-            Vector2 confinerBounds = confinerCollider.bounds.size;
+            Vector2 confinerBounds = boundsSize;
             Vector2 confinerCenter = confinerCollider.bounds.center;
 
-            Vector2 val = player.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
+            Vector2 val = player.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
 
             float minX = confinerCenter.x - confinerBounds.x / 2 + val.x;
             float maxX = confinerCenter.x + confinerBounds.x / 2 - val.x;
@@ -79,7 +127,7 @@ public class FreePress : MonoBehaviour
 
         if (!IsPointerOverUIObject())
         {
-            while (!isZooming && isPressed)
+            while (!isZooming && (isPressed))
             {
                 Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
                 currentTouchPos.z = -10;
@@ -91,12 +139,50 @@ public class FreePress : MonoBehaviour
 
                 targetPosition = LockToCameraBorder(targetPosition);
 
-                Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, freePressDist.magnitude * Time.deltaTime * 5);
+                targetPosition.z = -10;
 
-                transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5);
+
+                mapInfos.CameraTransform = transform.position;
 
                 yield return null;
             }
+        }
+    }
+
+    /// <summary>
+    /// Deceleration of the Camera on UnPress
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Deceleration()
+    {
+        while (isDecelerating && !isZooming)
+        {
+            Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(freePressTouch);
+            currentTouchPos.z = -10;
+
+            freePressDist = freePressTouchPos - currentTouchPos;
+            freePressDist.z = -10;
+
+            Vector3 targetPosition = transform.position + freePressDist;
+
+            targetPosition = LockToCameraBorder(targetPosition);
+            targetPosition.z = -10;
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+
+            mapInfos.CameraTransform = transform.position;
+
+            if (velocity.magnitude < 0.1f)
+            {
+                isDecelerating = false;
+
+                velocity = Vector3.zero;
+                freePressTouchPos = Vector3.zero;
+                freePressDist = Vector3.zero;
+            }
+
+            yield return null;
         }
     }
 
@@ -108,7 +194,7 @@ public class FreePress : MonoBehaviour
     {
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
-            position = touchPress
+            position = freePressTouch
         };
 
         List<RaycastResult> raycastResults = new List<RaycastResult>();
@@ -129,21 +215,6 @@ public class FreePress : MonoBehaviour
     }
 
     /// <summary>
-    /// Reset when stop Touch
-    /// </summary>
-    private void ResetTouch()
-    {
-        if (moveCoroutine != null)
-        {
-            StopCoroutine(moveCoroutine);
-            moveCoroutine = null;
-        }
-
-        freePressTouchPos = Vector3.zero;
-        freePressDist = Vector3.zero;
-    }
-
-    /// <summary>
     /// Touch Down
     /// </summary>
     public void TouchDown(InputAction.CallbackContext ctx)
@@ -151,6 +222,26 @@ public class FreePress : MonoBehaviour
         if (ctx.performed && !isZooming)
         {
             isPressed = true;
+            isDecelerating = false;
+
+            velocity = Vector3.zero;
+            freePressTouchPos = Vector3.zero;
+            freePressDist = Vector3.zero;
+
+            freePressTouch = touchPress;
+            freePressTouch.z = -10;
+
+            if (moveCoroutine != null)
+            {
+                StopCoroutine(moveCoroutine);
+                moveCoroutine = null;
+            }
+
+            if (deceleratingCoroutine != null)
+            {
+                StopCoroutine(deceleratingCoroutine);
+                deceleratingCoroutine = null;
+            }
 
             if (moveCoroutine == null)
             {
@@ -161,7 +252,20 @@ public class FreePress : MonoBehaviour
         {
             isPressed = false;
 
-            ResetTouch();
+            isDecelerating = true;
+
+            freePressTouch = touchPress;
+
+            if (deceleratingCoroutine != null)
+            {
+                StopCoroutine(deceleratingCoroutine);
+                deceleratingCoroutine = null;
+            }
+
+            if (deceleratingCoroutine == null)
+            {
+                deceleratingCoroutine = StartCoroutine(Deceleration());
+            }
         }
     }
 
@@ -171,7 +275,11 @@ public class FreePress : MonoBehaviour
     /// <param name="increment"></param>
     private void Zoom(float increment)
     {
-        cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(transform.GetComponent<CinemachineCamera>().Lens.OrthographicSize - increment, zoomMax, zoomMin);
+        cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(cinemachineCamera.Lens.OrthographicSize - increment, zoomMax, zoomMin);
+        
+        float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
+
+        circleCamera.localScale = new Vector3(newScale, newScale, 1);
 
         cinemachineConfiner.InvalidateBoundingShapeCache();
         cinemachineConfiner.InvalidateLensCache();
@@ -185,9 +293,25 @@ public class FreePress : MonoBehaviour
     {
         if (ctx.started && !isZooming && !IsPointerOverUIObject())
         {
+            float increment = ctx.ReadValue<float>() * speedZoomCam;
+            float newZoom = cinemachineCamera.Lens.OrthographicSize - increment;
+
             isZooming = true;
 
-            Zoom(ctx.ReadValue<float>() * speedZoomCam);
+            if (newZoom > zoomMin)
+            {
+                cinemachineCamera.Lens.OrthographicSize = zoomMin;
+
+                return;
+            }
+            else if (newZoom < zoomMax)
+            {
+                cinemachineCamera.Lens.OrthographicSize = zoomMax;
+
+                return;
+            }
+
+            Zoom(increment);
         }
         else if (ctx.canceled)
         {
