@@ -12,11 +12,16 @@ public class RUI_Game : MonoBehaviour
     public RSE_ShutQuestsPopUp shutQuestsPopUp;
     public RSE_ShutFortuneWheelPopUp shutFortuneWheelPopUp;
 
+    public RSO_PointerPosition pointerPosition;
+    public RSE_PointerDown pointerDown;
+
     private VisualElement root;
 
     private Button buttonGiftsPopUp;
     private Button buttonFortuneWheelPopUp;
     private Button buttonQuestsPopUp;
+
+    public StyleSheet pointerBlocker;
 
     [SerializeField] VisualTreeAsset m_ListEntryTemplate;
 
@@ -39,6 +44,24 @@ public class RUI_Game : MonoBehaviour
         buttonGiftsPopUp.RegisterCallback<ClickEvent>(CallGiftsPopUp);
         buttonFortuneWheelPopUp.RegisterCallback<ClickEvent>(CallFortuneWheelPopUp);
         buttonQuestsPopUp.RegisterCallback<ClickEvent>(CallQuestsPopUp);
+
+        InitializePointerBlockers(root);
+    }
+
+    void InitializePointerBlockers(VisualElement root)
+    {
+        if (root.hierarchy.childCount != 0)
+        {
+            foreach (var child in root.Children())
+            {
+                InitializePointerBlockers(child);
+            }
+        }
+
+        if (root.ClassListContains("pointerBlocker"))
+        {
+            root.RegisterCallback<PointerMoveEvent>(BlockPointerMovement);
+        }
     }
 
     private void OnDisable()
@@ -51,15 +74,20 @@ public class RUI_Game : MonoBehaviour
         buttonQuestsPopUp.UnregisterCallback<ClickEvent>(CallQuestsPopUp);
     }
 
+    void BlockPointerMovement(PointerMoveEvent pointerMoveEvent)
+    {
+        pointerMoveEvent.StopPropagation();
+    }
+
     void GetPointerPosition(PointerDownEvent pointerDownEvent)
     {
-        Debug.Log(pointerDownEvent.position);
+        pointerPosition.Value = pointerDownEvent.position;
+        pointerDown.Fire?.Invoke();
     }
 
     void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
     {
-        if (pointerMoveEvent.pressedButtons == 0) return;
-        Debug.Log(pointerMoveEvent.position);
+        pointerPosition.Value = pointerMoveEvent.position;
     }
 
     void CallGiftsPopUp(ClickEvent clickEvent)
