@@ -7256,6 +7256,10 @@ PrefabInstance:
       propertyPath: BoundingShape2D
       value: 
       objectReference: {fileID: 920116251}
+    - target: {fileID: 2861123517048878351, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 6785241673552559866, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: player
       value: 
@@ -7298,6 +7302,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824066381716854344, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
