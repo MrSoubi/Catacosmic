@@ -16,7 +16,7 @@ public class FreePress : MonoBehaviour
     [Header("Zoom")]
     public float speedCam;
     public float zoomMax;
-    private float zoomMin;
+    public float zoomMin;
     public float speedZoomCam;
     public float smoothTime;
     public float zoomChangeMin;
@@ -78,8 +78,6 @@ public class FreePress : MonoBehaviour
         {
             boundsSize.x = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.x;
             boundsSize.y = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.y;
-
-            zoomMin = confinerCollider.bounds.size.y / 2;
         }
     }
 
