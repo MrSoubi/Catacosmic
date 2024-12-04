@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class FreePress : MonoBehaviour
 {
-    [Header("Targets")]
+    [Header("ScriptableObjects")]
+    public MapInfos mapInfos;
+
+    [Header("Target")]
     public Transform player;
 
     [Header("Zoom")]
     public float zoomMax;
-    public float zoomMin;
+    private float zoomMin;
     public float speedZoomCam;
-    public float smoothTime = 0.3f;
+    public float smoothTime;
     public float zoomChangeMin;
+
+    [Header("Camera Circle")]
+    public Transform circleCamera;
 
     [Header("Cinemachine")]
     public CinemachineCamera cinemachineCamera;
@@ -41,14 +46,39 @@ public class FreePress : MonoBehaviour
     private Coroutine deceleratingCoroutine;
     private Coroutine zoomCoroutine;
 
+    private void OnValidate()
+    {
+        if (zoomMax < 10)
+        {
+            zoomMax = 10;
+        }
+
+        if(speedZoomCam < 0)
+        {
+            speedZoomCam = 0;
+        }
+
+        if (smoothTime < 0)
+        {
+            smoothTime = 0;
+        }
+
+        if (zoomChangeMin < 0)
+        {
+            zoomChangeMin = 0;
+        }
+    }
+
     private void Start()
     {
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
-        if(confinerCollider != null)
+        if (confinerCollider != null)
         {
             boundsSize.x = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.x;
             boundsSize.y = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.y;
+
+            zoomMin = confinerCollider.bounds.size.y / 2;
         }
     }
 
@@ -66,7 +96,7 @@ public class FreePress : MonoBehaviour
             Vector2 confinerBounds = boundsSize;
             Vector2 confinerCenter = confinerCollider.bounds.center;
 
-            Vector2 val = player.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
+            Vector2 val = player.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
 
             float minX = confinerCenter.x - confinerBounds.x / 2 + val.x;
             float maxX = confinerCenter.x + confinerBounds.x / 2 - val.x;
@@ -107,21 +137,24 @@ public class FreePress : MonoBehaviour
 
                 Vector3 targetPosition = transform.position + freePressDist;
 
-                if (isPressed)
-                {
-                    targetPosition = LockToCameraBorder(targetPosition);
+                targetPosition = LockToCameraBorder(targetPosition);
 
-                    targetPosition.z = -10;
+                targetPosition.z = -10;
 
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, freePressDist.magnitude * Time.deltaTime * 5);
-                }
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5);
+
+                mapInfos.CameraTransform = transform.position;
 
                 yield return null;
             }
         }
     }
 
-    private IEnumerator Temp()
+    /// <summary>
+    /// Deceleration of the Camera on UnPress
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Deceleration()
     {
         while (isDecelerating && !isZooming)
         {
@@ -137,6 +170,8 @@ public class FreePress : MonoBehaviour
             targetPosition.z = -10;
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+
+            mapInfos.CameraTransform = transform.position;
 
             if (velocity.magnitude < 0.1f)
             {
@@ -219,6 +254,8 @@ public class FreePress : MonoBehaviour
 
             isDecelerating = true;
 
+            freePressTouch = touchPress;
+
             if (deceleratingCoroutine != null)
             {
                 StopCoroutine(deceleratingCoroutine);
@@ -227,10 +264,8 @@ public class FreePress : MonoBehaviour
 
             if (deceleratingCoroutine == null)
             {
-                deceleratingCoroutine = StartCoroutine(Temp());
+                deceleratingCoroutine = StartCoroutine(Deceleration());
             }
-
-            freePressTouch = touchPress;
         }
     }
 
@@ -241,6 +276,10 @@ public class FreePress : MonoBehaviour
     private void Zoom(float increment)
     {
         cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(cinemachineCamera.Lens.OrthographicSize - increment, zoomMax, zoomMin);
+        
+        float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
+
+        circleCamera.localScale = new Vector3(newScale, newScale, 1);
 
         cinemachineConfiner.InvalidateBoundingShapeCache();
         cinemachineConfiner.InvalidateLensCache();
@@ -259,8 +298,16 @@ public class FreePress : MonoBehaviour
 
             isZooming = true;
 
-            if((increment > 0 && newZoom <= zoomMax) || (increment < 0 && newZoom >= zoomMin))
+            if (newZoom > zoomMin)
             {
+                cinemachineCamera.Lens.OrthographicSize = zoomMin;
+
+                return;
+            }
+            else if (newZoom < zoomMax)
+            {
+                cinemachineCamera.Lens.OrthographicSize = zoomMax;
+
                 return;
             }
 
@@ -289,15 +336,13 @@ public class FreePress : MonoBehaviour
 
             float distanceChange = Mathf.Abs(distance - previousDistance);
 
-            isZooming = true;
-
             if (distanceChange >= zoomChangeMin)
             {
-                if (distance > previousDistance && previousDistance > 0 && cinemachineCamera.Lens.OrthographicSize > zoomMax)
+                if (distance > previousDistance && previousDistance > 0)
                 {
                     Zoom(1 * speedZoomCam);
                 }
-                else if (distance < previousDistance && cinemachineCamera.Lens.OrthographicSize < zoomMin)
+                else if (distance < previousDistance)
                 {
                     Zoom(-1 * speedZoomCam);
                 }

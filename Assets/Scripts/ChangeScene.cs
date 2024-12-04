@@ -3,15 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public string levelName1;
-    public string levelName2;
+    [Header("Scenes Name")]
+    [SerializeField, Tooltip("Scene Name 1")] ScenesNameEnum levelName1;
+    [SerializeField, Tooltip("Scene Name 2")] ScenesNameEnum levelName2;
 
     /// <summary>
     /// Scene 1
     /// </summary>
     public void PressButton1()
     {
-        SceneManager.LoadScene(levelName1);
+        SceneManager.LoadScene(levelName1.ToString());
     }
 
     /// <summary>
@@ -19,6 +20,6 @@ public class ChangeScene : MonoBehaviour
     /// </summary>
     public void PressButton2()
     {
-        SceneManager.LoadScene(levelName2);
+        SceneManager.LoadScene(levelName2.ToString());
     }
 }

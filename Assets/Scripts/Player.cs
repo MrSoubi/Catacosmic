@@ -2,20 +2,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Targets")]
-    public Transform cameraTarget;
+    [Header("ScriptableObjects")]
+    [SerializeField] private MapInfos mapInfos;
 
     [Header("Default Disaster")]
-    public GameObject prefab;
+    [SerializeField] private GameObject prefab;
 
     [Header("Speed")]
-    public float speed;
+    [SerializeField] private float speed;
 
     [Header("RigidBody")]
-    public Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     private bool isNeedToMove;
     private GameObject currentDisaster;
+
+    private void OnValidate()
+    {
+        if(speed < 0)
+        {
+            speed = 0;
+        }
+    }
 
     private void Start()
     {
@@ -46,9 +54,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void MoveToCamera()
     {
-        if (cameraTarget == null) return;
-
-        Vector2 targetPosition = cameraTarget.position;
+        Vector2 targetPosition = mapInfos.CameraTransform;
         float distance = Vector2.Distance(rb.position, targetPosition);
 
         if (distance > 0.05f)
@@ -58,6 +64,8 @@ public class Player : MonoBehaviour
             Vector2 direction = (targetPosition - rb.position).normalized;
 
             rb.linearVelocity = direction * speed;
+
+            mapInfos.PlayerTransform = transform.position;
         }
         else if (isNeedToMove)
         {

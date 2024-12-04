@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8508e3c97182c124695ad9f1622b304e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
   prefab: {fileID: 3879445112946658002, guid: b2e06d44439554c4185ee4dedce3ab8f, type: 3}
   speed: 5
   rb: {fileID: 5131635400869751737}

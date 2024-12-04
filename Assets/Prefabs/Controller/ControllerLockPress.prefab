@@ -781,8 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5f7fde67c47754ba31d3bc65d72eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName1: Killian_JoyStick
-  levelName2: Killian_FreePress
+  levelName1: 1
+  levelName2: 0
 --- !u!1 &3681165581383378845
 GameObject:
   m_ObjectHideFlags: 0
