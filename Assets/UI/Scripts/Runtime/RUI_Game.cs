@@ -21,7 +21,7 @@ public class RUI_Game : MonoBehaviour
     private Button buttonFortuneWheelPopUp;
     private Button buttonQuestsPopUp;
 
-    public StyleSheet pointerBlocker;
+    const string POINTER_BLOCKER_STYLE_CLASS = "pointerBlocker";
 
     [SerializeField] VisualTreeAsset m_ListEntryTemplate;
 
@@ -48,6 +48,8 @@ public class RUI_Game : MonoBehaviour
         InitializePointerBlockers(root);
     }
 
+    // TODO: Make the same thing but for unregistering
+    // Searches recursively all children of the VisualElement and registers the PointerMoveEvent to BlockPointerMovement of each child if it has the pointerBlocker class in its style
     void InitializePointerBlockers(VisualElement root)
     {
         if (root.hierarchy.childCount != 0)
@@ -58,7 +60,7 @@ public class RUI_Game : MonoBehaviour
             }
         }
 
-        if (root.ClassListContains("pointerBlocker"))
+        if (root.ClassListContains(POINTER_BLOCKER_STYLE_CLASS))
         {
             root.RegisterCallback<PointerMoveEvent>(BlockPointerMovement);
         }
