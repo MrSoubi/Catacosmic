@@ -49,26 +49,6 @@ public class FreePress : MonoBehaviour
     private Coroutine deceleratingCoroutine;
     private Coroutine zoomCoroutine;
 
-
-    public RSE_PointerDown test;
-    public RSO_PointerPosition test2;
-
-    private void Awake()
-    {
-        test.Fire += temp;
-        test2.onValueChanged += temp2;
-    }
-
-    private void temp()
-    {
-        Debug.Log("Touch");
-    }
-
-    private void temp2(Vector2 temp)
-    {
-        Debug.Log("Move to " + temp);
-    }
-
     private void OnValidate()
     {
         if (zoomMax < 10)
