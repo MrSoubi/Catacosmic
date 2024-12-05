@@ -14,6 +14,7 @@ public class RUI_Game : MonoBehaviour
 
     public RSO_PointerPosition pointerPosition;
     public RSE_PointerDown pointerDown;
+    public RSE_PointerUp pointerUp;
 
     private VisualElement root;
 
@@ -35,7 +36,9 @@ public class RUI_Game : MonoBehaviour
         root = uiDocument.rootVisualElement;
 
         root.RegisterCallback<PointerDownEvent>(GetPointerPosition);
+        root.RegisterCallback<PointerDownEvent>(TriggerPointerDown);
         root.RegisterCallback<PointerMoveEvent>(GetPointerPosition);
+        root.RegisterCallback<PointerUpEvent>(TriggerPointerUp);
 
         buttonGiftsPopUp = uiDocument.rootVisualElement.Q("Button_Gifts") as Button;
         buttonFortuneWheelPopUp = uiDocument.rootVisualElement.Q("Button_FortuneWheel") as Button;
@@ -63,6 +66,8 @@ public class RUI_Game : MonoBehaviour
         if (root.ClassListContains(POINTER_BLOCKER_STYLE_CLASS))
         {
             root.RegisterCallback<PointerMoveEvent>(BlockPointerMovement);
+            root.RegisterCallback<PointerDownEvent>(BlockPointerMovement);
+            root.RegisterCallback<PointerUpEvent>(BlockPointerMovement);
         }
     }
 
@@ -81,10 +86,30 @@ public class RUI_Game : MonoBehaviour
         pointerMoveEvent.StopPropagation();
     }
 
+    void BlockPointerMovement(PointerDownEvent pointerDownEvent)
+    {
+        pointerDownEvent.StopPropagation();
+    }
+
+    void BlockPointerMovement(PointerUpEvent pointerUpEvent)
+    {
+        pointerUpEvent.StopPropagation();
+    }
+
+    void TriggerPointerDown(PointerDownEvent pointerDownEvent)
+    {
+        pointerDown.Fire?.Invoke();
+    }
+
+    void TriggerPointerUp(PointerUpEvent pointerUpEvent)
+    {
+        pointerUp.Fire?.Invoke();
+    }
+
+
     void GetPointerPosition(PointerDownEvent pointerDownEvent)
     {
         pointerPosition.Value = pointerDownEvent.position;
-        pointerDown.Fire?.Invoke();
     }
 
     void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
