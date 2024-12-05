@@ -67,7 +67,6 @@ public class RUI_Game : MonoBehaviour
         {
             root.RegisterCallback<PointerMoveEvent>(BlockPointerMovement);
             root.RegisterCallback<PointerDownEvent>(BlockPointerMovement);
-            root.RegisterCallback<PointerUpEvent>(BlockPointerMovement);
         }
     }
 
