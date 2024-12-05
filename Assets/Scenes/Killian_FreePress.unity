@@ -2754,6 +2754,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   test: {fileID: 11400000, guid: 7d3bbab2fe2f56b4789a81eaf360c2ed, type: 2}
   test2: {fileID: 11400000, guid: 02697b7757c235c448f48cfb2aa3f9e2, type: 2}
+  test3: {fileID: 11400000, guid: 37c75577610720e40808774c019ad4e5, type: 2}
+  moveSpeed: 20
 --- !u!1 &777585533
 GameObject:
   m_ObjectHideFlags: 0
