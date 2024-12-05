@@ -3,10 +3,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MapInfos", menuName = "Catacosmic/Map Infos")]
 public class MapInfos : ScriptableObject
 {
-    public BoxCollider2D Collider;
+    [Header("References")]
+    [SerializeField] private BoxCollider2D boxCollider2DRef;
+    [SerializeField] private GameObject playerRef;
+
+    [Header("Parameters")]
     [SerializeField] private Vector3 playerTransform;
     [SerializeField] private Vector3 cameraTransform;
     [SerializeField] private Bounds mapboxCollider;
+
+    public BoxCollider2D BoxCollider2DRef
+    {
+        get => boxCollider2DRef;
+        set => boxCollider2DRef = value;
+    }
+
+    public GameObject PlayerRef
+    {
+        get => playerRef;
+        set => playerRef = value;
+    }
 
     public Vector3 PlayerTransform
     {
