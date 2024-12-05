@@ -49,6 +49,26 @@ public class FreePress : MonoBehaviour
     private Coroutine deceleratingCoroutine;
     private Coroutine zoomCoroutine;
 
+
+    public RSE_PointerDown test;
+    public RSO_PointerPosition test2;
+
+    private void Awake()
+    {
+        test.Fire += temp;
+        test2.onValueChanged += temp2;
+    }
+
+    private void temp()
+    {
+        Debug.Log("Touch");
+    }
+
+    private void temp2(Vector2 temp)
+    {
+        Debug.Log("Move to " + temp);
+    }
+
     private void OnValidate()
     {
         if (zoomMax < 10)
@@ -75,6 +95,8 @@ public class FreePress : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+
+        cinemachineConfiner.BoundingShape2D = mapInfos.Collider;
 
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
@@ -195,7 +217,7 @@ public class FreePress : MonoBehaviour
     /// <returns></returns>
     private bool IsPointerOverUIObject()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        /*PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = freePressTouch
         };
@@ -203,7 +225,8 @@ public class FreePress : MonoBehaviour
         List<RaycastResult> raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, raycastResults);
 
-        return raycastResults.Exists(result => result.gameObject.CompareTag("UI"));
+        return raycastResults.Exists(result => result.gameObject.CompareTag("UI"));*/
+        return false;
     }
 
 
