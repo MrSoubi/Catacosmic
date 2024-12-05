@@ -20,10 +20,10 @@ public class RSO_PointerPosition : ScriptableObject
         get => _value;
         set
         {
-            if (_value.x == value.x && _value.y == Screen.height - value.y) return;
+            if (_value.x == value.x && _value.y == Camera.main.pixelHeight - value.y) return;
 
             _value.x = value.x;
-            _value.y = Screen.height - value.y;
+            _value.y = Camera.main.pixelHeight - value.y;
 
             position = _value;
 

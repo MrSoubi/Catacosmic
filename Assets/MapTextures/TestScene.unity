@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2667146d9cc0a614781b5a8eef0ae6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: -0.18
   texture: {fileID: 2800000, guid: 6e218adc785b45e4d8dd6733a50ad835, type: 3}
   spriteRenderer: {fileID: 1803722613}
   position: {fileID: 11400000, guid: 02697b7757c235c448f48cfb2aa3f9e2, type: 2}
