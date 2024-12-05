@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748f1e6d55e07340b2e8b02c61129e1, type: 3}
   m_Name: MapInfos
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
   playerTransform: {x: 0, y: 0, z: 0}
   cameraTransform: {x: 0, y: 0, z: -10}
   mapboxCollider:

@@ -8,25 +8,27 @@ using UnityEngine.InputSystem;
 public class FreePress : MonoBehaviour
 {
     [Header("ScriptableObjects")]
-    public MapInfos mapInfos;
+    [SerializeField] private MapInfos mapInfos;
 
     [Header("Target")]
-    public Transform player;
+    [SerializeField] private Transform player;
 
     [Header("Zoom")]
-    public float speedCam;
-    public float zoomMax;
-    private float zoomMin;
-    public float speedZoomCam;
-    public float smoothTime;
-    public float zoomChangeMin;
+    [SerializeField] private float speedCam;
+    [SerializeField] private float zoomMax;
+    [SerializeField] private float zoomMin;
+    [SerializeField] private float speedZoomCam;
+    [SerializeField] private float smoothTime;
+    [SerializeField] private float zoomChangeMin;
 
     [Header("Camera Circle")]
-    public Transform circleCamera;
+    [SerializeField] private Transform circleCamera;
 
     [Header("Cinemachine")]
-    public CinemachineCamera cinemachineCamera;
-    public CinemachineConfiner2D cinemachineConfiner;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+    [SerializeField] private CinemachineConfiner2D cinemachineConfiner;
+
+    private Camera mainCamera;
 
     private Vector3 velocity;
     private Vector3 touchPress;
@@ -72,14 +74,16 @@ public class FreePress : MonoBehaviour
 
     private void Start()
     {
+        mainCamera = Camera.main;
+
+        cinemachineConfiner.BoundingShape2D = mapInfos.Collider;
+
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
         if (confinerCollider != null)
         {
             boundsSize.x = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.x;
             boundsSize.y = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.y;
-
-            zoomMin = confinerCollider.bounds.size.y / 2;
         }
     }
 
@@ -123,14 +127,14 @@ public class FreePress : MonoBehaviour
     {
         yield return null;
 
-        freePressTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
+        freePressTouchPos = mainCamera.ScreenToWorldPoint(touchPress);
         freePressTouchPos.z = -10;
 
         if (!IsPointerOverUIObject())
         {
             while (!isZooming && (isPressed))
             {
-                Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(touchPress);
+                Vector3 currentTouchPos = mainCamera.ScreenToWorldPoint(touchPress);
                 currentTouchPos.z = -10;
 
                 freePressDist = freePressTouchPos - currentTouchPos;
@@ -159,7 +163,7 @@ public class FreePress : MonoBehaviour
     {
         while (isDecelerating && !isZooming)
         {
-            Vector3 currentTouchPos = Camera.main.ScreenToWorldPoint(freePressTouch);
+            Vector3 currentTouchPos = mainCamera.ScreenToWorldPoint(freePressTouch);
             currentTouchPos.z = -10;
 
             freePressDist = freePressTouchPos - currentTouchPos;
@@ -193,7 +197,7 @@ public class FreePress : MonoBehaviour
     /// <returns></returns>
     private bool IsPointerOverUIObject()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        /*PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = freePressTouch
         };
@@ -201,7 +205,8 @@ public class FreePress : MonoBehaviour
         List<RaycastResult> raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, raycastResults);
 
-        return raycastResults.Exists(result => result.gameObject.CompareTag("UI"));
+        return raycastResults.Exists(result => result.gameObject.CompareTag("UI"));*/
+        return false;
     }
 
 
@@ -277,7 +282,7 @@ public class FreePress : MonoBehaviour
     private void Zoom(float increment)
     {
         cinemachineCamera.Lens.OrthographicSize = Mathf.Clamp(cinemachineCamera.Lens.OrthographicSize - increment, zoomMax, zoomMin);
-        
+
         float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
 
         circleCamera.localScale = new Vector3(newScale, newScale, 1);
