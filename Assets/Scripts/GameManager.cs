@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
+        mapInfos.BoxCollider2DRef = null;
+        mapInfos.PlayerRef = null;
         mapInfos.PlayerTransform = Vector3.zero;
         mapInfos.CameraTransform = new Vector3(0, 0, -10);
         mapInfos.MapBoxCollider = new Bounds(Vector3.zero, Vector3.zero);

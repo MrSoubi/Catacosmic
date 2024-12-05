@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        mapInfos.PlayerRef = gameObject;
+    }
+
     private void Start()
     {
         SpawnDisater(prefab);

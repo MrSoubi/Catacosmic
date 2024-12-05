@@ -7,7 +7,7 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
-        mapInfos.Collider = GetComponent<BoxCollider2D>();
+        mapInfos.BoxCollider2DRef = GetComponent<BoxCollider2D>();
         mapInfos.MapBoxCollider = GetComponent<BoxCollider2D>().bounds;
     }
 }

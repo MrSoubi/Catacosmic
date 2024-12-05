@@ -10,9 +10,6 @@ public class FreePress : MonoBehaviour
     [Header("ScriptableObjects")]
     [SerializeField] private MapInfos mapInfos;
 
-    [Header("Target")]
-    [SerializeField] private Transform player;
-
     [Header("Zoom")]
     [SerializeField] private float speedCam;
     [SerializeField] private float zoomMax;
@@ -76,7 +73,7 @@ public class FreePress : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        cinemachineConfiner.BoundingShape2D = mapInfos.Collider;
+        cinemachineConfiner.BoundingShape2D = mapInfos.BoxCollider2DRef;
 
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
@@ -96,12 +93,12 @@ public class FreePress : MonoBehaviour
     {
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
-        if (confinerCollider != null && player != null)
+        if (confinerCollider != null)
         {
             Vector2 confinerBounds = boundsSize;
             Vector2 confinerCenter = confinerCollider.bounds.center;
 
-            Vector2 val = player.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
+            Vector2 val = mapInfos.PlayerRef.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
 
             float minX = confinerCenter.x - confinerBounds.x / 2 + val.x;
             float maxX = confinerCenter.x + confinerBounds.x / 2 - val.x;
