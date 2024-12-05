@@ -2,6 +2,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines.Interpolators;
+using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class TextureManipulator : MonoBehaviour
 {
@@ -22,23 +24,24 @@ public class TextureManipulator : MonoBehaviour
 
     void Paint(Vector2 screenPosition)
     {
-        Vector2 position = Camera.main.ScreenToWorldPoint(screenPosition);
-        Debug.Log("Screen position: " + position);
+        Vector2 localPosition = GetLocalPositionFromScreenPosition(screenPosition);
 
-        Vector2 spriteSize = new (spriteRenderer.bounds.size.x, spriteRenderer.bounds.size.y);
-        Debug.Log("Sprite size: " +  spriteSize);
+        Vector2 pixelTarget = new (localPosition.x / spriteRenderer.bounds.size.x, localPosition.y / spriteRenderer.bounds.size.y);
 
-        Vector4 temp = spriteRenderer.worldToLocalMatrix * position;
-        Vector2 positionOnLocalSpace = new(temp.x, temp.y);
-        positionOnLocalSpace += (spriteSize / 2);
-        Debug.Log("Position on local space: " + positionOnLocalSpace);
-
-
-        Vector2 pixelTarget = new (positionOnLocalSpace.x / spriteRenderer.bounds.size.x, positionOnLocalSpace.y / spriteRenderer.bounds.size.y);
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), 1024 - Mathf.FloorToInt(pixelTarget.y * 1024));
-        Debug.Log("Pixel target: " + pixelTargetInt);
 
         Brush(pixelTargetInt, 10, Color.green);
+    }
+
+    Vector2 GetLocalPositionFromScreenPosition(Vector2 screenPosition)
+    {
+        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+        Vector2 localPosition = spriteRenderer.worldToLocalMatrix * worldPosition;
+
+        localPosition += spriteRenderer.size / 2;
+
+        return localPosition;
     }
 
     void Brush(Vector2Int pixelPosition, int size, Color color)
@@ -82,5 +85,19 @@ public class TextureManipulator : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    [Button]
+    void EraseTexture(Color color)
+    {
+        for (int i = 0; i < texture.width; i++)
+        {
+            for (int j = 0; j < texture.height; j++)
+            {
+                texture.SetPixel(i, j, color);
+            }
+        }
+
+        texture.Apply();
     }
 }
