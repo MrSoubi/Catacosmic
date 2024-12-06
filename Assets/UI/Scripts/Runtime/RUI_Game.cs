@@ -108,12 +108,12 @@ public class RUI_Game : MonoBehaviour
 
     void GetPointerPosition(PointerDownEvent pointerDownEvent)
     {
-        pointerPosition.Value = pointerDownEvent.position;
+        pointerPosition.Value = pointerDownEvent.position * root.panel.scaledPixelsPerPoint;
     }
 
     void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
     {
-        pointerPosition.Value = pointerMoveEvent.position;
+        pointerPosition.Value = pointerMoveEvent.position * root.panel.scaledPixelsPerPoint;
     }
 
     void CallGiftsPopUp(ClickEvent clickEvent)

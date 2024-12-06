@@ -28,8 +28,12 @@ public class TextureManipulator : MonoBehaviour
     {
         Vector2 localPosition = GetLocalPositionFromScreenPosition(screenPosition);
 
-        Vector2 pixelTarget = new (localPosition.x * spriteRenderer.bounds.extents.x, localPosition.y * spriteRenderer.bounds.extents.y);
+        Vector2 pixelTarget = localPosition;
 
+        pixelTarget.x = (pixelTarget.x + spriteRenderer.bounds.extents.x) / spriteRenderer.bounds.size.x;
+        pixelTarget.y = (pixelTarget.y + spriteRenderer.bounds.extents.y) / spriteRenderer.bounds.size.y;
+
+        Debug.Log(pixelTarget);
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), Mathf.FloorToInt(pixelTarget.y * 1024));
 
         Brush(pixelTargetInt, 10, Color.green);
@@ -37,30 +41,13 @@ public class TextureManipulator : MonoBehaviour
 
     Vector2 GetLocalPositionFromScreenPosition(Vector2 screenPosition)
     {
-        Vector2 screenPositionRatio;
+        Vector3 viewportPosition = new Vector3(screenPosition.x / Camera.main.pixelWidth, (Camera.main.pixelHeight - screenPosition.y) / Camera.main.pixelHeight, 1);
 
-        screenPositionRatio.x = (2 * screenPosition.x / Camera.main.pixelWidth) - 1;
-        screenPositionRatio.y = (2 * screenPosition.y / Camera.main.pixelHeight) - 1;
-
-
-
-        Debug.Log(Screen.width + " / " + Screen.height);
-
-        return screenPositionRatio;
-
-
-
-/*        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-        
+        Vector2 worldPosition = Camera.main.ViewportToWorldPoint(viewportPosition);
 
         Vector2 localPosition = spriteRenderer.worldToLocalMatrix * worldPosition;
 
-        localPosition += spriteRenderer.size / 2;
-
-        Debug.Log(screenPosition + " -> " + worldPosition + " -> " + localPosition);
-
-        return localPosition;*/
+        return localPosition;
     }
 
     void Brush(Vector2Int pixelPosition, int size, Color color)
