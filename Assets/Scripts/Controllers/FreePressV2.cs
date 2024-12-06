@@ -240,4 +240,19 @@ public class FreePressV2 : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Zoom
+    /// </summary>
+    public void Zoom()
+    {
+        cinemachineCamera.Lens.OrthographicSize += 1;
+
+        float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
+
+        circleCamera.localScale = new Vector3(newScale, newScale, 1);
+
+        cinemachineConfiner.InvalidateBoundingShapeCache();
+        cinemachineConfiner.InvalidateLensCache();
+    }
 }
