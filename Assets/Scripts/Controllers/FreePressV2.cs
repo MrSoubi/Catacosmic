@@ -230,21 +230,24 @@ public class FreePressV2 : MonoBehaviour
     /// </summary>
     public void TouchUp()
     {
-        isPressed = false;
-
-        isDecelerating = true;
-
-        if (deceleratingCoroutine != null)
+        if(isPressed)
         {
-            StopCoroutine(deceleratingCoroutine);
-            deceleratingCoroutine = null;
-        }
+            isPressed = false;
 
-        freePressTouch = touchPress;
+            isDecelerating = true;
 
-        if (deceleratingCoroutine == null)
-        {
-            deceleratingCoroutine = StartCoroutine(Deceleration());
+            if (deceleratingCoroutine != null)
+            {
+                StopCoroutine(deceleratingCoroutine);
+                deceleratingCoroutine = null;
+            }
+
+            freePressTouch = touchPress;
+
+            if (deceleratingCoroutine == null)
+            {
+                deceleratingCoroutine = StartCoroutine(Deceleration());
+            }
         }
     }
 }
