@@ -30,6 +30,8 @@ public class FreePressV2 : MonoBehaviour
     private Vector3 freePressTouchPos;
     private Vector3 freePressDist;
 
+    private Vector2 boundsSize;
+
     private bool isPressed;
     private bool isDecelerating;
 
@@ -68,6 +70,14 @@ public class FreePressV2 : MonoBehaviour
         mainCamera = Camera.main;
 
         cinemachineConfiner.BoundingShape2D = mapInfos.BoxCollider2DRef;
+
+        Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
+
+        if (confinerCollider != null)
+        {
+            boundsSize.x = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.x;
+            boundsSize.y = confinerCollider.GetComponent<SpriteRenderer>().bounds.size.y;
+        }
     }
 
     /// <summary>
@@ -81,7 +91,7 @@ public class FreePressV2 : MonoBehaviour
 
         if (confinerCollider != null)
         {
-            Vector2 confinerBounds = confinerCollider.bounds.size;
+            Vector2 confinerBounds = boundsSize;
             Vector2 confinerCenter = confinerCollider.bounds.center;
 
             Vector2 val = mapInfos.PlayerRef.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
