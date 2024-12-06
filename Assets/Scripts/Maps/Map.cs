@@ -1,9 +1,10 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    [Header("ScriptableObjects")]
-    [SerializeField] private MapInfos mapInfos;
+    [Title("ScriptableObjects")]
+    [SerializeField] private RSO_MapInfos mapInfos;
 
     private void Awake()
     {

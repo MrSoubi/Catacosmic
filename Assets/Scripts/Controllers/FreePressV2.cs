@@ -1,31 +1,24 @@
+using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 public class FreePressV2 : MonoBehaviour
 {
-    [Header("ScriptableObjects")]
-    [SerializeField] private MapInfos mapInfos;
+    [Title("ScriptableObjects")]
+    [SerializeField] private RSO_MapInfos mapInfos;
     [SerializeField] private RSE_PointerDown test;
     [SerializeField] private RSO_PointerPosition test2;
     [SerializeField] private RSE_PointerUp test3;
 
-    [Header("Zoom")]
+    [Title("Camera Speed")]
     [SerializeField] private float speedCam;
-    [SerializeField] private float zoomMax;
-    [SerializeField] private float zoomMin;
-    [SerializeField] private float speedZoomCam;
-    [SerializeField] private float smoothTime;
-    [SerializeField] private float zoomChangeMin;
+    [SerializeField, SuffixLabel("s")] private float smoothTime;
 
-    [Header("Camera Circle")]
+    [Title("Camera Circle")]
     [SerializeField] private Transform circleCamera;
 
-    [Header("Cinemachine")]
+    [Title("Cinemachine")]
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private CinemachineConfiner2D cinemachineConfiner;
 
@@ -36,25 +29,40 @@ public class FreePressV2 : MonoBehaviour
     private Vector3 freePressTouch;
     private Vector3 freePressTouchPos;
     private Vector3 freePressDist;
-    private Vector3 touch1Press;
-    private Vector3 touch2Press;
 
     private Vector2 boundsSize;
 
     private bool isPressed;
     private bool isDecelerating;
-    private bool isTouchPress1;
-    private bool isZooming;
 
     private Coroutine moveCoroutine;
     private Coroutine deceleratingCoroutine;
-    private Coroutine zoomCoroutine;
+
+    private void OnValidate()
+    {
+        if (speedCam < 0)
+        {
+            speedCam = 0;
+        }
+
+        if (smoothTime < 0)
+        {
+            smoothTime = 0;
+        }
+    }
 
     private void Awake()
     {
         test.Fire += TouchDown;
         test2.onValueChanged += TouchPos;
         test3.Fire += TouchUp;
+    }
+
+    private void OnDisable()
+    {
+        test.Fire -= TouchDown;
+        test2.onValueChanged -= TouchPos;
+        test3.Fire -= TouchUp;
     }
 
     private void Start()
@@ -115,7 +123,7 @@ public class FreePressV2 : MonoBehaviour
         freePressTouchPos = mainCamera.ScreenToWorldPoint(touchPress);
         freePressTouchPos.z = -10;
 
-        while (!isZooming && (isPressed))
+        while (isPressed)
         {
             Vector3 currentTouchPos = mainCamera.ScreenToWorldPoint(touchPress);
             currentTouchPos.z = -10;
@@ -143,7 +151,7 @@ public class FreePressV2 : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Deceleration()
     {
-        while (isDecelerating && !isZooming)
+        while (isDecelerating)
         {
             Vector3 currentTouchPos = mainCamera.ScreenToWorldPoint(freePressTouch);
             currentTouchPos.z = -10;

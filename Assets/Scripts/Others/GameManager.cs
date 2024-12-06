@@ -1,9 +1,11 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("ScriptableObjects")]
-    [SerializeField] private MapInfos mapInfos;
+    [Title("ScriptableObjects")]
+    [SerializeField] private RSO_MapInfos mapInfos;
+    [SerializeField] private RSO_DisasterStats disasterStats;
 
     private void OnDisable()
     {

@@ -1,13 +1,14 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MapInfos", menuName = "Catacosmic/Map Infos")]
-public class MapInfos : ScriptableObject
+public class RSO_MapInfos : ScriptableObject
 {
-    [Header("References")]
+    [Title("References")]
     [SerializeField] private BoxCollider2D boxCollider2DRef;
     [SerializeField] private GameObject playerRef;
 
-    [Header("Parameters")]
+    [Title("Parameters")]
     [SerializeField] private Vector3 playerTransform;
     [SerializeField] private Vector3 cameraTransform;
     [SerializeField] private Bounds mapboxCollider;

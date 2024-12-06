@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class FreePress : MonoBehaviour
 {
     [Header("ScriptableObjects")]
-    [SerializeField] private MapInfos mapInfos;
+    [SerializeField] private RSO_MapInfos mapInfos;
 
     [Header("Zoom")]
     [SerializeField] private float speedCam;

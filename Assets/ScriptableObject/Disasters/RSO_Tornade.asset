@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e748f1e6d55e07340b2e8b02c61129e1, type: 3}
-  m_Name: MapInfos
+  m_Script: {fileID: 11500000, guid: 42cf0cc2529dc0a4d992c3f6b532559a, type: 3}
+  m_Name: RSO_Tornade
   m_EditorClassIdentifier: 
-  Collider: {fileID: 0}
-  playerTransform: {x: 0, y: 0, z: 0}
-  cameraTransform: {x: 0, y: 0, z: -10}
-  mapboxCollider:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+  force: 10
+  speed: 5
+  radius: 1

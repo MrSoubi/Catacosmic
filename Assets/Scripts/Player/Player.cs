@@ -1,29 +1,20 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("ScriptableObjects")]
-    [SerializeField] private MapInfos mapInfos;
+    [Title("ScriptableObjects")]
+    [SerializeField] private RSO_MapInfos mapInfos;
 
-    [Header("Default Disaster")]
+    [Title("Default Disaster")]
     [SerializeField] private GameObject prefab;
 
-    [Header("Speed")]
-    [SerializeField] private float speed;
-
-    [Header("RigidBody")]
+    [Title("RigidBody")]
     [SerializeField] private Rigidbody2D rb;
 
     private bool isNeedToMove;
     private GameObject currentDisaster;
-
-    private void OnValidate()
-    {
-        if(speed < 0)
-        {
-            speed = 0;
-        }
-    }
+    private Disaster disasterScript;
 
     private void Awake()
     {
@@ -52,6 +43,7 @@ public class Player : MonoBehaviour
         }
 
         currentDisaster = Instantiate(disaster, transform.position, Quaternion.identity, transform);
+        disasterScript = currentDisaster.GetComponent<Disaster>();
     }
 
     /// <summary>
@@ -68,7 +60,7 @@ public class Player : MonoBehaviour
 
             Vector2 direction = (targetPosition - rb.position).normalized;
 
-            rb.linearVelocity = direction * speed;
+            rb.linearVelocity = direction * disasterScript.DisasterStats.Speed;
 
             mapInfos.PlayerTransform = transform.position;
         }

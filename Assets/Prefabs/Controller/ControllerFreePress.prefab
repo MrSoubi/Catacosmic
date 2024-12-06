@@ -251,11 +251,7 @@ MonoBehaviour:
   test2: {fileID: 11400000, guid: 02697b7757c235c448f48cfb2aa3f9e2, type: 2}
   test3: {fileID: 11400000, guid: 37c75577610720e40808774c019ad4e5, type: 2}
   speedCam: 10
-  zoomMax: 25
-  zoomMin: 150
-  speedZoomCam: 4
   smoothTime: 0.2
-  zoomChangeMin: 5
   circleCamera: {fileID: 6843042190284816401}
   cinemachineCamera: {fileID: 1025714566204047620}
   cinemachineConfiner: {fileID: 1141519314297749779}
