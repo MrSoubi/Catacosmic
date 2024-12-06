@@ -8,6 +8,8 @@ public class RSO_DisasterStats : ScriptableObject
     [SerializeField] private float force;
     [SerializeField] private float speed;
     [SerializeField] private float radius;
+    [SerializeField, SuffixLabel("%")] private float criticChance;
+    [SerializeField] private float criticMutliplier;
 
     private void OnValidate()
     {
@@ -21,9 +23,19 @@ public class RSO_DisasterStats : ScriptableObject
             speed = 0;
         }
 
-        if (radius < 0)
+        if (radius < 0.5f)
         {
-            radius = 0;
+            radius = 0.5f;
+        }
+
+        if (criticChance < 0)
+        {
+            criticChance = 0;
+        }
+
+        if (criticMutliplier < 1)
+        {
+            criticMutliplier = 1;
         }
     }
 
@@ -42,6 +54,18 @@ public class RSO_DisasterStats : ScriptableObject
     public float Radius
     {
         get => radius;
-        set => radius = Mathf.Max(value, 0);
+        set => radius = Mathf.Max(value, 0.5f);
+    }
+
+    public float CriticChance
+    {
+        get => criticChance;
+        set => criticChance = Mathf.Max(value, 0);
+    }
+
+    public float CriticMutliplier
+    {
+        get => criticMutliplier;
+        set => criticMutliplier = Mathf.Max(value, 1);
     }
 }
