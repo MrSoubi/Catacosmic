@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a0aacde7c711a40abeec1c13c98983, type: 3}
-  m_Name: RSO_PointerPosition
+  m_Script: {fileID: 11500000, guid: da1c98158992eb6479b6ee64fd90924e, type: 3}
+  m_Name: RSO_PointerPositionOnScreen
   m_EditorClassIdentifier: 
-  position: 
+  position: {x: 0, y: 0}

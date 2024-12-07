@@ -12,7 +12,7 @@ public class RUI_Game : MonoBehaviour
     public RSE_ShutQuestsPopUp shutQuestsPopUp;
     public RSE_ShutFortuneWheelPopUp shutFortuneWheelPopUp;
 
-    public RSO_PointerPosition pointerPosition;
+    public RSO_PointerPositionOnScreen pointerPosition;
     public RSE_PointerDown pointerDown;
     public RSE_PointerUp pointerUp;
 

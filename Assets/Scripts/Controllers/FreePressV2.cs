@@ -8,7 +8,7 @@ public class FreePressV2 : MonoBehaviour
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
     [SerializeField] private RSE_PointerDown test;
-    [SerializeField] private RSO_PointerPosition test2;
+    [SerializeField] private RSO_PointerPositionOnScreen test2;
     [SerializeField] private RSE_PointerUp test3;
 
     [Title("Camera Speed")]

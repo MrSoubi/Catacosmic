@@ -5,8 +5,8 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "RSO_PointerPosition", menuName = "Data/RSO/PointerPosition")]
-public class RSO_PointerPosition : ScriptableObject
+[CreateAssetMenu(fileName = "RSO_PointerPositionOnScreen", menuName = "Data/RSO/PointerPositionOnScreen")]
+public class RSO_PointerPositionOnScreen : ScriptableObject
 {
     public Action<Vector2> onValueChanged;
 

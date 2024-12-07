@@ -7,12 +7,10 @@ using UnityEditor;
 
 public class TextureManipulator : MonoBehaviour
 {
-    [MinValue(0)]
-    public float test;
     public Texture2D texture;
     public SpriteRenderer spriteRenderer;
 
-    public RSO_PointerPosition position;
+    public RSO_PointerPositionOnScreen position;
 
     private void OnEnable()
     {
