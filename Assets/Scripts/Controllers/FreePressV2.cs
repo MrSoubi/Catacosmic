@@ -22,8 +22,6 @@ public class FreePressV2 : MonoBehaviour
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private CinemachineConfiner2D cinemachineConfiner;
 
-    private Camera mainCamera;
-
     private Vector3 velocity;
     private Vector3 touchPress;
     private Vector3 freePressTouch;
@@ -67,8 +65,6 @@ public class FreePressV2 : MonoBehaviour
 
     private void Start()
     {
-        mainCamera = Camera.main;
-
         cinemachineConfiner.BoundingShape2D = mapInfos.BoxCollider2DRef;
 
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
