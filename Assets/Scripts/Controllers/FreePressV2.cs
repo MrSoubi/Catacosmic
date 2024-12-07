@@ -65,7 +65,7 @@ public class FreePressV2 : MonoBehaviour
 
     private void Start()
     {
-        cinemachineConfiner.BoundingShape2D = mapInfos.BoxCollider2DRef;
+        //cinemachineConfiner.BoundingShape2D = mapInfos.BoxCollider2DRef;
 
         Collider2D confinerCollider = cinemachineConfiner.BoundingShape2D;
 
@@ -90,7 +90,7 @@ public class FreePressV2 : MonoBehaviour
             Vector2 confinerBounds = boundsSize;
             Vector2 confinerCenter = confinerCollider.bounds.center;
 
-            Vector2 val = mapInfos.PlayerRef.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
+            Vector2 val = Vector2.zero;
 
             float minX = confinerCenter.x - confinerBounds.x / 2 + val.x;
             float maxX = confinerCenter.x + confinerBounds.x / 2 - val.x;

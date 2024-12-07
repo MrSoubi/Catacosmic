@@ -16,14 +16,11 @@ public class Player : MonoBehaviour
     private GameObject currentDisaster;
     private Disaster disasterScript;
 
-    private void Awake()
-    {
-        mapInfos.PlayerRef = gameObject;
-    }
-
     private void Start()
     {
         SpawnDisater(prefab);
+
+        mapInfos.PlayerSize = transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
     }
 
     private void FixedUpdate()

@@ -8,7 +8,6 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
-        mapInfos.BoxCollider2DRef = GetComponent<BoxCollider2D>();
-        mapInfos.MapBoxCollider = GetComponent<BoxCollider2D>().bounds;
+        mapInfos.MapBounds = GetComponent<SpriteRenderer>().bounds;
     }
 }

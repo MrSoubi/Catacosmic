@@ -7260,6 +7260,34 @@ PrefabInstance:
       value: ControllerFreePress
       objectReference: {fileID: 0}
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -7286,7 +7314,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 12750493}
+  - {fileID: 616550333}
   - {fileID: 4967135818957680447}
   - {fileID: 1602275403}
   - {fileID: 185742114}
-  - {fileID: 616550333}
