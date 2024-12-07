@@ -8,7 +8,7 @@ public class FreePressV2 : MonoBehaviour
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
     [SerializeField] private RSE_PointerDown test;
-    [SerializeField] private RSO_PointerPositionOnScreen test2;
+    [SerializeField] private RSO_PointerWorldPosition test2;
     [SerializeField] private RSE_PointerUp test3;
 
     [Title("Camera Speed")]
@@ -120,12 +120,12 @@ public class FreePressV2 : MonoBehaviour
     {
         yield return null;
 
-        freePressTouchPos = mainCamera.ScreenToWorldPoint(touchPress);
+        freePressTouchPos = touchPress;
         freePressTouchPos.z = -10;
 
         while (isPressed)
         {
-            Vector3 currentTouchPos = mainCamera.ScreenToWorldPoint(touchPress);
+            Vector3 currentTouchPos = touchPress;
             currentTouchPos.z = -10;
 
             freePressDist = freePressTouchPos - currentTouchPos;
@@ -241,8 +241,6 @@ public class FreePressV2 : MonoBehaviour
                 StopCoroutine(deceleratingCoroutine);
                 deceleratingCoroutine = null;
             }
-
-            freePressTouch = touchPress;
 
             if (deceleratingCoroutine == null)
             {
