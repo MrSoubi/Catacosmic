@@ -1,7 +1,9 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    [Title("ScriptableObjects")]
     public RSO_PointerPositionOnScreen pointerPositionOnScreen;
     public RSO_PointerWorldPosition pointerWorldPosition;
 
