@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 6e218adc785b45e4d8dd6733a50ad835, type: 3}
   spriteRenderer: {fileID: 1803722613}
-  position: {fileID: 11400000, guid: 02697b7757c235c448f48cfb2aa3f9e2, type: 2}
+  position: {fileID: 11400000, guid: 4c56ca59fcc63d14f9eaf79270ee1c40, type: 2}
   color: {r: 0, g: 1, b: 0.09511161, a: 1}
 --- !u!212 &1803722613
 SpriteRenderer:
@@ -313,7 +313,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: b83fe3497a30e7447b61e888683b1633, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -334,7 +334,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6e218adc785b45e4d8dd6733a50ad835, type: 3}
+  m_Sprite: {fileID: -2327914154669315186, guid: e1821f3dc147b8e4490b7bd7541e91f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

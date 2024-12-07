@@ -10,7 +10,7 @@ public class TextureManipulator : MonoBehaviour
     public Texture2D texture;
     public SpriteRenderer spriteRenderer;
 
-    public RSO_PointerPositionOnScreen position;
+    public RSO_PointerWorldPosition position;
 
     private void OnEnable()
     {
@@ -22,11 +22,9 @@ public class TextureManipulator : MonoBehaviour
         position.onValueChanged -= Paint;
     }
 
-    void Paint(Vector2 screenPosition)
+    void Paint(Vector2 worldPosition)
     {
-        Vector2 localPosition = GetLocalPositionFromScreenPosition(screenPosition);
-
-        Vector2 pixelTarget = localPosition;
+        Vector2 pixelTarget = worldPosition;
 
         pixelTarget.x = (pixelTarget.x + spriteRenderer.bounds.extents.x) / spriteRenderer.bounds.size.x;
         pixelTarget.y = (pixelTarget.y + spriteRenderer.bounds.extents.y) / spriteRenderer.bounds.size.y;
@@ -34,18 +32,7 @@ public class TextureManipulator : MonoBehaviour
         Debug.Log(pixelTarget);
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), Mathf.FloorToInt(pixelTarget.y * 1024));
 
-        Brush(pixelTargetInt, 10, Color.green);
-    }
-
-    Vector2 GetLocalPositionFromScreenPosition(Vector2 screenPosition)
-    {
-        Vector3 viewportPosition = new Vector3(screenPosition.x / Camera.main.pixelWidth, (Camera.main.pixelHeight - screenPosition.y) / Camera.main.pixelHeight, 1);
-
-        Vector2 worldPosition = Camera.main.ViewportToWorldPoint(viewportPosition);
-
-        Vector2 localPosition = spriteRenderer.worldToLocalMatrix * worldPosition;
-
-        return localPosition;
+        Brush(pixelTargetInt, 100, Color.white);
     }
 
     void Brush(Vector2Int pixelPosition, int size, Color color)
@@ -98,7 +85,7 @@ public class TextureManipulator : MonoBehaviour
         {
             for (int j = 0; j < texture.height; j++)
             {
-                texture.SetPixel(i, j, Color.white);
+                texture.SetPixel(i, j, Color.black);
             }
         }
 
