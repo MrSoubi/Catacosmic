@@ -137,6 +137,8 @@ public class FreePressV2 : MonoBehaviour
 
             targetPosition.z = -10;
 
+            velocity = (targetPosition - transform.position) / speedCam * Time.deltaTime;
+
             transform.position = Vector3.Lerp(transform.position, targetPosition, speedCam * Time.deltaTime);
 
             mapInfos.CameraTransform = transform.position;
@@ -151,24 +153,23 @@ public class FreePressV2 : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Deceleration()
     {
+        float decelerationFactor = 6f;
+        float velocityThreshold = 0.1f;
+
         while (isDecelerating)
         {
-            Vector3 currentTouchPos = mainCamera.ScreenToWorldPoint(freePressTouch);
-            currentTouchPos.z = -10;
-
-            freePressDist = freePressTouchPos - currentTouchPos;
-            freePressDist.z = -10;
-
-            Vector3 targetPosition = transform.position + freePressDist;
+            Vector3 targetPosition = transform.position + velocity * Time.deltaTime;
 
             targetPosition = LockToCameraBorder(targetPosition);
             targetPosition.z = -10;
 
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+            transform.position = targetPosition;
+
+            velocity *= decelerationFactor;
 
             mapInfos.CameraTransform = transform.position;
 
-            if (velocity.magnitude < 0.1f)
+            if (velocity.magnitude < velocityThreshold)
             {
                 isDecelerating = false;
 
@@ -180,7 +181,6 @@ public class FreePressV2 : MonoBehaviour
             yield return null;
         }
     }
-
 
     /// <summary>
     /// Touch Position
@@ -249,5 +249,20 @@ public class FreePressV2 : MonoBehaviour
                 deceleratingCoroutine = StartCoroutine(Deceleration());
             }
         }
+    }
+
+    /// <summary>
+    /// Zoom
+    /// </summary>
+    public void Zoom()
+    {
+        cinemachineCamera.Lens.OrthographicSize += 1;
+
+        float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
+
+        circleCamera.localScale = new Vector3(newScale, newScale, 1);
+
+        cinemachineConfiner.InvalidateBoundingShapeCache();
+        cinemachineConfiner.InvalidateLensCache();
     }
 }

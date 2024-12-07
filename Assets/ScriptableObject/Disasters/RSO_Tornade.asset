@@ -15,3 +15,5 @@ MonoBehaviour:
   force: 10
   speed: 5
   radius: 1
+  criticChance: 0
+  criticMutliplier: 1

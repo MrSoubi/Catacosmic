@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
 
         currentDisaster = Instantiate(disaster, transform.position, Quaternion.identity, transform);
         disasterScript = currentDisaster.GetComponent<Disaster>();
+        currentDisaster.transform.localScale = new Vector3(disasterScript.DisasterStats.Radius, disasterScript.DisasterStats.Radius, disasterScript.DisasterStats.Radius);
     }
 
     /// <summary>
