@@ -65,7 +65,6 @@ public class RUI_Game : MonoBehaviour
 
         if (root.ClassListContains(POINTER_BLOCKER_STYLE_CLASS))
         {
-            root.RegisterCallback<PointerMoveEvent>(BlockPointerMovement);
             root.RegisterCallback<PointerDownEvent>(BlockPointerMovement);
         }
     }
@@ -73,7 +72,6 @@ public class RUI_Game : MonoBehaviour
     private void OnDisable()
     {
         root.UnregisterCallback<PointerDownEvent>(GetPointerPosition);
-        root.UnregisterCallback<PointerMoveEvent>(GetPointerPosition);
 
         buttonGiftsPopUp.UnregisterCallback<ClickEvent>(CallGiftsPopUp);
         buttonFortuneWheelPopUp.UnregisterCallback<ClickEvent>(CallFortuneWheelPopUp);
@@ -104,7 +102,6 @@ public class RUI_Game : MonoBehaviour
     {
         pointerUp.Fire?.Invoke();
     }
-
 
     void GetPointerPosition(PointerDownEvent pointerDownEvent)
     {
