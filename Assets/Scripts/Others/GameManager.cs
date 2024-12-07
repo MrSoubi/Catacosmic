@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
-    [SerializeField] private RSO_DisasterStats disasterStats;
 
     private void OnDisable()
     {
