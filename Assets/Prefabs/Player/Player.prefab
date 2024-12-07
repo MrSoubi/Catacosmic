@@ -74,5 +74,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
   prefab: {fileID: 3879445112946658002, guid: b2e06d44439554c4185ee4dedce3ab8f, type: 3}
-  speed: 5
   rb: {fileID: 5131635400869751737}

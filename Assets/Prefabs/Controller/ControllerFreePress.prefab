@@ -249,7 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
   test: {fileID: 11400000, guid: 7d3bbab2fe2f56b4789a81eaf360c2ed, type: 2}
-  test2: {fileID: 11400000, guid: 02697b7757c235c448f48cfb2aa3f9e2, type: 2}
+  test2: {fileID: 11400000, guid: 4c56ca59fcc63d14f9eaf79270ee1c40, type: 2}
   test3: {fileID: 11400000, guid: 37c75577610720e40808774c019ad4e5, type: 2}
   speedCam: 10
   smoothTime: 0.4
