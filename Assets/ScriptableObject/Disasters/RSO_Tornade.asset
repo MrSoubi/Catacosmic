@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cf0cc2529dc0a4d992c3f6b532559a, type: 3}
   m_Name: RSO_Tornade
   m_EditorClassIdentifier: 
-  force: 10
-  speed: 5
   radius: 1
+  speed: 5
+  damage: 10
   criticChance: 0
   criticMutliplier: 1
+  timeAction: 0.2
+  resitanceMulitiplier: 1

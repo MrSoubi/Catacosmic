@@ -5,17 +5,19 @@ using UnityEngine;
 public class RSO_DisasterStats : ScriptableObject
 {
     [Title("Parameters")]
-    [SerializeField] private float force;
-    [SerializeField] private float speed;
     [SerializeField] private float radius;
+    [SerializeField] private float speed;
+    [SerializeField] private float damage;
     [SerializeField, SuffixLabel("%")] private float criticChance;
     [SerializeField] private float criticMutliplier;
+    [SerializeField, SuffixLabel("s")] private float timeAction;
+    [SerializeField] private float resitanceMulitiplier;
 
     private void OnValidate()
     {
-        if(force < 0)
+        if (radius < 0.5f)
         {
-            force = 0;
+            radius = 0.5f;
         }
 
         if (speed < 0)
@@ -23,9 +25,9 @@ public class RSO_DisasterStats : ScriptableObject
             speed = 0;
         }
 
-        if (radius < 0.5f)
+        if (damage < 0)
         {
-            radius = 0.5f;
+            damage = 0;
         }
 
         if (criticChance < 0)
@@ -37,12 +39,22 @@ public class RSO_DisasterStats : ScriptableObject
         {
             criticMutliplier = 1;
         }
+
+        if (timeAction < 0)
+        {
+            timeAction = 0;
+        }
+
+        if (resitanceMulitiplier < 0)
+        {
+            resitanceMulitiplier = 0;
+        }
     }
 
-    public float Force
+    public float Radius
     {
-        get => force;
-        set => force = Mathf.Max(value, 0);
+        get => radius;
+        set => radius = Mathf.Max(value, 0.5f);
     }
 
     public float Speed
@@ -51,10 +63,10 @@ public class RSO_DisasterStats : ScriptableObject
         set => speed = Mathf.Max(value, 0);
     }
 
-    public float Radius
+    public float Force
     {
-        get => radius;
-        set => radius = Mathf.Max(value, 0.5f);
+        get => damage;
+        set => damage = Mathf.Max(value, 0);
     }
 
     public float CriticChance
@@ -67,5 +79,17 @@ public class RSO_DisasterStats : ScriptableObject
     {
         get => criticMutliplier;
         set => criticMutliplier = Mathf.Max(value, 1);
+    }
+
+    public float TimeAction
+    {
+        get => timeAction;
+        set => timeAction = Mathf.Max(value, 0);
+    }
+
+    public float ResitanceMulitiplier
+    {
+        get => resitanceMulitiplier;
+        set => resitanceMulitiplier = Mathf.Max(value, 0);
     }
 }

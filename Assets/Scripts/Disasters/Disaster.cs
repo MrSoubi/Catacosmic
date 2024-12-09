@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 public class Disaster : MonoBehaviour
@@ -21,6 +22,8 @@ public class Disaster : MonoBehaviour
     {
         transform.localScale = new Vector3(disasterStats.Radius, disasterStats.Radius, disasterStats.Radius);
         mapInfos.PlayerSize = sr.bounds.size / 2;
+
+        StartCoroutine(Damage());
     }
 
     private void FixedUpdate()
@@ -55,5 +58,16 @@ public class Disaster : MonoBehaviour
 
             disasterPosition.Value = transform.position;
         }
+    }
+
+    /// <summary>
+    /// Damage Action
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Damage()
+    {
+        yield return new WaitForSeconds(disasterStats.TimeAction);
+
+        StartCoroutine(Damage());
     }
 }
