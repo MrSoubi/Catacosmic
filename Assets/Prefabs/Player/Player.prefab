@@ -73,5 +73,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
+  disasterPosition: {fileID: 11400000, guid: e79382620735b884e9e1569758433e46, type: 2}
   prefab: {fileID: 3879445112946658002, guid: b2e06d44439554c4185ee4dedce3ab8f, type: 3}
   rb: {fileID: 5131635400869751737}

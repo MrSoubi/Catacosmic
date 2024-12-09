@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
+    [SerializeField] private RSO_DisasterPosition disasterPosition;
 
     [Title("Default Disaster")]
     [SerializeField] private GameObject prefab;
@@ -21,6 +22,11 @@ public class Player : MonoBehaviour
         SpawnDisater(prefab);
 
         mapInfos.PlayerSize = transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size / 2;
+    }
+
+    private void Update()
+    {
+        disasterPosition.Value = transform.position;
     }
 
     private void FixedUpdate()
