@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6d4cee760295094c866c8baeb67a950
+guid: 39a32a9b69276c243b769e0f33d8cde3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2074587963939560039
-    second: CameraTarget_0
+      213: -4119334708683220384
+    second: Target_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,24 +109,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CameraTarget_0
+      name: Target_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76a1be5f2ca6acc10800000000000000
-      internalID: 2074587963939560039
+      spriteID: 06adff958ee25d6c0800000000000000
+      internalID: -4119334708683220384
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CameraTarget_0: 2074587963939560039
+      Target_0: -4119334708683220384
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
