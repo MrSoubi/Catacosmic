@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
-public class FreePress : MonoBehaviour
+public class CameraFreePress : MonoBehaviour
 {
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
