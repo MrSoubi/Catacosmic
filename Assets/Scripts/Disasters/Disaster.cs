@@ -19,8 +19,8 @@ public class Disaster : MonoBehaviour
 
     private void Start()
     {
-        mapInfos.PlayerSize = sr.bounds.size / 2;
         transform.localScale = new Vector3(disasterStats.Radius, disasterStats.Radius, disasterStats.Radius);
+        mapInfos.PlayerSize = sr.bounds.size / 2;
     }
 
     private void FixedUpdate()
