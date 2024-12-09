@@ -12,10 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748f1e6d55e07340b2e8b02c61129e1, type: 3}
   m_Name: RSO_MapInfos
   m_EditorClassIdentifier: 
-  boxCollider2DRef: {fileID: 0}
-  playerRef: {fileID: 0}
-  playerTransform: {x: 0, y: 0, z: 0}
-  cameraTransform: {x: 0, y: 0, z: -10}
-  mapboxCollider:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
