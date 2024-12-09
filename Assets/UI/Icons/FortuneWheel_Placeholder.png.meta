@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FortuneWheel_Placeholder_0: 3567357618465356119
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
