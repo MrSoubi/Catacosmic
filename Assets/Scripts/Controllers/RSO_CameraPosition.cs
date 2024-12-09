@@ -1,15 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "RSO_DisasterPosition", menuName = "Data/RSO/DisasterPosition")]
-public class RSO_DisasterPosition : ScriptableObject
+[CreateAssetMenu(fileName = "RSO_CameraPosition", menuName = "Catacosmic/RSO/Camera Position")]
+public class RSO_CameraPosition : ScriptableObject
 {
     public Action<Vector2> onValueChanged;
 
+    [Title("Parameters")]
     [ShowInInspector]
     private Vector2 _value;
 

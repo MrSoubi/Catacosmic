@@ -2,10 +2,11 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
-public class FreePress : MonoBehaviour
+public class CameraFreePress : MonoBehaviour
 {
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
+    [SerializeField] private RSO_CameraPosition cameraPosition;
     [SerializeField] private RSE_PointerDown pointerDown;
     [SerializeField] private RSO_PointerWorldPosition pointerWorldPosition;
     [SerializeField] private RSE_PointerUp pointerUp;
@@ -38,6 +39,11 @@ public class FreePress : MonoBehaviour
         pointerDown.Fire -= TouchDown;
         pointerWorldPosition.onValueChanged -= TouchPos;
         pointerUp.Fire -= TouchUp;
+    }
+
+    private void Start()
+    {
+        cameraPosition.Value = transform.position;
     }
 
     /// <summary>
@@ -78,7 +84,7 @@ public class FreePress : MonoBehaviour
 
             transform.position = LockToCameraBorder(transform.position);
 
-            mapInfos.CameraTransform = transform.position;
+            cameraPosition.Value = transform.position;
         }
     }
 
@@ -96,7 +102,7 @@ public class FreePress : MonoBehaviour
 
             transform.position = LockToCameraBorder(transform.position);
 
-            mapInfos.CameraTransform = transform.position;
+            cameraPosition.Value = transform.position;
 
             if (velocity.magnitude < 0.1f)
             {

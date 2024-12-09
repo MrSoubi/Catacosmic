@@ -114,7 +114,7 @@ public class LockPress : MonoBehaviour
 
                     transform.position = LockToCameraBorder(newPosition);
 
-                    mapInfos.CameraTransform = transform.position;
+                    //mapInfos.CameraTransform = transform.position;
                 }
 
                 yield return null;
