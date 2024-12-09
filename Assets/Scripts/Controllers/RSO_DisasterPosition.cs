@@ -7,6 +7,7 @@ public class RSO_DisasterPosition : ScriptableObject
 {
     public Action<Vector2> onValueChanged;
 
+    [Title("Parameters")]
     [ShowInInspector]
     private Vector2 _value;
 
