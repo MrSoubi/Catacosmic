@@ -136,7 +136,7 @@ public class JoyStick : MonoBehaviour
 
                     transform.position = LockToCameraBorder(newPosition);
 
-                    mapInfos.CameraTransform = transform.position;
+                    //mapInfos.CameraTransform = transform.position;
                 }
             }
 

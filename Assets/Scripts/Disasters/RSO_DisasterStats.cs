@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DisasterStats", menuName = "Catacosmic/Disaster Stats")]
+[CreateAssetMenu(fileName = "RSO_DisasterStats", menuName = "Catacosmic/RSO/Disaster Stats")]
 public class RSO_DisasterStats : ScriptableObject
 {
     [Title("Parameters")]

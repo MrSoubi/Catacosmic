@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
+  cameraPosition: {fileID: 11400000, guid: c50886e1ca748a34bb401827cec717c1, type: 2}
   disasterPosition: {fileID: 11400000, guid: e79382620735b884e9e1569758433e46, type: 2}
   disasterStats: {fileID: 11400000, guid: 890de4cb83016c641b05a6d4af77fc46, type: 2}
   rb: {fileID: 2774724204274923175}

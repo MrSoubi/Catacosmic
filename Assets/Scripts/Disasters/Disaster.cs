@@ -5,6 +5,7 @@ public class Disaster : MonoBehaviour
 {
     [Title("ScriptableObjects")]
     [SerializeField] private RSO_MapInfos mapInfos;
+    [SerializeField] private RSO_CameraPosition cameraPosition;
     [SerializeField] private RSO_DisasterPosition disasterPosition;
     [SerializeField] private RSO_DisasterStats disasterStats;
 
@@ -22,11 +23,6 @@ public class Disaster : MonoBehaviour
         transform.localScale = new Vector3(disasterStats.Radius, disasterStats.Radius, disasterStats.Radius);
     }
 
-    private void Update()
-    {
-        disasterPosition.Value = transform.position;
-    }
-
     private void FixedUpdate()
     {
         MoveToCamera();
@@ -37,7 +33,7 @@ public class Disaster : MonoBehaviour
     /// </summary>
     private void MoveToCamera()
     {
-        Vector2 targetPosition = mapInfos.CameraTransform;
+        Vector2 targetPosition = cameraPosition.Value;
         float distance = Vector2.Distance(rb.position, targetPosition);
 
         if (distance > 0.05f)
@@ -48,7 +44,7 @@ public class Disaster : MonoBehaviour
 
             rb.linearVelocity = direction * disasterStats.Speed;
 
-            mapInfos.PlayerTransform = transform.position;
+            disasterPosition.Value = transform.position;
         }
         else if (isNeedToMove)
         {
@@ -57,7 +53,7 @@ public class Disaster : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             transform.position = targetPosition;
 
-            mapInfos.PlayerTransform = transform.position;
+            disasterPosition.Value = transform.position;
         }
     }
 }
