@@ -16,6 +16,10 @@ public class Disaster : MonoBehaviour
     [Title("SpriteRenderer")]
     [SerializeField] private SpriteRenderer sr;
 
+    [Title("Arrow")]
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private ArrowGenerator arrowScript;
+
     private bool isNeedToMove;
 
     private void Start()
@@ -26,9 +30,37 @@ public class Disaster : MonoBehaviour
         StartCoroutine(Damage());
     }
 
+    private void Update()
+    {
+        Arrow();
+    }
+
     private void FixedUpdate()
     {
         MoveToCamera();
+    }
+
+    /// <summary>
+    /// Manage the Arrow
+    /// </summary>
+    private void Arrow()
+    {
+        Vector2 targetPosition = cameraPosition.Value;
+        float distance = Vector2.Distance(transform.position, targetPosition);
+        arrowScript.stemLength = distance - 1.5f;
+
+        if (distance <= 1.5)
+        {
+            arrow.SetActive(false);
+        }
+        else
+        {
+            arrow.SetActive(true);
+
+            Vector2 direction = targetPosition - (Vector2)transform.GetChild(0).transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.GetChild(0).transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
     }
 
     /// <summary>
