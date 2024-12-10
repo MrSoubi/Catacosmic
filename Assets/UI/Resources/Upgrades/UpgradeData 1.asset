@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92811e0634d3f046bf854342f77123b, type: 3}
   m_Name: UpgradeData 1
   m_EditorClassIdentifier: 
-  upgradeName: Speed
+  upgradeName: Radius
   portraitImage: {fileID: 0}
