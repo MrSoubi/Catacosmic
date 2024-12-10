@@ -131,7 +131,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7932639076287018912
@@ -291,5 +291,5 @@ MonoBehaviour:
   pointerWorldPosition: {fileID: 11400000, guid: 4c56ca59fcc63d14f9eaf79270ee1c40, type: 2}
   pointerUp: {fileID: 11400000, guid: 37c75577610720e40808774c019ad4e5, type: 2}
   cameraMain: {fileID: 5778474694985841871}
-  speedDecelaration: 0.5
+  speedDecelaration: 1
   velocityMinDecelaration: 5

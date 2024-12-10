@@ -33,11 +33,12 @@ public class RUI_Game : MonoBehaviour
         var upgradeListController = new UpgradeListController();
         upgradeListController.InitializeCharacterList(uiDocument.rootVisualElement, m_ListEntryTemplate);
 
-        root = uiDocument.rootVisualElement;
+        root = uiDocument.rootVisualElement; 
 
         root.RegisterCallback<PointerDownEvent>(GetPointerPosition);
         root.RegisterCallback<PointerDownEvent>(TriggerPointerDown);
         root.RegisterCallback<PointerMoveEvent>(GetPointerPosition);
+        root.RegisterCallback<PointerUpEvent>(GetPointerPosition);
         root.RegisterCallback<PointerUpEvent>(TriggerPointerUp);
 
         buttonGiftsPopUp = uiDocument.rootVisualElement.Q("Button_Gifts") as Button;
@@ -111,6 +112,11 @@ public class RUI_Game : MonoBehaviour
     void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
     {
         pointerPosition.Value = pointerMoveEvent.position * root.panel.scaledPixelsPerPoint;
+    }
+
+    void GetPointerPosition(PointerUpEvent pointerUpEvent)
+    {
+        pointerPosition.Value = pointerUpEvent.position * root.panel.scaledPixelsPerPoint;
     }
 
     void CallGiftsPopUp(ClickEvent clickEvent)

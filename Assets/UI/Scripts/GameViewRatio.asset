@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameViewRatio
   m_EditorClassIdentifier: 
   ratio: 0.6
-  gameRatio: 480.00003
+  gameRatio: 480
   menuRatio: 319.99997

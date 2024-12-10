@@ -1,2 +1,8 @@
 .pointerBlocker {
+    flex-grow: 1;
+    overflow: hidden;
+    justify-content: center;
+    align-self: auto;
+    align-content: auto;
+    align-items: auto;
 }
