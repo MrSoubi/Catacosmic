@@ -8,7 +8,7 @@ public class Disaster : MonoBehaviour
     [SerializeField] private RSO_MapInfos mapInfos;
     [SerializeField] private RSO_CameraPosition cameraPosition;
     [SerializeField] private RSO_DisasterPosition disasterPosition;
-    [SerializeField] private RSO_DisasterStats disasterStats;
+    [SerializeField] private SSO_DisasterStats disasterStats;
 
     [Title("RigidBody")]
     [SerializeField] private Rigidbody2D rb;
@@ -98,7 +98,7 @@ public class Disaster : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Damage()
     {
-        yield return new WaitForSeconds(disasterStats.TimeAction);
+        yield return new WaitForSeconds(disasterStats.AttackDelay);
 
         StartCoroutine(Damage());
     }

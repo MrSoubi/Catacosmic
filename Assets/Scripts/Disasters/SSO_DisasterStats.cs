@@ -1,16 +1,16 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_DisasterStats", menuName = "Catacosmic/RSO/Disaster Stats")]
-public class RSO_DisasterStats : ScriptableObject
+[CreateAssetMenu(fileName = "SSO_DisasterStats", menuName = "Catacosmic/RSO/Disaster Stats")]
+public class SSO_DisasterStats : ScriptableObject
 {
     [Title("Parameters")]
     [SerializeField] private float radius;
     [SerializeField] private float speed;
-    [SerializeField] private float damage;
+    [SerializeField] private float strength;
     [SerializeField, SuffixLabel("%")] private float criticChance;
     [SerializeField] private float criticMutliplier;
-    [SerializeField, SuffixLabel("s")] private float timeAction;
+    [SerializeField, SuffixLabel("s")] private float attackDelay;
     [SerializeField] private float resitanceMulitiplier;
 
     private void OnValidate()
@@ -25,9 +25,9 @@ public class RSO_DisasterStats : ScriptableObject
             speed = 0;
         }
 
-        if (damage < 0)
+        if (strength < 0)
         {
-            damage = 0;
+            strength = 0;
         }
 
         if (criticChance < 0)
@@ -40,9 +40,9 @@ public class RSO_DisasterStats : ScriptableObject
             criticMutliplier = 1;
         }
 
-        if (timeAction < 0)
+        if (attackDelay < 0)
         {
-            timeAction = 0;
+            attackDelay = 0;
         }
 
         if (resitanceMulitiplier < 0)
@@ -63,10 +63,10 @@ public class RSO_DisasterStats : ScriptableObject
         set => speed = Mathf.Max(value, 0);
     }
 
-    public float Force
+    public float Strength
     {
-        get => damage;
-        set => damage = Mathf.Max(value, 0);
+        get => strength;
+        set => strength = Mathf.Max(value, 0);
     }
 
     public float CriticChance
@@ -81,10 +81,10 @@ public class RSO_DisasterStats : ScriptableObject
         set => criticMutliplier = Mathf.Max(value, 1);
     }
 
-    public float TimeAction
+    public float AttackDelay
     {
-        get => timeAction;
-        set => timeAction = Mathf.Max(value, 0);
+        get => attackDelay;
+        set => attackDelay = Mathf.Max(value, 0);
     }
 
     public float ResitanceMulitiplier
