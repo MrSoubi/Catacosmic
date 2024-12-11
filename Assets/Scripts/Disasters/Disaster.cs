@@ -21,23 +21,29 @@ public class Disaster : MonoBehaviour
     [SerializeField] private ArrowGenerator arrowScript;
 
     private bool isNeedToMove;
+    private bool isNeedArrow;
 
     private void Start()
     {
+        disasterPosition.Value = transform.position;
+
         transform.localScale = new Vector3(disasterStats.Radius, disasterStats.Radius, disasterStats.Radius);
+
         mapInfos.PlayerSize = sr.bounds.size / 2;
 
         StartCoroutine(Damage());
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        Arrow();
+        StopAllCoroutines();
     }
 
     private void FixedUpdate()
     {
         MoveToCamera();
+
+        Arrow();
     }
 
     /// <summary>
@@ -46,20 +52,34 @@ public class Disaster : MonoBehaviour
     private void Arrow()
     {
         Vector2 targetPosition = cameraPosition.Value;
-        float distance = Vector2.Distance(transform.position, targetPosition);
-        arrowScript.stemLength = distance - 1.5f;
 
-        if (distance <= 1.5)
+        float distance = Vector2.Distance(transform.position, targetPosition);
+
+        if (distance > 1.5f)
         {
-            arrow.SetActive(false);
-        }
-        else
-        {
-            arrow.SetActive(true);
+            isNeedArrow = true;
+
+            arrowScript.stemLength = distance - 1.5f;
+
+            if (!arrow.activeInHierarchy)
+            {
+                arrow.SetActive(true);
+            }
 
             Vector2 direction = targetPosition - (Vector2)transform.GetChild(0).transform.position;
+
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
             transform.GetChild(0).transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+        else if (isNeedArrow)
+        {
+            isNeedArrow = false;
+
+            if (arrow.activeInHierarchy)
+            {
+                arrow.SetActive(false);
+            }
         }
     }
 
@@ -69,6 +89,7 @@ public class Disaster : MonoBehaviour
     private void MoveToCamera()
     {
         Vector2 targetPosition = cameraPosition.Value;
+
         float distance = Vector2.Distance(rb.position, targetPosition);
 
         if (distance > 0.05f)
@@ -93,12 +114,12 @@ public class Disaster : MonoBehaviour
     }
 
     /// <summary>
-    /// Damage Action
+    /// Damage with Attack Speed
     /// </summary>
     /// <returns></returns>
     private IEnumerator Damage()
     {
-        yield return new WaitForSeconds(disasterStats.TimeAction);
+        yield return new WaitForSeconds(disasterStats.AttackSpeed);
 
         StartCoroutine(Damage());
     }
