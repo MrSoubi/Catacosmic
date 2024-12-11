@@ -291,5 +291,5 @@ MonoBehaviour:
   pointerWorldPosition: {fileID: 11400000, guid: 4c56ca59fcc63d14f9eaf79270ee1c40, type: 2}
   pointerUp: {fileID: 11400000, guid: 37c75577610720e40808774c019ad4e5, type: 2}
   cameraMain: {fileID: 5778474694985841871}
-  speedDecelaration: 1
+  speedDecelaration: 0.5
   velocityMinDecelaration: 5
