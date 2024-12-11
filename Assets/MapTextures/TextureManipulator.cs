@@ -31,15 +31,31 @@ public class TextureManipulator : MonoBehaviour
 
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), Mathf.FloorToInt(pixelTarget.y * 1024));
 
-        Brush(pixelTargetInt, 100, Color.white);
+        Brush(pixelTargetInt, 5);
     }
 
-    void Brush(Vector2Int pixelPosition, int size, Color color)
+    float brushStrength = 1f;
+    float mapStrength = 50f;
+    void Brush(Vector2Int pixelPosition, int size)
     {
+        Color color;
+
         for (int i = -size / 2; i < size / 2; i++)
         {
             for (int j = -size / 2; j < size / 2; j++)
             {
+                string debug;
+                float pixelLife = 1 - texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j).grayscale;
+                debug = "life: " + pixelLife;
+                float damage = brushStrength / mapStrength;
+                debug += ", damage: " + damage;
+                float newPixelLife = 1 - Mathf.Max(pixelLife - damage, 0);
+                debug += ", life: " + newPixelLife;
+
+                Debug.Log(debug);
+
+                color = new Color(newPixelLife, newPixelLife, newPixelLife);
+
                 texture.SetPixel(pixelPosition.x + i, pixelPosition.y + j, color);
             }
         }
