@@ -1,17 +1,16 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SSO_DisasterStats", menuName = "Catacosmic/RSO/Disaster Stats")]
-public class SSO_DisasterStats : ScriptableObject
+[CreateAssetMenu(fileName = "RSO_DisasterStats", menuName = "Catacosmic/RSO/Disaster Stats")]
+public class RSO_DisasterStats : ScriptableObject
 {
     [Title("Parameters")]
     [SerializeField] private float radius;
     [SerializeField] private float speed;
-    [SerializeField] private float strength;
+    [SerializeField] private float damage;
     [SerializeField, SuffixLabel("%")] private float criticChance;
     [SerializeField] private float criticMutliplier;
-    [SerializeField, SuffixLabel("s")] private float attackDelay;
-    [SerializeField] private float resitanceMulitiplier;
+    [SerializeField, SuffixLabel("s")] private float attackSpeed;
 
     private void OnValidate()
     {
@@ -25,9 +24,9 @@ public class SSO_DisasterStats : ScriptableObject
             speed = 0;
         }
 
-        if (strength < 0)
+        if (damage < 0)
         {
-            strength = 0;
+            damage = 0;
         }
 
         if (criticChance < 0)
@@ -40,14 +39,9 @@ public class SSO_DisasterStats : ScriptableObject
             criticMutliplier = 1;
         }
 
-        if (attackDelay < 0)
+        if (attackSpeed < 0)
         {
-            attackDelay = 0;
-        }
-
-        if (resitanceMulitiplier < 0)
-        {
-            resitanceMulitiplier = 0;
+            attackSpeed = 0;
         }
     }
 
@@ -63,10 +57,10 @@ public class SSO_DisasterStats : ScriptableObject
         set => speed = Mathf.Max(value, 0);
     }
 
-    public float Strength
+    public float Force
     {
-        get => strength;
-        set => strength = Mathf.Max(value, 0);
+        get => damage;
+        set => damage = Mathf.Max(value, 0);
     }
 
     public float CriticChance
@@ -81,15 +75,9 @@ public class SSO_DisasterStats : ScriptableObject
         set => criticMutliplier = Mathf.Max(value, 1);
     }
 
-    public float AttackDelay
+    public float AttackSpeed
     {
-        get => attackDelay;
-        set => attackDelay = Mathf.Max(value, 0);
-    }
-
-    public float ResitanceMulitiplier
-    {
-        get => resitanceMulitiplier;
-        set => resitanceMulitiplier = Mathf.Max(value, 0);
+        get => attackSpeed;
+        set => attackSpeed = Mathf.Max(value, 0);
     }
 }

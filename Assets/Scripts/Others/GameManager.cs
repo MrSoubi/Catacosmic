@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Destroy Disaster & Spawn the new Disaster
+    /// Destroy the Current Disaster & Spawn the new Disaster
     /// </summary>
     /// <param name="disaster"></param>
     private void SpawnDisater(GameObject disaster)

@@ -74,7 +74,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6015037484215545687}
@@ -291,5 +291,7 @@ MonoBehaviour:
   pointerWorldPosition: {fileID: 11400000, guid: 4c56ca59fcc63d14f9eaf79270ee1c40, type: 2}
   pointerUp: {fileID: 11400000, guid: 37c75577610720e40808774c019ad4e5, type: 2}
   cameraMain: {fileID: 5778474694985841871}
+  circleCamera: {fileID: 7784119470980692793}
+  cameraSize: 25
   speedDecelaration: 1
-  velocityMinDecelaration: 5
+  velocityMinDecelaration: 1
