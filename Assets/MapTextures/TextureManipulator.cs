@@ -44,15 +44,9 @@ public class TextureManipulator : MonoBehaviour
         {
             for (int j = -size / 2; j < size / 2; j++)
             {
-                string debug;
                 float pixelLife = 1 - texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j).grayscale;
-                debug = "life: " + pixelLife;
                 float damage = brushStrength / mapStrength;
-                debug += ", damage: " + damage;
                 float newPixelLife = 1 - Mathf.Max(pixelLife - damage, 0);
-                debug += ", life: " + newPixelLife;
-
-                Debug.Log(debug);
 
                 color = new Color(newPixelLife, newPixelLife, newPixelLife);
 
