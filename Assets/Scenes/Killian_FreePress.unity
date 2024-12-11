@@ -7258,6 +7258,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerFreePress
       objectReference: {fileID: 0}
+    - target: {fileID: 3224153613304361350, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_Size.x
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224153613304361350, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_Size.y
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224153613304361350, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4119334708683220384, guid: 39a32a9b69276c243b769e0f33d8cde3, type: 3}
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
