@@ -11,41 +11,45 @@ public class TextureManipulator : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     public RSO_DisasterPosition position;
+    public RSO_CurrentDisasterSize disasterSize;
+    public RSO_CurrentDisasterStrength disasterStrength;
+    public RSE_DisasterAttack disasterAttack;
 
     private void OnEnable()
     {
-        position.onValueChanged += Paint;
+        disasterAttack.Fire += Paint;
     }
 
     private void OnDisable()
     {
-        position.onValueChanged -= Paint;
+        disasterAttack.Fire -= Paint;
     }
 
-    void Paint(Vector2 worldPosition)
+    void Paint()
     {
-        Vector2 pixelTarget = worldPosition;
+        Vector2 worldPosition = position.Value;
+        Vector2 pixelTarget;
 
         pixelTarget.x = (worldPosition.x + spriteRenderer.bounds.extents.x) / spriteRenderer.bounds.size.x;
         pixelTarget.y = (worldPosition.y + spriteRenderer.bounds.extents.y) / spriteRenderer.bounds.size.y;
 
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), Mathf.FloorToInt(pixelTarget.y * 1024));
 
-        Brush(pixelTargetInt, 5);
+        Brush(pixelTargetInt);
     }
 
-    float brushStrength = 1f;
     float mapStrength = 50f;
-    void Brush(Vector2Int pixelPosition, int size)
+    void Brush(Vector2Int pixelPosition)
     {
         Color color;
+        int size = disasterSize.Value;
 
         for (int i = -size / 2; i < size / 2; i++)
         {
             for (int j = -size / 2; j < size / 2; j++)
             {
                 float pixelLife = 1 - texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j).grayscale;
-                float damage = brushStrength / mapStrength;
+                float damage = disasterStrength.Value / mapStrength;
                 float newPixelLife = 1 - Mathf.Max(pixelLife - damage, 0);
 
                 color = new Color(newPixelLife, newPixelLife, newPixelLife);

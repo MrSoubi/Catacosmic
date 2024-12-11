@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Disaster : MonoBehaviour
 {
-    [Title("ScriptableObjects")]
-    [SerializeField] private RSO_MapInfos mapInfos;
-    [SerializeField] private RSO_CameraPosition cameraPosition;
-    [SerializeField] private RSO_DisasterPosition disasterPosition;
-    [SerializeField] private RSO_DisasterStats disasterStats;
+    [Title("Input Data")]
+    public RSO_MapInfos mapInfos;
+    public RSO_CameraPosition cameraPosition;
+    public SSO_DisasterStats disasterStats;
+
+    [Title("Output Data")]
+    public RSO_CurrentDisasterSize disasterSize;
+    public RSO_CurrentDisasterStrength disasterStrength;
+    public RSO_DisasterPosition disasterPosition;
+
+    [Title("Output Events")]
+    public RSE_DisasterAttack disasterAttack;
 
     [Title("RigidBody")]
     [SerializeField] private Rigidbody2D rb;
@@ -27,8 +34,9 @@ public class Disaster : MonoBehaviour
     {
         disasterPosition.Value = transform.position;
 
-        transform.localScale = new Vector3(disasterStats.Radius, disasterStats.Radius, disasterStats.Radius);
-
+        //transform.localScale = new Vector3(disasterStats.Size, disasterStats.Size, disasterStats.Size);
+        disasterSize.Value = disasterStats.Size;
+        disasterStrength.Value = disasterStats.Strength;
         mapInfos.PlayerSize = sr.bounds.size / 2;
 
         StartCoroutine(Damage());
@@ -98,7 +106,7 @@ public class Disaster : MonoBehaviour
 
             Vector2 direction = (targetPosition - rb.position).normalized;
 
-            rb.linearVelocity = direction * disasterStats.Speed;
+            rb.linearVelocity = direction * disasterStats.Velocity;
 
             disasterPosition.Value = transform.position;
         }
@@ -120,6 +128,8 @@ public class Disaster : MonoBehaviour
     private IEnumerator Damage()
     {
         yield return new WaitForSeconds(disasterStats.AttackSpeed);
+
+        disasterAttack.FireEvent();
 
         StartCoroutine(Damage());
     }

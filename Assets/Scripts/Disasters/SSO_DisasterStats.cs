@@ -1,32 +1,32 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_DisasterStats", menuName = "Catacosmic/RSO/Disaster Stats")]
-public class RSO_DisasterStats : ScriptableObject
+[CreateAssetMenu(fileName = "SSO_DisasterStats", menuName = "Catacosmic/SSO/Disaster Stats")]
+public class SSO_DisasterStats : ScriptableObject
 {
     [Title("Parameters")]
-    [SerializeField] private float radius;
-    [SerializeField] private float speed;
-    [SerializeField] private float damage;
+    [SerializeField] private int size;
+    [SerializeField] private float velocity;
+    [SerializeField] private float strength;
     [SerializeField, SuffixLabel("%")] private float criticChance;
-    [SerializeField] private float criticMutliplier;
+    [SerializeField] private float criticMultiplier;
     [SerializeField, SuffixLabel("s")] private float attackSpeed;
 
     private void OnValidate()
     {
-        if (radius < 0.5f)
+        if (size < 1)
         {
-            radius = 0.5f;
+            size = 1;
         }
 
-        if (speed < 0)
+        if (velocity < 0)
         {
-            speed = 0;
+            velocity = 0;
         }
 
-        if (damage < 0)
+        if (strength < 0)
         {
-            damage = 0;
+            strength = 0;
         }
 
         if (criticChance < 0)
@@ -34,9 +34,9 @@ public class RSO_DisasterStats : ScriptableObject
             criticChance = 0;
         }
 
-        if (criticMutliplier < 1)
+        if (criticMultiplier < 1)
         {
-            criticMutliplier = 1;
+            criticMultiplier = 1;
         }
 
         if (attackSpeed < 0)
@@ -45,22 +45,22 @@ public class RSO_DisasterStats : ScriptableObject
         }
     }
 
-    public float Radius
+    public int Size
     {
-        get => radius;
-        set => radius = Mathf.Max(value, 0.5f);
+        get => size;
+        set => size = Mathf.Max(value, 1);
     }
 
-    public float Speed
+    public float Velocity
     {
-        get => speed;
-        set => speed = Mathf.Max(value, 0);
+        get => velocity;
+        set => velocity = Mathf.Max(value, 0);
     }
 
-    public float Force
+    public float Strength
     {
-        get => damage;
-        set => damage = Mathf.Max(value, 0);
+        get => strength;
+        set => strength = Mathf.Max(value, 0);
     }
 
     public float CriticChance
@@ -69,10 +69,10 @@ public class RSO_DisasterStats : ScriptableObject
         set => criticChance = Mathf.Max(value, 0);
     }
 
-    public float CriticMutliplier
+    public float CriticMultiplier
     {
-        get => criticMutliplier;
-        set => criticMutliplier = Mathf.Max(value, 1);
+        get => criticMultiplier;
+        set => criticMultiplier = Mathf.Max(value, 1);
     }
 
     public float AttackSpeed
