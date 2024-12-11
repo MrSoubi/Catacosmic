@@ -189,9 +189,6 @@ public class CameraFreePress : MonoBehaviour
 
         float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
 
-        circleCamera.localScale = new Vector3(newScale, newScale, 1);
-
-        cinemachineConfiner.InvalidateBoundingShapeCache();
-        cinemachineConfiner.InvalidateLensCache();*/
+        circleCamera.localScale = new Vector3(newScale, newScale, 1);*/
     }
 }
