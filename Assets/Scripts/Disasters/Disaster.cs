@@ -5,11 +5,11 @@ using UnityEngine;
 public class Disaster : MonoBehaviour
 {
     [Title("Input Data")]
-    public RSO_MapInfos mapInfos;
-    public RSO_CameraPosition cameraPosition;
     public SSO_DisasterStats disasterStats;
 
     [Title("Output Data")]
+    public RSO_MapInfos mapInfos;
+    public RSO_CameraPosition cameraPosition;
     public RSO_CurrentDisasterSize disasterSize;
     public RSO_CurrentDisasterStrength disasterStrength;
     public RSO_DisasterPosition disasterPosition;
@@ -34,9 +34,11 @@ public class Disaster : MonoBehaviour
     {
         disasterPosition.Value = transform.position;
 
-        //transform.localScale = new Vector3(disasterStats.Size, disasterStats.Size, disasterStats.Size);
+        //transform.localScale = new Vector3(disasterStats.Size, disasterStats.Size, 1);
+
         disasterSize.Value = disasterStats.Size;
         disasterStrength.Value = disasterStats.Strength;
+
         mapInfos.PlayerSize = sr.bounds.size / 2;
 
         StartCoroutine(Damage());

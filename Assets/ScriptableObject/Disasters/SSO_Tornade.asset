@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cf0cc2529dc0a4d992c3f6b532559a, type: 3}
   m_Name: SSO_Tornade
   m_EditorClassIdentifier: 
-  size: 5
+  size: 1
   velocity: 5
-  strength: 10
+  strength: 20
   criticChance: 0
   criticMultiplier: 1
   attackSpeed: 0.3
