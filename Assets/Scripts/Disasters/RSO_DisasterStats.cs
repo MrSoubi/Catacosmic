@@ -11,6 +11,7 @@ public class RSO_DisasterStats : ScriptableObject
     [SerializeField, SuffixLabel("%")] private float criticChance;
     [SerializeField] private float criticMutliplier;
     [SerializeField, SuffixLabel("s")] private float timeAction;
+    [SerializeField] private float resitanceMulitiplier;
 
     private void OnValidate()
     {
@@ -42,6 +43,11 @@ public class RSO_DisasterStats : ScriptableObject
         if (timeAction < 0)
         {
             timeAction = 0;
+        }
+
+        if (resitanceMulitiplier < 0)
+        {
+            resitanceMulitiplier = 0;
         }
     }
 
@@ -79,5 +85,11 @@ public class RSO_DisasterStats : ScriptableObject
     {
         get => timeAction;
         set => timeAction = Mathf.Max(value, 0);
+    }
+
+    public float ResitanceMulitiplier
+    {
+        get => resitanceMulitiplier;
+        set => resitanceMulitiplier = Mathf.Max(value, 0);
     }
 }
