@@ -26,10 +26,9 @@ public class TextureManipulator : MonoBehaviour
     {
         Vector2 pixelTarget = worldPosition;
 
-        pixelTarget.x = (pixelTarget.x + spriteRenderer.bounds.extents.x) / spriteRenderer.bounds.size.x;
-        pixelTarget.y = (pixelTarget.y + spriteRenderer.bounds.extents.y) / spriteRenderer.bounds.size.y;
+        pixelTarget.x = (worldPosition.x + spriteRenderer.bounds.extents.x) / spriteRenderer.bounds.size.x;
+        pixelTarget.y = (worldPosition.y + spriteRenderer.bounds.extents.y) / spriteRenderer.bounds.size.y;
 
-        Debug.Log(pixelTarget);
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), Mathf.FloorToInt(pixelTarget.y * 1024));
 
         Brush(pixelTargetInt, 100, Color.white);
