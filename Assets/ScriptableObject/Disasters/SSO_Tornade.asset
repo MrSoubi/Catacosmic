@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 5
   velocity: 5
-  strength: 0.5
+  strength: 10
   criticChance: 0
   criticMultiplier: 1
-  attackSpeed: 1
+  attackSpeed: 0.3
