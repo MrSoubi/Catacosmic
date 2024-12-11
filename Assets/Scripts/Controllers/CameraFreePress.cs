@@ -13,6 +13,8 @@ public class CameraFreePress : MonoBehaviour
 
     [Title("Camera")]
     [SerializeField] private Camera cameraMain;
+    [SerializeField] private Transform circleCamera;
+    [SerializeField] private float cameraSize;
     [SerializeField] private float speedDecelaration;
     [SerializeField] private float velocityMinDecelaration;
 
@@ -23,6 +25,17 @@ public class CameraFreePress : MonoBehaviour
 
     private bool isTouch;
     private bool isDecelerating;
+
+    private Coroutine decelerationCoroutine;
+
+    private void OnValidate()
+    {
+        cameraMain.orthographicSize = cameraSize;
+
+        float newScale = cameraSize / 50f;
+
+        circleCamera.localScale = new Vector3(newScale, newScale, 1);
+    }
 
     private void Awake()
     {
@@ -53,18 +66,21 @@ public class CameraFreePress : MonoBehaviour
     /// <returns></returns>
     private Vector3 LockToCameraBorder(Vector3 newPosition)
     {
-        Vector2 confinerBounds = mapInfos.MapBounds.extents;
-        Vector2 confinerCenter = mapInfos.MapBounds.center;
+        if (mapInfos.MapBounds.extents.x > 0 && mapInfos.MapBounds.extents.y > 0)
+        {
+            Vector2 confinerBounds = mapInfos.MapBounds.extents;
+            Vector2 confinerCenter = mapInfos.MapBounds.center;
 
-        Vector2 playerSize = mapInfos.PlayerSize;
+            Vector2 playerSize = mapInfos.PlayerSize;
 
-        float minX = confinerCenter.x - confinerBounds.x + playerSize.x;
-        float maxX = confinerCenter.x + confinerBounds.x - playerSize.x;
-        float minY = confinerCenter.y - confinerBounds.y + playerSize.y;
-        float maxY = confinerCenter.y + confinerBounds.y - playerSize.y;
+            float minX = confinerCenter.x - confinerBounds.x + playerSize.x;
+            float maxX = confinerCenter.x + confinerBounds.x - playerSize.x;
+            float minY = confinerCenter.y - confinerBounds.y + playerSize.y;
+            float maxY = confinerCenter.y + confinerBounds.y - playerSize.y;
 
-        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
-        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+            newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+        }
 
         return newPosition;
     }
@@ -94,7 +110,7 @@ public class CameraFreePress : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Deceleration()
     {
-        while(isDecelerating)
+        while (isDecelerating)
         {
             velocity = Vector2.Lerp(velocity, Vector2.zero, 0.1f);
 
@@ -134,6 +150,11 @@ public class CameraFreePress : MonoBehaviour
         isTouch = true;
         isDecelerating = false;
 
+        if (decelerationCoroutine != null)
+        {
+            StopCoroutine(decelerationCoroutine);
+        }
+
         touchPos = touchCurrentPos;
 
         velocity = Vector3.zero;
@@ -144,17 +165,17 @@ public class CameraFreePress : MonoBehaviour
     /// </summary>
     private void TouchUp()
     {
-        if(isTouch)
+        if (isTouch)
         {
             isTouch = false;
 
             movement = Vector3.zero;
 
-            if(velocity.magnitude >= velocityMinDecelaration)
+            if (velocity.magnitude >= velocityMinDecelaration)
             {
                 isDecelerating = true;
 
-                StartCoroutine(Deceleration());
+                decelerationCoroutine = StartCoroutine(Deceleration());
             }
         }
     }
