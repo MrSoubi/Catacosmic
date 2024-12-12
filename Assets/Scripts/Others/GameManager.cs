@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         currentMapBounds.MapBounds = new Bounds(Vector3.zero, Vector3.zero);
-        currentPlayerSize.PlayerSize = Vector3.zero;
+        currentPlayerSize.Value = Vector3.zero;
     }
 
     private void Start()
