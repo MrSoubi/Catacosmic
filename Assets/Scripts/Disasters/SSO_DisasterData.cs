@@ -47,6 +47,18 @@ public class SSO_DisasterData : ScriptableObject
         }
     }
 
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public Sprite Sprite
+    {
+        get => sprite;
+        set => sprite = value;
+    }
+
     public int Size
     {
         get => size;
