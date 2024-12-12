@@ -5,7 +5,7 @@ using UnityEngine;
 public class Disaster : MonoBehaviour
 {
     [Title("Input Data")]
-    public SSO_DisasterStats disasterStats;
+    public SSO_DisasterData disasterData;
 
     [Title("Output Data")]
     public RSO_MapInfos mapInfos;
@@ -34,11 +34,11 @@ public class Disaster : MonoBehaviour
     {
         disasterPosition.Value = transform.position;
 
-        transform.localScale = new Vector3(disasterStats.Size / 5f, disasterStats.Size / 5f, 1);
-        transform.GetChild(0).localScale = new Vector3(5f / disasterStats.Size, 5f / disasterStats.Size, 1);
+        transform.localScale = new Vector3(disasterData.Size / 5f, disasterData.Size / 5f, 1);
+        transform.GetChild(0).localScale = new Vector3(5f / disasterData.Size, 5f / disasterData.Size, 1);
 
-        disasterSize.Value = disasterStats.Size;
-        disasterStrength.Value = disasterStats.Strength;
+        disasterSize.Value = disasterData.Size;
+        disasterStrength.Value = disasterData.Strength;
 
         mapInfos.PlayerSize = sr.bounds.size / 2;
 
@@ -109,7 +109,7 @@ public class Disaster : MonoBehaviour
 
             Vector2 direction = (targetPosition - rb.position).normalized;
 
-            rb.linearVelocity = direction * disasterStats.Velocity;
+            rb.linearVelocity = direction * disasterData.Velocity;
 
             disasterPosition.Value = transform.position;
         }
@@ -130,7 +130,7 @@ public class Disaster : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Damage()
     {
-        yield return new WaitForSeconds(disasterStats.AttackSpeed);
+        yield return new WaitForSeconds(disasterData.AttackSpeed);
 
         disasterAttack.FireEvent();
 

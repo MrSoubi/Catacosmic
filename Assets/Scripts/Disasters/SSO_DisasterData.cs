@@ -1,10 +1,12 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SSO_DisasterStats", menuName = "Catacosmic/SSO/Disaster Stats")]
-public class SSO_DisasterStats : ScriptableObject
+[CreateAssetMenu(fileName = "SSO_DisasterData", menuName = "Catacosmic/SSO/Disaster Data")]
+public class SSO_DisasterData : ScriptableObject
 {
     [Title("Parameters")]
+    [SerializeField] private string name;
+    [SerializeField] private Sprite sprite;
     [SerializeField] private int size;
     [SerializeField] private float velocity;
     [SerializeField] private float strength;
