@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class CameraFreePress : MonoBehaviour
 {
-    [Title("ScriptableObjects")]
-    [SerializeField] private RSO_MapInfos mapInfos;
+    [Title("Output Data")]
+    [SerializeField] private RSO_CurrentMapBounds currentMapBounds;
+    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
     [SerializeField] private RSO_CameraPosition cameraPosition;
-    [SerializeField] private RSE_PointerDown pointerDown;
     [SerializeField] private RSO_PointerWorldPosition pointerWorldPosition;
+
+    [Title("Output Events")]
+    [SerializeField] private RSE_PointerDown pointerDown;
     [SerializeField] private RSE_PointerUp pointerUp;
 
-    [Title("Camera")]
+    [Title("Camera References")]
     [SerializeField] private Camera cameraMain;
     [SerializeField] private Transform circleCamera;
+
+    [Title("Camera Parameters")]
     [SerializeField] private float cameraSize;
     [SerializeField] private float speedDecelaration;
     [SerializeField] private float velocityMinDecelaration;
@@ -66,12 +71,12 @@ public class CameraFreePress : MonoBehaviour
     /// <returns></returns>
     private Vector3 LockToCameraBorder(Vector3 newPosition)
     {
-        if (mapInfos.MapBounds.extents.x > 0 && mapInfos.MapBounds.extents.y > 0)
+        if (currentMapBounds.MapBounds.extents.x > 0 && currentMapBounds.MapBounds.extents.y > 0)
         {
-            Vector2 confinerBounds = mapInfos.MapBounds.extents;
-            Vector2 confinerCenter = mapInfos.MapBounds.center;
+            Vector2 confinerBounds = currentMapBounds.MapBounds.extents;
+            Vector2 confinerCenter = currentMapBounds.MapBounds.center;
 
-            Vector2 playerSize = mapInfos.PlayerSize;
+            Vector2 playerSize = currentPlayerSize.PlayerSize;
 
             float minX = confinerCenter.x - confinerBounds.x + playerSize.x;
             float maxX = confinerCenter.x + confinerBounds.x - playerSize.x;

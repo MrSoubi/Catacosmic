@@ -264,8 +264,8 @@ Transform:
   m_GameObject: {fileID: 777585533}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 185742114}
@@ -335,15 +335,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2333051413942639813, guid: 4d4620a578fa421478da7610eb5600dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.1572256
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2333051413942639813, guid: 4d4620a578fa421478da7610eb5600dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34371686
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2333051413942639813, guid: 4d4620a578fa421478da7610eb5600dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.10277943
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2333051413942639813, guid: 4d4620a578fa421478da7610eb5600dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -455,22 +455,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerFreePress
       objectReference: {fileID: 0}
-    - target: {fileID: 3224153613304361350, guid: e2648666f5b3118469951f1eb397248d, type: 3}
-      propertyPath: m_Size.x
-      value: 5.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3224153613304361350, guid: e2648666f5b3118469951f1eb397248d, type: 3}
-      propertyPath: m_Size.y
-      value: 5.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3224153613304361350, guid: e2648666f5b3118469951f1eb397248d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -4119334708683220384, guid: 39a32a9b69276c243b769e0f33d8cde3, type: 3}
-    - target: {fileID: 5778474694985841871, guid: e2648666f5b3118469951f1eb397248d, type: 3}
-      propertyPath: orthographic size
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -510,14 +494,6 @@ PrefabInstance:
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7784119470980692793, guid: e2648666f5b3118469951f1eb397248d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7784119470980692793, guid: e2648666f5b3118469951f1eb397248d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
