@@ -2,13 +2,14 @@ using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Brush", menuName = "Catacosmic/Disasters/Brush")]
-public class Brush : ScriptableObject
+public class Brush : MonoBehaviour
 {
     public float[,] damageValues;
 
     [SerializeField] Texture2D brushTexture;
 
+
+    
     [Button]
     void SetDamageValues()
     {
