@@ -455,6 +455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerFreePress
       objectReference: {fileID: 0}
+    - target: {fileID: 5778474694985841871, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: orthographic size
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -494,6 +498,14 @@ PrefabInstance:
     - target: {fileID: 7446315670949283300, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784119470980692793, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784119470980692793, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
