@@ -34,7 +34,8 @@ public class Disaster : MonoBehaviour
     {
         disasterPosition.Value = transform.position;
 
-        //transform.localScale = new Vector3(disasterStats.Size, disasterStats.Size, 1);
+        transform.localScale = new Vector3(disasterStats.Size / 5f, disasterStats.Size / 5f, 1);
+        transform.GetChild(0).localScale = new Vector3(5f / disasterStats.Size, 5f / disasterStats.Size, 1);
 
         disasterSize.Value = disasterStats.Size;
         disasterStrength.Value = disasterStats.Strength;
@@ -76,7 +77,7 @@ public class Disaster : MonoBehaviour
                 arrow.SetActive(true);
             }
 
-            Vector2 direction = targetPosition - (Vector2)transform.GetChild(0).transform.position;
+            Vector2 direction = targetPosition - (Vector2)transform.position;
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
