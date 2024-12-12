@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    [Title("ScriptableObjects")]
-    [SerializeField] private RSO_MapInfos mapInfos;
+    [Title("Output Data")]
+    [SerializeField] private RSO_CurrentMapBounds currentMapBounds;
 
     private void Awake()
     {
-        mapInfos.MapBounds = GetComponent<SpriteRenderer>().bounds;
+        currentMapBounds.MapBounds = GetComponent<SpriteRenderer>().bounds;
     }
 }

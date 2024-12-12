@@ -5,17 +5,17 @@ using UnityEngine;
 public class Disaster : MonoBehaviour
 {
     [Title("Input Data")]
-    public SSO_DisasterData disasterData;
+    [SerializeField] private SSO_DisasterData disasterData;
 
     [Title("Output Data")]
-    public RSO_MapInfos mapInfos;
-    public RSO_CameraPosition cameraPosition;
-    public RSO_CurrentDisasterSize disasterSize;
-    public RSO_CurrentDisasterStrength disasterStrength;
-    public RSO_DisasterPosition disasterPosition;
+    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
+    [SerializeField] private RSO_CameraPosition cameraPosition;
+    [SerializeField] private RSO_CurrentDisasterSize disasterSize;
+    [SerializeField] private RSO_CurrentDisasterStrength disasterStrength;
+    [SerializeField] private RSO_DisasterPosition disasterPosition;
 
     [Title("Output Events")]
-    public RSE_DisasterAttack disasterAttack;
+    [SerializeField] private RSE_DisasterAttack disasterAttack;
 
     [Title("RigidBody")]
     [SerializeField] private Rigidbody2D rb;
@@ -40,7 +40,7 @@ public class Disaster : MonoBehaviour
         disasterSize.Value = disasterData.Size;
         disasterStrength.Value = disasterData.Strength;
 
-        mapInfos.PlayerSize = sr.bounds.size / 2;
+        currentPlayerSize.PlayerSize = sr.bounds.size / 2;
 
         StartCoroutine(Damage());
     }

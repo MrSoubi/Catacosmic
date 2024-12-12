@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593f387eecd9e6843b9e1ffad91e8aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
+  currentMapBounds: {fileID: 11400000, guid: 5ecb48366100e0b4a9f200089064adc7, type: 2}
+  currentPlayerSize: {fileID: 11400000, guid: dd275d92655209540a265ee3ad4af0a1, type: 2}
   prefab: {fileID: 3879445112946658002, guid: b2e06d44439554c4185ee4dedce3ab8f, type: 3}
 --- !u!1 &5713622678503412466
 GameObject:
@@ -285,7 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6553b9fc48dac43b7eea3d3f46e667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
+  currentMapBounds: {fileID: 11400000, guid: 5ecb48366100e0b4a9f200089064adc7, type: 2}
+  currentPlayerSize: {fileID: 11400000, guid: dd275d92655209540a265ee3ad4af0a1, type: 2}
   cameraPosition: {fileID: 11400000, guid: c50886e1ca748a34bb401827cec717c1, type: 2}
   pointerDown: {fileID: 11400000, guid: 7d3bbab2fe2f56b4789a81eaf360c2ed, type: 2}
   pointerWorldPosition: {fileID: 11400000, guid: 4c56ca59fcc63d14f9eaf79270ee1c40, type: 2}
