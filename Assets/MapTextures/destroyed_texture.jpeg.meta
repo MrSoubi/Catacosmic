@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6bb4b29afd8eb7e41814297853ae7984
+guid: a9eaf1d406ce917459bda151cb97c812
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1105753267457670791
-    second: DestroyedLand_1K_0
+      213: -7114392635751960991
+    second: destroyed_texture_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DestroyedLand_1K_0
+      name: destroyed_texture_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 97145f3034397a0f0800000000000000
-      internalID: -1105753267457670791
+      spriteID: 16e69596799944d90800000000000000
+      internalID: -7114392635751960991
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DestroyedLand_1K_0: -1105753267457670791
+      destroyed_texture_0: -7114392635751960991
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

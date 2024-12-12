@@ -15,6 +15,8 @@ public class TextureManipulator : MonoBehaviour
     public RSO_CurrentDisasterStrength disasterStrength;
     public RSE_DisasterAttack disasterAttack;
 
+    public Brush brush;
+
     private void OnEnable()
     {
         disasterAttack.Fire += Paint;
@@ -35,16 +37,30 @@ public class TextureManipulator : MonoBehaviour
 
         Vector2Int pixelTargetInt = new (Mathf.FloorToInt(pixelTarget.x * 1024), Mathf.FloorToInt(pixelTarget.y * 1024));
 
-        Brush(pixelTargetInt);
+        ApplyBrush(pixelTargetInt);
     }
 
     float mapStrength = 50f;
-    void Brush(Vector2Int pixelPosition)
+    void ApplyBrush(Vector2Int pixelPosition)
     {
         Color color;
         int size = disasterSize.Value;
+        int brushWidth = brush.damageValues.GetLength(0) * size;
+        int brushHeight = brush.damageValues.GetLength(1) * size;
 
-        for (int i = -size / 2; i < size / 2; i++)
+        for (int i = - brushWidth / 2; i < brushWidth / 2; i++)
+        {
+            for (int j =  - brushHeight / 2; j < brushHeight / 2; j++)
+            {
+                float pixelLife = 1 - texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j).grayscale;
+                float newPixelLife = 1 - Mathf.Max(pixelLife - brush.damageValues[i / size,j / size], 0);
+                color = new Color(newPixelLife, newPixelLife, newPixelLife);
+
+                texture.SetPixel(pixelPosition.x + i, pixelPosition.y + j, color);
+            }
+        }
+
+/*        for (int i = -size / 2; i < size / 2; i++)
         {
             for (int j = -size / 2; j < size / 2; j++)
             {
@@ -56,7 +72,7 @@ public class TextureManipulator : MonoBehaviour
 
                 texture.SetPixel(pixelPosition.x + i, pixelPosition.y + j, color);
             }
-        }
+        }*/
 
         texture.Apply();
     }
