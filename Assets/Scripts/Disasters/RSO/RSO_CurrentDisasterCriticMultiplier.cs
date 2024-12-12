@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_CurrentDisasterCriticMultiplier", menuName = "Catacosmic/RSO/Current Disaster Critic Multiplier")]
+[CreateAssetMenu(fileName = "RSO_CurrentDisasterCriticMultiplier", menuName = "Catacosmic/RSO/CurrentDisasterCriticMultiplier")]
 public class RSO_CurrentDisasterCriticMultiplier : ScriptableObject
 {
     public Action<float> onValueChanged;

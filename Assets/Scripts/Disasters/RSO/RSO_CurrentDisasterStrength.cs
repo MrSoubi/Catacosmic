@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_CurrentDisasterStrength", menuName = "Catacosmic/RSO/Current Disaster Strength")]
+[CreateAssetMenu(fileName = "RSO_CurrentDisasterStrength", menuName = "Catacosmic/RSO/CurrentDisasterStrength")]
 public class RSO_CurrentDisasterStrength : ScriptableObject
 {
     public Action<float> onValueChanged;

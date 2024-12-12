@@ -166,5 +166,7 @@ public class Disaster : MonoBehaviour
     {
         transform.localScale = new Vector3(size / 5f, size / 5f, 1);
         transform.GetChild(0).localScale = new Vector3(5f / size, 5f / size, 1);
+
+        currentPlayerSize.PlayerSize = sr.bounds.size / 2;
     }
 }

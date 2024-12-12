@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SSO_DisasterData", menuName = "Catacosmic/SSO/Disaster Data")]
+[CreateAssetMenu(fileName = "SSO_DisasterData", menuName = "Catacosmic/SSO/DisasterData")]
 public class SSO_DisasterData : ScriptableObject
 {
     [Title("Parameters")]

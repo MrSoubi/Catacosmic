@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_CurrentMapBounds", menuName = "Catacosmic/RSO/Current Map Bounds")]
+[CreateAssetMenu(fileName = "RSO_CurrentMapBounds", menuName = "Catacosmic/RSO/CurrentMapBounds")]
 public class RSO_CurrentMapBounds : ScriptableObject
 {
     [Title("Parameters")]
