@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class JoyStick : MonoBehaviour
 {
     [Header("ScriptableObjects")]
-    public RSO_MapInfos mapInfos;
+    //public RSO_MapInfos mapInfos;
 
     [Header("Targets")]
     public Transform player;

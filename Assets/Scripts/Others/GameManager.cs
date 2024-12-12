@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Title("ScriptableObjects")]
-    [SerializeField] private RSO_MapInfos mapInfos;
+    [Title("Output Data")]
+    [SerializeField] private RSO_CurrentMapBounds currentMapBounds;
+    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
 
     [Title("Default Disaster")]
     [SerializeField] private GameObject prefab;
@@ -13,8 +14,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        mapInfos.PlayerSize = Vector3.zero;
-        mapInfos.MapBounds = new Bounds(Vector3.zero, Vector3.zero);
+        currentMapBounds.MapBounds = new Bounds(Vector3.zero, Vector3.zero);
+        currentPlayerSize.PlayerSize = Vector3.zero;
     }
 
     private void Start()

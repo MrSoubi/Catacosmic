@@ -100,4 +100,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85dba301384ec4c4995a137cbdfb0c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInfos: {fileID: 11400000, guid: 749a5848be84db84abc761037356d1bc, type: 2}
+  currentMapBounds: {fileID: 11400000, guid: 5ecb48366100e0b4a9f200089064adc7, type: 2}

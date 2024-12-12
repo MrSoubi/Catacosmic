@@ -5,17 +5,23 @@ using UnityEngine;
 public class Disaster : MonoBehaviour
 {
     [Title("Input Data")]
-    public SSO_DisasterData disasterData;
+    [SerializeField] private SSO_DisasterData disasterData;
 
     [Title("Output Data")]
-    public RSO_MapInfos mapInfos;
-    public RSO_CameraPosition cameraPosition;
-    public RSO_CurrentDisasterSize disasterSize;
-    public RSO_CurrentDisasterStrength disasterStrength;
-    public RSO_DisasterPosition disasterPosition;
+    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
+    [SerializeField] private RSO_CameraPosition cameraPosition;
+    [SerializeField] private RSO_DisasterPosition disasterPosition;
+    [SerializeField] private RSO_CurrentDisasterName currentDisasterName;
+    [SerializeField] private RSO_CurrentDisasterSprite currentDisasterSprite;
+    [SerializeField] private RSO_CurrentDisasterSize currentDisasterSize;
+    [SerializeField] private RSO_CurrentDisasterVelocity currentDisasterVelocity;
+    [SerializeField] private RSO_CurrentDisasterStrength currentDisasterStrength;
+    [SerializeField] private RSO_CurrentDisasterCriticChance currentDisasterCriticChance;
+    [SerializeField] private RSO_CurrentDisasterCriticMultiplier currentDisasterCriticMultiplier;
+    [SerializeField] private RSO_CurrentDisasterAttackSpeed currentDisasterAttackSpeed;
 
     [Title("Output Events")]
-    public RSE_DisasterAttack disasterAttack;
+    [SerializeField] private RSE_DisasterAttack disasterAttack;
 
     [Title("RigidBody")]
     [SerializeField] private Rigidbody2D rb;
@@ -37,10 +43,16 @@ public class Disaster : MonoBehaviour
         transform.localScale = new Vector3(disasterData.Size / 5f, disasterData.Size / 5f, 1);
         transform.GetChild(0).localScale = new Vector3(5f / disasterData.Size, 5f / disasterData.Size, 1);
 
-        disasterSize.Value = disasterData.Size;
-        disasterStrength.Value = disasterData.Strength;
+        currentDisasterName.Value = disasterData.Name;
+        currentDisasterSprite.Value = disasterData.Sprite;
+        currentDisasterSize.Value = disasterData.Size;
+        currentDisasterVelocity.Value = disasterData.Velocity;
+        currentDisasterStrength.Value = disasterData.Strength;
+        currentDisasterCriticChance.Value = disasterData.CriticChance;
+        currentDisasterCriticMultiplier.Value = disasterData.CriticMultiplier;
+        currentDisasterAttackSpeed.Value = disasterData.AttackSpeed;
 
-        mapInfos.PlayerSize = sr.bounds.size / 2;
+        currentPlayerSize.PlayerSize = sr.bounds.size / 2;
 
         StartCoroutine(Damage());
     }
