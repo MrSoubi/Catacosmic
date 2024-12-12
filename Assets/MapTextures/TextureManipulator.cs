@@ -46,22 +46,22 @@ public class TextureManipulator : MonoBehaviour
     void ApplyBrush(Vector2Int pixelPosition)
     {
         Color color;
+
         int size = disasterSize.Value;
-        int brushWidth = brush.damageValues.GetLength(0) * size;
-        int brushHeight = brush.damageValues.GetLength(1) * size;
 
-        for (int i = - brushWidth / 2; i < brushWidth / 2; i++)
+        for (int i = - size / 2; i < size / 2; i++)
         {
-            for (int j =  - brushHeight / 2; j < brushHeight / 2; j++)
+            for (int j =  - size / 2; j < size / 2; j++)
             {
-                float pixelLife = 1 - texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j).grayscale;
-                float newPixelLife = 1 - Mathf.Max(pixelLife - brush.damageValues[i / size,j / size], 0);
+                if (texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j) == Color.black)
+                {
+                    playerMoney.Value.Add(mapStrength);
 
-                int money = (int)((pixelLife - newPixelLife) * mapStrength);
-                playerMoney.Value.Add(money);
-                color = new Color(newPixelLife, newPixelLife, newPixelLife);
+                    color = Color.white;
 
-                texture.SetPixel(pixelPosition.x + i, pixelPosition.y + j, color);
+                    texture.SetPixel(pixelPosition.x + i, pixelPosition.y + j, color);
+                }
+
             }
         }
 

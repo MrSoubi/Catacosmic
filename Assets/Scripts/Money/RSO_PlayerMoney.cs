@@ -23,4 +23,16 @@ public class RSO_PlayerMoney : ScriptableObject
             onValueChanged?.Invoke(_value);
         }
     }
+
+    [Button]
+    void Print()
+    {
+        Debug.Log(_value.ToString());
+    }
+
+    [Button]
+    void Set(int amount)
+    {
+        Value = amount;
+    }
 }

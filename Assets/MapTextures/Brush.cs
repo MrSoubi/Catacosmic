@@ -9,7 +9,11 @@ public class Brush : MonoBehaviour
     [SerializeField] Texture2D brushTexture;
 
 
-    
+    private void Start()
+    {
+        SetDamageValues();
+    }
+
     [Button]
     void SetDamageValues()
     {
