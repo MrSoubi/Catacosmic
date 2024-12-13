@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ccb28f85d72ab0408f6538142b2fa53, type: 3}
-  m_Name: GameViewRatio
+  m_Script: {fileID: 11500000, guid: ca0f0c6021ec50b4993419785f67da6a, type: 3}
+  m_Name: RSE_CallUpgrade
   m_EditorClassIdentifier: 
-  ratio: 0.6
-  gameRatio: 480.00003
-  menuRatio: 319.99997
