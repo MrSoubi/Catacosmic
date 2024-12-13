@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TimedPlanetIcon4_Placeholder_0: -2863505729392902741
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
