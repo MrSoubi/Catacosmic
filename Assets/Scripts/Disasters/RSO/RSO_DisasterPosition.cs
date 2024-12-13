@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_DisasterPosition", menuName = "Catacosmic/RSO/Disaster Position")]
+[CreateAssetMenu(fileName = "RSO_DisasterPosition", menuName = "Catacosmic/RSO/DisasterPosition")]
 public class RSO_DisasterPosition : ScriptableObject
 {
     public Action<Vector2> onValueChanged;

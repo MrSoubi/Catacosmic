@@ -31,10 +31,20 @@ public class Disaster : MonoBehaviour
 
     [Title("Arrow")]
     [SerializeField] private GameObject arrow;
-    [SerializeField] private ArrowGenerator arrowScript;
+    [SerializeField] private ArrowGenerator arrowGenerator;
 
     private bool isNeedToMove;
     private bool isNeedArrow;
+
+    private void Awake()
+    {
+        currentDisasterSize.onValueChanged += ChangeSize;
+    }
+
+    private void OnDisable()
+    {
+        currentDisasterSize.onValueChanged -= ChangeSize;
+    }
 
     private void Start()
     {
@@ -52,7 +62,7 @@ public class Disaster : MonoBehaviour
         currentDisasterCriticMultiplier.Value = disasterData.CriticMultiplier;
         currentDisasterAttackSpeed.Value = disasterData.AttackSpeed;
 
-        currentPlayerSize.PlayerSize = sr.bounds.size / 2;
+        currentPlayerSize.Value = sr.bounds.size / 2;
 
         StartCoroutine(Damage());
     }
@@ -82,7 +92,7 @@ public class Disaster : MonoBehaviour
         {
             isNeedArrow = true;
 
-            arrowScript.stemLength = distance - 1.5f;
+            arrowGenerator.stemLength = distance - 1.5f;
 
             if (!arrow.activeInHierarchy)
             {
@@ -147,5 +157,16 @@ public class Disaster : MonoBehaviour
         disasterAttack.FireEvent();
 
         StartCoroutine(Damage());
+    }
+
+    /// <summary>
+    /// Change the Size of the Disaster
+    /// </summary>
+    private void ChangeSize(int size)
+    {
+        transform.localScale = new Vector3(size / 5f, size / 5f, 1);
+        transform.GetChild(0).localScale = new Vector3(5f / size, 5f / size, 1);
+
+        currentPlayerSize.Value = sr.bounds.size / 2;
     }
 }

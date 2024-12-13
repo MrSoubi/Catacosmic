@@ -47,6 +47,8 @@ public class CameraFreePress : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Application.targetFrameRate = 60;
 
+        currentPlayerSize.onValueChanged += VerifCameraBorder;
+
         pointerDown.Fire += TouchDown;
         pointerWorldPosition.onValueChanged += TouchPos;
         pointerUp.Fire += TouchUp;
@@ -54,6 +56,8 @@ public class CameraFreePress : MonoBehaviour
 
     private void OnDisable()
     {
+        currentPlayerSize.onValueChanged -= VerifCameraBorder;
+
         pointerDown.Fire -= TouchDown;
         pointerWorldPosition.onValueChanged -= TouchPos;
         pointerUp.Fire -= TouchUp;
@@ -61,6 +65,16 @@ public class CameraFreePress : MonoBehaviour
 
     private void Start()
     {
+        cameraPosition.Value = transform.position;
+    }
+
+    /// <summary>
+    /// Verif if Camera is Lock inside the Map when Size Grown
+    /// </summary>
+    private void VerifCameraBorder(Vector3 pos)
+    {
+        transform.position = LockToCameraBorder(transform.position);
+
         cameraPosition.Value = transform.position;
     }
 
@@ -76,7 +90,7 @@ public class CameraFreePress : MonoBehaviour
             Vector2 confinerBounds = currentMapBounds.MapBounds.extents;
             Vector2 confinerCenter = currentMapBounds.MapBounds.center;
 
-            Vector2 playerSize = currentPlayerSize.PlayerSize;
+            Vector2 playerSize = currentPlayerSize.Value;
 
             float minX = confinerCenter.x - confinerBounds.x + playerSize.x;
             float maxX = confinerCenter.x + confinerBounds.x - playerSize.x;

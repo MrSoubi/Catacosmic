@@ -50,3 +50,5 @@ MonoBehaviour:
   disasterSize: {fileID: 11400000, guid: 46c6089687dcd5b42b6534c7ab71f798, type: 2}
   disasterStrength: {fileID: 11400000, guid: e2a9a3e9cd0c61e479c2a6bb5df1554e, type: 2}
   disasterAttack: {fileID: 11400000, guid: f06a3aa6dcf9e214cb4462ad1cb2deda, type: 2}
+  playerMoney: {fileID: 11400000, guid: 76b0bd6285d1cde47926615e80e16e52, type: 2}
+  brush: {fileID: 11400000, guid: 5134cb6823e46fb468057bc8d72894db, type: 2}

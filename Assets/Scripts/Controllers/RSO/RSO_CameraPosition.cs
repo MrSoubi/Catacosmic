@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_CameraPosition", menuName = "Catacosmic/RSO/Camera Position")]
+[CreateAssetMenu(fileName = "RSO_CameraPosition", menuName = "Catacosmic/RSO/CameraPosition")]
 public class RSO_CameraPosition : ScriptableObject
 {
     public Action<Vector2> onValueChanged;

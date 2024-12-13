@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ccb28f85d72ab0408f6538142b2fa53, type: 3}
-  m_Name: GameViewRatio
+  m_Script: {fileID: 11500000, guid: 0dd426b4aca944d4c9899765770691ba, type: 3}
+  m_Name: RSO_PlayerMoney
   m_EditorClassIdentifier: 
-  ratio: 1
-  gameRatio: 800
-  menuRatio: 0

@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_CurrentDisasterSprite", menuName = "Catacosmic/RSO/Current Disaster Sprite")]
+[CreateAssetMenu(fileName = "RSO_CurrentDisasterSprite", menuName = "Catacosmic/RSO/CurrentDisasterSprite")]
 public class RSO_CurrentDisasterSprite : ScriptableObject
 {
     public Action<Sprite> onValueChanged;

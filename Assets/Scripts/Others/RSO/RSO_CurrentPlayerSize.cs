@@ -1,15 +1,26 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RSO_CurrentPlayerSize", menuName = "Catacosmic/RSO/Current Player Size")]
+[CreateAssetMenu(fileName = "RSO_CurrentPlayerSize", menuName = "Catacosmic/RSO/CurrentPlayerSize")]
 public class RSO_CurrentPlayerSize : ScriptableObject
 {
-    [Title("Parameters")]
-    [SerializeField] private Vector3 playerSize;
+    public Action<Vector3> onValueChanged;
 
-    public Vector3 PlayerSize
+    [Title("Parameters")]
+    [ShowInInspector]
+    private Vector3 _value;
+
+    public Vector3 Value
     {
-        get => playerSize;
-        set => playerSize = value;
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+
+            _value = value;
+
+            onValueChanged?.Invoke(_value);
+        }
     }
 }
