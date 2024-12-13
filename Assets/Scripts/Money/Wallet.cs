@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Numerics;
 using UnityEngine;
 
 public class Wallet : MonoBehaviour
@@ -11,15 +12,15 @@ public class Wallet : MonoBehaviour
     }
 
     [Button]
-    void Add(int amount)
+    void Add(BigInteger amount)
     {
-        money.Value.Add(amount);
+        money.Value += amount;
     }
 
     [Button]
-    void Remove(int amount)
+    void Remove(BigInteger amount)
     {
-        money.Value.Subtract(amount);
+        money.Value -= amount;
     }
 
     [Button]

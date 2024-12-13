@@ -1,17 +1,18 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using System.Numerics;
 
 [CreateAssetMenu(fileName = "RSO_PlayerMoney", menuName = "Catacosmic/RSO/PlayerMoney")]
 public class RSO_PlayerMoney : ScriptableObject
 {
-    public Action<BigFloatNumerics.BigNumber> onValueChanged;
+    public Action<BigInteger> onValueChanged;
 
     [Title("Parameters")]
     [ShowInInspector]
-    private BigFloatNumerics.BigNumber _value;
+    private BigInteger _value;
 
-    public BigFloatNumerics.BigNumber Value
+    public BigInteger Value
     {
         get => _value;
         set

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Splines.Interpolators;
 using Sirenix.OdinInspector;
 using UnityEditor;
+using System.Numerics;
 
 public class TextureManipulator : MonoBehaviour
 {
@@ -17,8 +18,6 @@ public class TextureManipulator : MonoBehaviour
 
     public RSO_PlayerMoney playerMoney;
 
-    public Brush brush;
-
     private void OnEnable()
     {
         disasterAttack.Fire += Paint;
@@ -31,8 +30,8 @@ public class TextureManipulator : MonoBehaviour
 
     void Paint()
     {
-        Vector2 worldPosition = position.Value;
-        Vector2 pixelTarget;
+        UnityEngine.Vector2 worldPosition = position.Value;
+        UnityEngine.Vector2 pixelTarget;
 
         pixelTarget.x = (worldPosition.x + spriteRenderer.bounds.extents.x) / spriteRenderer.bounds.size.x;
         pixelTarget.y = (worldPosition.y + spriteRenderer.bounds.extents.y) / spriteRenderer.bounds.size.y;
@@ -42,7 +41,7 @@ public class TextureManipulator : MonoBehaviour
         ApplyBrush(pixelTargetInt);
     }
 
-    float mapStrength = 50f;
+    BigInteger mapStrength = 50;
     void ApplyBrush(Vector2Int pixelPosition)
     {
         Color color;
@@ -55,7 +54,7 @@ public class TextureManipulator : MonoBehaviour
             {
                 if (texture.GetPixel(pixelPosition.x + i, pixelPosition.y + j) == Color.black)
                 {
-                    playerMoney.Value.Add(mapStrength);
+                    playerMoney.Value += mapStrength;
 
                     color = Color.white;
 
