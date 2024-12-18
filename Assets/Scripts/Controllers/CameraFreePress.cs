@@ -5,12 +5,12 @@ using UnityEngine;
 public class CameraFreePress : MonoBehaviour
 {
     [Title("Output Data")]
-    [SerializeField] private RSO_CurrentMapBounds currentMapBounds;
-    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
     [SerializeField] private RSO_CameraPosition cameraPosition;
+
+    [Title("Input Data")]
     [SerializeField] private RSO_PointerWorldPosition pointerWorldPosition;
 
-    [Title("Output Events")]
+    [Title("Input Events")]
     [SerializeField] private RSE_PointerDown pointerDown;
     [SerializeField] private RSE_PointerUp pointerUp;
 
@@ -23,6 +23,8 @@ public class CameraFreePress : MonoBehaviour
     [SerializeField] private float speedDecelaration;
     [SerializeField] private float velocityMinDecelaration;
 
+    float speed = 1;
+
     private Vector2 touchPos;
     private Vector2 touchCurrentPos;
     private Vector2 movement;
@@ -33,21 +35,10 @@ public class CameraFreePress : MonoBehaviour
 
     private Coroutine decelerationCoroutine;
 
-    private void OnValidate()
-    {
-        cameraMain.orthographicSize = cameraSize;
-
-        float newScale = cameraSize / 50f;
-
-        circleCamera.localScale = new Vector3(newScale, newScale, 1);
-    }
-
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Application.targetFrameRate = 60;
-
-        currentPlayerSize.onValueChanged += VerifCameraBorder;
 
         pointerDown.Fire += TouchDown;
         pointerWorldPosition.onValueChanged += TouchPos;
@@ -56,8 +47,6 @@ public class CameraFreePress : MonoBehaviour
 
     private void OnDisable()
     {
-        currentPlayerSize.onValueChanged -= VerifCameraBorder;
-
         pointerDown.Fire -= TouchDown;
         pointerWorldPosition.onValueChanged -= TouchPos;
         pointerUp.Fire -= TouchUp;
@@ -68,45 +57,6 @@ public class CameraFreePress : MonoBehaviour
         cameraPosition.Value = transform.position;
     }
 
-    /// <summary>
-    /// Verif if Camera is Lock inside the Map when Size Grown
-    /// </summary>
-    private void VerifCameraBorder(Vector3 pos)
-    {
-        transform.position = LockToCameraBorder(transform.position);
-
-        cameraPosition.Value = transform.position;
-    }
-
-    /// <summary>
-    /// Lock the Camera inside the Map
-    /// </summary>
-    /// <param name="newPosition"></param>
-    /// <returns></returns>
-    private Vector3 LockToCameraBorder(Vector3 newPosition)
-    {
-        if (currentMapBounds.MapBounds.extents.x > 0 && currentMapBounds.MapBounds.extents.y > 0)
-        {
-            Vector2 confinerBounds = currentMapBounds.MapBounds.extents;
-            Vector2 confinerCenter = currentMapBounds.MapBounds.center;
-
-            Vector2 playerSize = currentPlayerSize.Value;
-
-            float minX = confinerCenter.x - confinerBounds.x + playerSize.x;
-            float maxX = confinerCenter.x + confinerBounds.x - playerSize.x;
-            float minY = confinerCenter.y - confinerBounds.y + playerSize.y;
-            float maxY = confinerCenter.y + confinerBounds.y - playerSize.y;
-
-            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
-            newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
-        }
-
-        return newPosition;
-    }
-
-    /// <summary>
-    /// Move the Camera
-    /// </summary>
     private void MoveCamera()
     {
         if (isTouch)
@@ -117,16 +67,10 @@ public class CameraFreePress : MonoBehaviour
 
             transform.position -= new Vector3(movement.x, movement.y, 0);
 
-            transform.position = LockToCameraBorder(transform.position);
-
             cameraPosition.Value = transform.position;
         }
     }
 
-    /// <summary>
-    /// Move the Camera with Deceleration
-    /// </summary>
-    /// <returns></returns>
     private IEnumerator Deceleration()
     {
         while (isDecelerating)
@@ -134,8 +78,6 @@ public class CameraFreePress : MonoBehaviour
             velocity = Vector2.Lerp(velocity, Vector2.zero, 0.1f);
 
             transform.position -= new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime;
-
-            transform.position = LockToCameraBorder(transform.position);
 
             cameraPosition.Value = transform.position;
 
@@ -150,10 +92,6 @@ public class CameraFreePress : MonoBehaviour
         velocity = Vector2.zero;
     }
 
-    /// <summary>
-    /// Touch Position
-    /// </summary>
-    /// <param name="ctx"></param>
     private void TouchPos(Vector2 pos)
     {
         touchCurrentPos = pos;
@@ -161,9 +99,6 @@ public class CameraFreePress : MonoBehaviour
         MoveCamera();
     }
 
-    /// <summary>
-    /// Touch Down
-    /// </summary>
     private void TouchDown()
     {
         isTouch = true;
@@ -178,10 +113,6 @@ public class CameraFreePress : MonoBehaviour
 
         velocity = Vector3.zero;
     }
-
-    /// <summary>
-    /// Touch Up
-    /// </summary>
     private void TouchUp()
     {
         if (isTouch)
@@ -197,17 +128,5 @@ public class CameraFreePress : MonoBehaviour
                 decelerationCoroutine = StartCoroutine(Deceleration());
             }
         }
-    }
-
-    /// <summary>
-    /// Zoom
-    /// </summary>
-    private void Zoom()
-    {
-        /*cinemachineCamera.Lens.OrthographicSize += 1;
-
-        float newScale = cinemachineCamera.Lens.OrthographicSize / 50f;
-
-        circleCamera.localScale = new Vector3(newScale, newScale, 1);*/
     }
 }
