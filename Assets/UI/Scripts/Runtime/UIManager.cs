@@ -10,13 +10,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIDocument fortuneWheelPopUp;
     [SerializeField] UIDocument questsPopUp;
 
+    [Header("References Challenge")]
+    [SerializeField] UIDocument challengeUI;
+
     [Header("References Shop")]
     [SerializeField] UIDocument shopUI;
 
     [SerializeField] UIDocument shopInfo;
 
-    [SerializeField] UIDocument shopInvoke1;
-    [SerializeField] UIDocument shopInvoke10;
+    [SerializeField] UIDocument shopInvoke;
+
     [SerializeField] UIDocument shopInvokeAd;
 
     [SerializeField] UIDocument shopDisasterTab;
@@ -28,6 +31,9 @@ public class UIManager : MonoBehaviour
     public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
     public RSE_CallGiftPopUp callGiftPopUp;
     public RSE_CallQuestsPopUp callQuestsPopUp;
+
+    [Header("Input Events Challenge")]
+    public RSE_CallTimedPlanet callTimedPlanet;
 
     [Header("Input Events Shop")]
     public RSE_CallShop callShop;
@@ -52,12 +58,15 @@ public class UIManager : MonoBehaviour
         callGiftPopUp.Fire += OnGiftPopUpCalled;
 
 
+        callTimedPlanet.Fire += OnOpenChallenge;
+
+
         callShop.Fire += OnOpenShop;
 
         callInfo.Fire += OnOpenShopInfo;
 
-        callInvoke1.Fire += OnOpenShopInvoke1;
-        callInvoke10.Fire += OnOpenShopInvoke10;
+        callInvoke1.Fire += OnOpenShopInvoke;
+        callInvoke10.Fire += OnOpenShopInvoke;
         callInvokeAdd.Fire += OnOpenShopInvokeAdd;
 
         callDisasterTab.Fire += OnOpenShopDisasterTab;
@@ -73,12 +82,15 @@ public class UIManager : MonoBehaviour
         callGiftPopUp.Fire -= OnGiftPopUpCalled;
 
 
+        callTimedPlanet.Fire -= OnOpenChallenge;
+
+
         callShop.Fire -= OnOpenShop;
 
         callInfo.Fire -= OnOpenShopInfo;
 
-        callInvoke1.Fire -= OnOpenShopInvoke1;
-        callInvoke10.Fire -= OnOpenShopInvoke10;
+        callInvoke1.Fire -= OnOpenShopInvoke;
+        callInvoke10.Fire -= OnOpenShopInvoke;
         callInvokeAdd.Fire -= OnOpenShopInvokeAdd;
 
         callDisasterTab.Fire -= OnOpenShopDisasterTab;
@@ -107,7 +119,33 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void CleanTab()
     {
+        challengeUI.gameObject.SetActive(false);
+
         CleanShopTab();
+    }
+
+    /// <summary>
+    /// Open the Challenge
+    /// </summary>
+    private void OnOpenChallenge()
+    {
+        if (index == 3)
+        {
+            index = 0;
+
+            challengeUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            if(index != 0)
+            {
+                CleanTab();
+            }
+
+            index = 3;
+
+            challengeUI.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -115,17 +153,22 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShop()
     {
-        if(index == 0)
-        {
-            index = 4;
-
-            shopUI.gameObject.SetActive(true);
-        }
-        else
+        if (index == 4)
         {
             index = 0;
 
-            CleanTab();
+            CleanShopTab();
+        }
+        else
+        {
+            if (index != 0)
+            {
+                CleanTab();
+            }
+
+            index = 4;
+
+            shopUI.gameObject.SetActive(true);
         }
     }
 
@@ -134,23 +177,15 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShopInfo()
     {
-        
+        shopInfo.gameObject.SetActive(true);
     }
 
     /// <summary>
-    /// Open the Shop Invoke 1
+    /// Open the Shop Invoke
     /// </summary>
-    private void OnOpenShopInvoke1()
+    private void OnOpenShopInvoke()
     {
-
-    }
-
-    /// <summary>
-    /// Open the Shop Invoke 10
-    /// </summary>
-    private void OnOpenShopInvoke10()
-    {
-
+        shopInvoke.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -158,7 +193,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShopInvokeAdd()
     {
-
+        shopInvokeAd.gameObject.SetActive(true);
     }
 
     /// <summary>
