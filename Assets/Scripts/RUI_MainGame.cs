@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
 
-public class RUI_GameTemp : MonoBehaviour
+public class RUI_MainGame : MonoBehaviour
 {
     [Title("Output Events")]
     public RSE_CallUpgrade callUpgrade;
