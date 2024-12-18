@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VictoryHalo_Placeholder_0: 3725664622351485531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

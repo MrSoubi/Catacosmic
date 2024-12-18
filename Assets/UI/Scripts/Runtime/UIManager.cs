@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,12 +24,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIDocument shopAbilitiesTab;
     [SerializeField] UIDocument shopMarketTab;
 
-    [Header("Input Events")]
+    [Header("Input Events Main")]
     public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
     public RSE_CallGiftPopUp callGiftPopUp;
     public RSE_CallQuestsPopUp callQuestsPopUp;
 
-
+    [Header("Input Events Shop")]
     public RSE_CallShop callShop;
 
     public RSE_CallInfo callInfo;
@@ -42,6 +43,8 @@ public class UIManager : MonoBehaviour
     public RSE_CallAbilitiesTab callAbilitiesTab;
     public RSE_CallMarketTab callMarketTab;
 
+    private int index;
+
     private void OnEnable()
     {
         callQuestsPopUp.Fire += OnQuestsPopUpCalled;
@@ -50,6 +53,12 @@ public class UIManager : MonoBehaviour
 
 
         callShop.Fire += OnOpenShop;
+
+        callInfo.Fire += OnOpenShopInfo;
+
+        callInvoke1.Fire += OnOpenShopInvoke1;
+        callInvoke10.Fire += OnOpenShopInvoke10;
+        callInvokeAdd.Fire += OnOpenShopInvokeAdd;
 
         callDisasterTab.Fire += OnOpenShopDisasterTab;
         callEquipmentTab.Fire += OnOpenShopEquipmentTab;
@@ -65,6 +74,12 @@ public class UIManager : MonoBehaviour
 
 
         callShop.Fire -= OnOpenShop;
+
+        callInfo.Fire -= OnOpenShopInfo;
+
+        callInvoke1.Fire -= OnOpenShopInvoke1;
+        callInvoke10.Fire -= OnOpenShopInvoke10;
+        callInvokeAdd.Fire -= OnOpenShopInvokeAdd;
 
         callDisasterTab.Fire -= OnOpenShopDisasterTab;
         callEquipmentTab.Fire -= OnOpenShopEquipmentTab;
@@ -88,14 +103,11 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Close All Tab in the Shop
+    /// Close All Tab
     /// </summary>
-    private void CleanShopTab()
+    private void CleanTab()
     {
-        shopDisasterTab.enabled = false;
-        shopEquipmentTab.enabled = false;
-        shopAbilitiesTab.enabled = false;
-        shopMarketTab.enabled = false;
+        CleanShopTab();
     }
 
     /// <summary>
@@ -103,13 +115,17 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShop()
     {
-        if(!shopUI.enabled)
+        if(index == 0)
         {
-            shopUI.enabled = true;
+            index = 4;
+
+            shopUI.gameObject.SetActive(true);
         }
         else
         {
-            shopUI.enabled = false;
+            index = 0;
+
+            CleanTab();
         }
     }
 
@@ -146,13 +162,27 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Close All Tab in the Shop
+    /// </summary>
+    private void CleanShopTab()
+    {
+        shopDisasterTab.gameObject.SetActive(false);
+        shopEquipmentTab.gameObject.SetActive(false);
+        shopAbilitiesTab.gameObject.SetActive(false);
+        shopMarketTab.gameObject.SetActive(false);
+    }
+
+    /// <summary>
     /// Open the Shop Disasaster Tab
     /// </summary>
     private void OnOpenShopDisasterTab()
     {
-        CleanShopTab();
+        if(!shopDisasterTab.gameObject.activeInHierarchy)
+        {
+            CleanShopTab();
 
-        shopDisasterTab.enabled = true;
+            shopDisasterTab.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -160,9 +190,12 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShopEquipmentTab()
     {
-        CleanShopTab();
+        if (!shopEquipmentTab.gameObject.activeInHierarchy)
+        {
+            CleanShopTab();
 
-        shopEquipmentTab.enabled = true;
+            shopEquipmentTab.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -170,9 +203,12 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShopAbilitiesTab()
     {
-        CleanShopTab();
+        if (!shopAbilitiesTab.gameObject.activeInHierarchy)
+        {
+            CleanShopTab();
 
-        shopAbilitiesTab.enabled = true;
+            shopAbilitiesTab.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -180,8 +216,11 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnOpenShopMarketTab()
     {
-        CleanShopTab();
+        if (!shopMarketTab.gameObject.activeInHierarchy)
+        {
+            CleanShopTab();
 
-        shopMarketTab.enabled = true;
+            shopMarketTab.gameObject.SetActive(true);
+        }
     }
 }
