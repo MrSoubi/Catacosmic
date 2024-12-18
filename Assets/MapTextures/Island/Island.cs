@@ -16,9 +16,21 @@ public class Island : MonoBehaviour
 
     BigInteger mapStrength = 50;
 
+    bool isDisasterInVicinity = false;
+
     private void Start()
     {
         InitializeDamageTexture();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isDisasterInVicinity = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isDisasterInVicinity = false;
     }
 
     private void InitializeDamageTexture()
