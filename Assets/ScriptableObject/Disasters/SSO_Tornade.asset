@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Tornade
   sprite: {fileID: 0}
   size: 5
-  velocity: 5
+  velocity: 0.5
   strength: 2
   criticChance: 0
   criticMultiplier: 1
-  attackSpeed: 0.3
+  attackSpeed: 0.1
