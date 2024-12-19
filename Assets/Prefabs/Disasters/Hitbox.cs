@@ -29,11 +29,9 @@ public class Hitbox : MonoBehaviour
 
     void Attack(double strength)
     {
-        CleanTargets();
-
-        foreach (Hurtbox target in targets)
+        for (int i = targets.Count - 1; i >= 0; i--)
         {
-            target.TakeDamage(strength, attackType);
+            targets[i].TakeDamage(strength, attackType);
         }
     }
 
@@ -44,14 +42,6 @@ public class Hitbox : MonoBehaviour
         if (collision.TryGetComponent<Hurtbox>(out victim))
         {
             targets.Add(victim);
-        }
-    }
-
-    void CleanTargets()
-    {
-        for (int i = targets.Count - 1; i >= 0; i--)
-        {
-            if (targets[i] == null) targets.RemoveAt(i);
         }
     }
 
