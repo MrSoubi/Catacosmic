@@ -1,0 +1,1 @@
+C:\Users\k_furno\Documents\Unity\Catacosmic\Catacosmic\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\1b3l3y2b\obj\armeabi-v7a
