@@ -44,7 +44,7 @@ public class RUI_MainGame : MonoBehaviour
         buttonTimedPlanet.RegisterCallback<ClickEvent>(CallButtonTimedPlanet);
         buttonShop.RegisterCallback<ClickEvent>(CallButtonShop);
 
-        //InitializePointerBlockers(root);
+        InitializePointerBlockers(root);
     }
 
     private void OnDisable()
