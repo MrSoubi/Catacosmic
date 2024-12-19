@@ -62,8 +62,6 @@ public class Disaster : MonoBehaviour
         currentDisasterCriticMultiplier.Value = disasterData.CriticMultiplier;
         currentDisasterAttackSpeed.Value = disasterData.AttackSpeed;
 
-        //currentPlayerSize.Value = sr.bounds.size / 2;
-
         StartCoroutine(Damage());
     }
 
@@ -154,7 +152,7 @@ public class Disaster : MonoBehaviour
     {
         yield return new WaitForSeconds(disasterData.AttackSpeed);
 
-        disasterAttack.FireEvent();
+        disasterAttack.FireEvent(currentDisasterStrength.Value);
 
         StartCoroutine(Damage());
     }
