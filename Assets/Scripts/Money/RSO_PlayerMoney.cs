@@ -6,13 +6,13 @@ using System.Numerics;
 [CreateAssetMenu(fileName = "RSO_PlayerMoney", menuName = "Catacosmic/RSO/PlayerMoney")]
 public class RSO_PlayerMoney : ScriptableObject
 {
-    public Action<BigInteger> onValueChanged;
+    public Action<double> onValueChanged;
 
     [Title("Parameters")]
     [ShowInInspector]
-    private BigInteger _value;
+    private double _value;
 
-    public BigInteger Value
+    public double Value
     {
         get => _value;
         set

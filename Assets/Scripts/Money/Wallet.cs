@@ -12,13 +12,14 @@ public class Wallet : MonoBehaviour
     }
 
     [Button]
-    public void Add(BigInteger amount)
+    public void Add(double amount)
     {
+        print(amount);
         money.Value += amount;
     }
 
     [Button]
-    public void Remove(BigInteger amount)
+    public void Remove(double amount)
     {
         money.Value -= amount;
     }

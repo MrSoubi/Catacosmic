@@ -5,13 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RSO_CurrentDisasterStrength", menuName = "Catacosmic/RSO/CurrentDisasterStrength")]
 public class RSO_CurrentDisasterStrength : ScriptableObject
 {
-    public Action<float> onValueChanged;
+    public Action<double> onValueChanged;
 
     [Title("Parameters")]
     [ShowInInspector]
-    private float _value;
+    private double _value;
 
-    public float Value
+    public double Value
     {
         get => _value;
         set
