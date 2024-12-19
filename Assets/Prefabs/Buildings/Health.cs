@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 
     public Action onDeath;
     public Action<double> onHealthChanged;
+    public Action<double> onTookDamage;
 
     public void SetHealth(double maxHealth)
     {
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour
         Debug.Log(health);
 
         onHealthChanged?.Invoke(health);
+        onTookDamage?.Invoke(damage);
 
         if (health <= 0)
         {

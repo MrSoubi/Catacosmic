@@ -3,27 +3,52 @@ using UnityEngine.Events;
 
 public class BuildingBehaviour : MonoBehaviour
 {
-    public Wallet wallet;
+    public double health;
+    public double reward;
+    public float tornadoMultiplicator;
+    public float tsunamiMultiplicator;
+    public float earthquakeMultiplicator;
 
-    public SSO_BuildingData buildingData;
+    public GameObject hitMarkerPrefab;
+
+    public RSE_MoneyGain moneyGain;
 
     public Hurtbox hurtbox;
-    public Health health;
+    public Health healthComponent;
 
     private void OnEnable()
     {
-        health.onDeath += Destroy;
+        healthComponent.onDeath += Destroy;
+        healthComponent.onTookDamage += DisplayDamage;
+    }
+
+    private void OnDisable()
+    {
+        healthComponent.onDeath += Destroy;
+        healthComponent.onTookDamage += DisplayDamage;
     }
 
     private void Start()
     {
-        health.SetHealth(buildingData.health);
-        hurtbox.Initialize(buildingData.tsunamiMultiplicator, buildingData.tornadoMultiplicator, buildingData.earthquakeMultiplicator);
+        healthComponent.SetHealth(health);
+        hurtbox.Initialize(tsunamiMultiplicator, tornadoMultiplicator, earthquakeMultiplicator);
     }
 
     private void Destroy()
     {
-        wallet.Add(buildingData.reward);
+        moneyGain.Fire?.Invoke(reward);
+        LaunchHitMarker(reward, Color.yellow);
         Destroy(gameObject);
+    }
+
+    private void DisplayDamage(double damage)
+    {
+        LaunchHitMarker(damage, Color.red);
+    }
+
+    private void LaunchHitMarker(double value, Color color)
+    {
+        var hitMarker = Instantiate(hitMarkerPrefab, transform.position, Quaternion.identity);
+        hitMarker.GetComponent<HitMarkerBehaviour>().Initialize(value, color);
     }
 }

@@ -5,6 +5,17 @@ using UnityEngine;
 public class Wallet : MonoBehaviour
 {
     public RSO_PlayerMoney money;
+    public RSE_MoneyGain moneyGain;
+
+    private void OnEnable()
+    {
+        moneyGain.Fire += Add;
+    }
+
+    private void OnDisable()
+    {
+        moneyGain.Fire -= Add;
+    }
 
     private void Start()
     {
