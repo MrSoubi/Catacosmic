@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DezoomIcon_0: -7933892480579759417
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

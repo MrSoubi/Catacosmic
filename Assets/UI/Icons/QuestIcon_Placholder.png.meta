@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      QuestIcon_Placholder_0: 3027582547740235369
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -23,8 +23,6 @@ public class CameraFreePress : MonoBehaviour
     [SerializeField] private float speedDecelaration;
     [SerializeField] private float velocityMinDecelaration;
 
-    float speed = 1;
-
     private Vector2 touchPos;
     private Vector2 touchCurrentPos;
     private Vector2 movement;
@@ -34,6 +32,12 @@ public class CameraFreePress : MonoBehaviour
     private bool isDecelerating;
 
     private Coroutine decelerationCoroutine;
+
+    private void OnValidate()
+    {
+        cameraMain.orthographicSize = cameraSize;
+        circleCamera.localScale = new Vector3(cameraSize / 50f, cameraSize / 50f, 1);
+    }
 
     private void Awake()
     {
