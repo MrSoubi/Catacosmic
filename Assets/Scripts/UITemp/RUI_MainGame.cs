@@ -5,6 +5,10 @@ using Sirenix.OdinInspector;
 public class RUI_MainGame : MonoBehaviour
 {
     [Title("Output Events")]
+    public RSE_CallGiftPopUp callGiftsPopUp;
+    public RSE_CallQuestsPopUp callQuestsPopUp;
+    public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
+
     public RSE_CallUpgrade callUpgrade;
     public RSE_CallInventory callInventory;
     public RSE_CallTimedPlanet callTimedPlanet;
@@ -15,6 +19,10 @@ public class RUI_MainGame : MonoBehaviour
     public RSE_PointerUp pointerUp;
 
     private VisualElement root;
+
+    private Button buttonGiftsPopUp;
+    private Button buttonFortuneWheelPopUp;
+    private Button buttonQuestsPopUp;
 
     private Button buttonUpgrade;
     private Button buttonInventory;
@@ -32,7 +40,16 @@ public class RUI_MainGame : MonoBehaviour
         root.RegisterCallback<PointerDownEvent>(GetPointerPosition);
         root.RegisterCallback<PointerDownEvent>(TriggerPointerDown);
         root.RegisterCallback<PointerMoveEvent>(GetPointerPosition);
+        root.RegisterCallback<PointerUpEvent>(GetPointerPosition);
         root.RegisterCallback<PointerUpEvent>(TriggerPointerUp);
+
+        buttonGiftsPopUp = uiDocument.rootVisualElement.Q("Button_Gifts") as Button;
+        buttonFortuneWheelPopUp = uiDocument.rootVisualElement.Q("Button_FortuneWheel") as Button;
+        buttonQuestsPopUp = uiDocument.rootVisualElement.Q("Button_Quests") as Button;
+
+        buttonGiftsPopUp.RegisterCallback<ClickEvent>(CallGiftsPopUp);
+        buttonFortuneWheelPopUp.RegisterCallback<ClickEvent>(CallFortuneWheelPopUp);
+        buttonQuestsPopUp.RegisterCallback<ClickEvent>(CallQuestsPopUp);
 
         buttonUpgrade = uiDocument.rootVisualElement.Q("UpgradePanelButton") as Button;
         buttonInventory = uiDocument.rootVisualElement.Q("InventoryPanelButton") as Button;
@@ -50,16 +67,21 @@ public class RUI_MainGame : MonoBehaviour
     private void OnDisable()
     {
         root.UnregisterCallback<PointerDownEvent>(GetPointerPosition);
+        root.UnregisterCallback<PointerDownEvent>(TriggerPointerDown);
+        root.UnregisterCallback<PointerMoveEvent>(GetPointerPosition);
+        root.UnregisterCallback<PointerUpEvent>(GetPointerPosition);
+        root.UnregisterCallback<PointerUpEvent>(TriggerPointerUp);
 
         buttonUpgrade.UnregisterCallback<ClickEvent>(CallButtonUpgrade);
         buttonInventory.UnregisterCallback<ClickEvent>(CallButtonInventory);
         buttonTimedPlanet.UnregisterCallback<ClickEvent>(CallButtonTimedPlanet);
         buttonShop.UnregisterCallback<ClickEvent>(CallButtonShop);
+
+        DeInitializePointerBlockers(root);
     }
 
-    // TODO: Make the same thing but for unregistering
     // Searches recursively all children of the VisualElement and registers the PointerMoveEvent to BlockPointerMovement of each child if it has the pointerBlocker class in its style
-    void InitializePointerBlockers(VisualElement root)
+    private void InitializePointerBlockers(VisualElement root)
     {
         if (root.hierarchy.childCount != 0)
         {
@@ -75,29 +97,66 @@ public class RUI_MainGame : MonoBehaviour
         }
     }
 
-    void BlockPointerMovement(PointerDownEvent pointerDownEvent)
+    // Searches recursively all children of the VisualElement and unregisters the PointerMoveEvent to BlockPointerMovement of each child if it has the pointerBlocker class in its style
+    private void DeInitializePointerBlockers(VisualElement root)
+    {
+        if (root.hierarchy.childCount != 0)
+        {
+            foreach (var child in root.Children())
+            {
+                DeInitializePointerBlockers(child);
+            }
+        }
+
+        if (root.ClassListContains(POINTER_BLOCKER_STYLE_CLASS))
+        {
+            root.UnregisterCallback<PointerDownEvent>(BlockPointerMovement);
+        }
+    }
+
+    private void BlockPointerMovement(PointerDownEvent pointerDownEvent)
     {
         pointerDownEvent.StopPropagation();
     }
 
-    void TriggerPointerDown(PointerDownEvent pointerDownEvent)
+    private void TriggerPointerDown(PointerDownEvent pointerDownEvent)
     {
         pointerDown.Fire?.Invoke();
     }
 
-    void TriggerPointerUp(PointerUpEvent pointerUpEvent)
+    private void TriggerPointerUp(PointerUpEvent pointerUpEvent)
     {
         pointerUp.Fire?.Invoke();
     }
 
-    void GetPointerPosition(PointerDownEvent pointerDownEvent)
+    private void GetPointerPosition(PointerDownEvent pointerDownEvent)
     {
         pointerPosition.Value = pointerDownEvent.position * root.panel.scaledPixelsPerPoint;
     }
 
-    void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
+    private void GetPointerPosition(PointerMoveEvent pointerMoveEvent)
     {
         pointerPosition.Value = pointerMoveEvent.position * root.panel.scaledPixelsPerPoint;
+    }
+
+    private void GetPointerPosition(PointerUpEvent pointerUpEvent)
+    {
+        pointerPosition.Value = pointerUpEvent.position * root.panel.scaledPixelsPerPoint;
+    }
+
+    private void CallGiftsPopUp(ClickEvent clickEvent)
+    {
+        callGiftsPopUp.Fire?.Invoke();
+    }
+
+    private void CallFortuneWheelPopUp(ClickEvent clickEvent)
+    {
+        callFortuneWheelPopUp.Fire?.Invoke();
+    }
+
+    private void CallQuestsPopUp(ClickEvent clickEvent)
+    {
+        callQuestsPopUp.Fire?.Invoke();
     }
 
     private void CallButtonUpgrade(ClickEvent clickEvent)

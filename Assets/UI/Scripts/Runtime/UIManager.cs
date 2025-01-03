@@ -1,19 +1,19 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Sirenix.OdinInspector;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("References Main")]
+    [Title("References Main")]
     [SerializeField] UIDocument gameUI;
     [SerializeField] UIDocument giftsPopUp;
     [SerializeField] UIDocument fortuneWheelPopUp;
     [SerializeField] UIDocument questsPopUp;
 
-    [Header("References Challenge")]
+    [Title("References Challenge")]
     [SerializeField] UIDocument challengeUI;
 
-    [Header("References Shop")]
+    [Title("References Shop")]
     [SerializeField] UIDocument shopUI;
 
     [SerializeField] UIDocument shopInfo;
@@ -27,15 +27,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIDocument shopAbilitiesTab;
     [SerializeField] UIDocument shopMarketTab;
 
-    [Header("Input Events Main")]
-    public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
+    [Title("Input Events Main")]
     public RSE_CallGiftPopUp callGiftPopUp;
+    public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
     public RSE_CallQuestsPopUp callQuestsPopUp;
 
-    [Header("Input Events Challenge")]
+    [Title("Input Events Challenge")]
     public RSE_CallTimedPlanet callTimedPlanet;
 
-    [Header("Input Events Shop")]
+    [Title("Input Events Shop")]
     public RSE_CallShop callShop;
 
     public RSE_CallInfo callInfo;
@@ -53,9 +53,9 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        callQuestsPopUp.Fire += OnQuestsPopUpCalled;
-        callFortuneWheelPopUp.Fire += OnFortuneWheelPopUpCalled;
         callGiftPopUp.Fire += OnGiftPopUpCalled;
+        callFortuneWheelPopUp.Fire += OnFortuneWheelPopUpCalled;
+        callQuestsPopUp.Fire += OnQuestsPopUpCalled;
 
 
         callTimedPlanet.Fire += OnOpenChallenge;
@@ -77,9 +77,9 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        callQuestsPopUp.Fire -= OnQuestsPopUpCalled;
-        callFortuneWheelPopUp.Fire -= OnFortuneWheelPopUpCalled;
         callGiftPopUp.Fire -= OnGiftPopUpCalled;
+        callFortuneWheelPopUp.Fire -= OnFortuneWheelPopUpCalled;
+        callQuestsPopUp.Fire -= OnQuestsPopUpCalled;
 
 
         callTimedPlanet.Fire -= OnOpenChallenge;
@@ -99,19 +99,28 @@ public class UIManager : MonoBehaviour
         callMarketTab.Fire -= OnOpenShopMarketTab;
     }
 
-    void OnGiftPopUpCalled()
+    /// <summary>
+    /// Open the Gift
+    /// </summary>
+    private void OnGiftPopUpCalled()
     {
-        giftsPopUp.enabled = true;
+        giftsPopUp.gameObject.SetActive(true);
     }
 
-    void OnFortuneWheelPopUpCalled()
+    /// <summary>
+    /// Open the Wheel
+    /// </summary>
+    private void OnFortuneWheelPopUpCalled()
     {
-        fortuneWheelPopUp.enabled = true;
+        fortuneWheelPopUp.gameObject.SetActive(true);
     }
 
-    void OnQuestsPopUpCalled()
+    /// <summary>
+    /// Open the Quests
+    /// </summary>
+    private void OnQuestsPopUpCalled()
     {
-        questsPopUp.enabled = true;
+        questsPopUp.gameObject.SetActive(true);
     }
 
     /// <summary>
