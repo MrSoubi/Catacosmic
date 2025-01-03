@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        index = -1;
+
         callGiftPopUp.Fire += OnGiftPopUpCalled;
         shutGiftsPopUp.Fire += OnGiftPopUpShut;
         callFortuneWheelPopUp.Fire += OnFortuneWheelPopUpCalled;
