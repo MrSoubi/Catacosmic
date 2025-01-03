@@ -95,15 +95,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889993247102421137}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1259d208bb76e9044913b777f0cf8e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stemLength: 1
-  stemWidth: 6.23
-  tipLength: 8.33
-  tipWidth: 0.43
+  stemWidth: 0.2
+  tipLength: 0.5
+  tipWidth: 0.5
 --- !u!210 &5676757912776182586
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   currentDisasterAttackSpeed: {fileID: 11400000, guid: 82602e185e497cc4bb08bea3a5618d03, type: 2}
   disasterAttack: {fileID: 11400000, guid: f06a3aa6dcf9e214cb4462ad1cb2deda, type: 2}
   rb: {fileID: 8985716034741753743}
-  sr: {fileID: 0}
+  sr: {fileID: 8543752814613673670}
   arrow: {fileID: 1889993247102421137}
   arrowGenerator: {fileID: 2480384883570203856}
 --- !u!114 &4729298115689604484

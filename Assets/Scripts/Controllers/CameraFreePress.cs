@@ -13,6 +13,8 @@ public class CameraFreePress : MonoBehaviour
     [Title("Input Events")]
     [SerializeField] private RSE_PointerDown pointerDown;
     [SerializeField] private RSE_PointerUp pointerUp;
+    [SerializeField] private RSE_CallZoom callZoom;
+    [SerializeField] private RSE_CallDeZoom callDeZoom;
 
     [Title("Camera References")]
     [SerializeField] private Camera cameraMain;
@@ -22,6 +24,9 @@ public class CameraFreePress : MonoBehaviour
     [SerializeField] private float cameraSize;
     [SerializeField] private float speedDecelaration;
     [SerializeField] private float velocityMinDecelaration;
+    [SerializeField] private int maxZoom;
+    [SerializeField] private int minZoom;
+    [SerializeField] private int stepZoom;
 
     private Vector2 touchPos;
     private Vector2 touchCurrentPos;
@@ -47,6 +52,9 @@ public class CameraFreePress : MonoBehaviour
         pointerDown.Fire += TouchDown;
         pointerWorldPosition.onValueChanged += TouchPos;
         pointerUp.Fire += TouchUp;
+
+        callZoom.Fire += Zoom;
+        callDeZoom.Fire += DeZoom;
     }
 
     private void OnDisable()
@@ -54,6 +62,9 @@ public class CameraFreePress : MonoBehaviour
         pointerDown.Fire -= TouchDown;
         pointerWorldPosition.onValueChanged -= TouchPos;
         pointerUp.Fire -= TouchUp;
+
+        callZoom.Fire -= Zoom;
+        callDeZoom.Fire -= DeZoom;
     }
 
     private void Start()
@@ -117,6 +128,7 @@ public class CameraFreePress : MonoBehaviour
 
         velocity = Vector3.zero;
     }
+
     private void TouchUp()
     {
         if (isTouch)
@@ -132,5 +144,17 @@ public class CameraFreePress : MonoBehaviour
                 decelerationCoroutine = StartCoroutine(Deceleration());
             }
         }
+    }
+
+    private void Zoom()
+    {
+        cameraMain.orthographicSize = Mathf.Clamp(cameraMain.orthographicSize - stepZoom, maxZoom, minZoom);
+        circleCamera.localScale = new Vector3(cameraMain.orthographicSize / 50f, cameraMain.orthographicSize / 50f, 1);
+    }
+
+    private void DeZoom()
+    {
+        cameraMain.orthographicSize = Mathf.Clamp(cameraMain.orthographicSize + stepZoom, maxZoom, minZoom);
+        circleCamera.localScale = new Vector3(cameraMain.orthographicSize / 50f, cameraMain.orthographicSize / 50f, 1);
     }
 }

@@ -62,6 +62,11 @@ public class Disaster : MonoBehaviour
         currentDisasterCriticMultiplier.Value = disasterData.CriticMultiplier;
         currentDisasterAttackSpeed.Value = disasterData.AttackSpeed;
 
+        arrowGenerator.stemLength = 0;
+        arrowGenerator.stemWidth = sr.size.x / 5f;
+        arrowGenerator.tipLength = sr.size.x / 2f;
+        arrowGenerator.tipWidth = sr.size.x / 2f;
+
         StartCoroutine(Damage());
     }
 
@@ -86,11 +91,11 @@ public class Disaster : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, targetPosition);
 
-        if (distance > 1.5f)
+        if (distance > sr.bounds.size.x)
         {
             isNeedArrow = true;
 
-            arrowGenerator.stemLength = distance - 1.5f;
+            arrowGenerator.stemLength = distance - sr.bounds.size.x;
 
             if (!arrow.activeInHierarchy)
             {
@@ -164,6 +169,10 @@ public class Disaster : MonoBehaviour
     {
         transform.localScale = new Vector3(size / 5f, size / 5f, 1);
         transform.GetChild(0).localScale = new Vector3(5f / size, 5f / size, 1);
+
+        arrowGenerator.stemWidth = sr.size.x / 5f;
+        arrowGenerator.tipLength = sr.size.x / 2f;
+        arrowGenerator.tipWidth = sr.size.x / 2f;
 
         //currentPlayerSize.Value = sr.bounds.size / 2;
     }

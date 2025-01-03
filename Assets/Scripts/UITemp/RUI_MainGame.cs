@@ -9,6 +9,9 @@ public class RUI_MainGame : MonoBehaviour
     public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
     public RSE_CallQuestsPopUp callQuestsPopUp;
 
+    public RSE_CallZoom callZoom;
+    public RSE_CallDeZoom callDeZoom;
+
     public RSE_CallUpgrade callUpgrade;
     public RSE_CallInventory callInventory;
     public RSE_CallTimedPlanet callTimedPlanet;
@@ -23,6 +26,9 @@ public class RUI_MainGame : MonoBehaviour
     private Button buttonGiftsPopUp;
     private Button buttonFortuneWheelPopUp;
     private Button buttonQuestsPopUp;
+
+    private Button buttonZoom;
+    private Button buttonDeZoom;
 
     private Button buttonUpgrade;
     private Button buttonInventory;
@@ -51,10 +57,16 @@ public class RUI_MainGame : MonoBehaviour
         buttonFortuneWheelPopUp.RegisterCallback<ClickEvent>(CallFortuneWheelPopUp);
         buttonQuestsPopUp.RegisterCallback<ClickEvent>(CallQuestsPopUp);
 
-        buttonUpgrade = uiDocument.rootVisualElement.Q("UpgradePanelButton") as Button;
-        buttonInventory = uiDocument.rootVisualElement.Q("InventoryPanelButton") as Button;
-        buttonTimedPlanet = uiDocument.rootVisualElement.Q("TimedPlanetPanelButton") as Button;
-        buttonShop = uiDocument.rootVisualElement.Q("ShopPanelButton") as Button;
+        buttonZoom = uiDocument.rootVisualElement.Q("Button_Zoom") as Button;
+        buttonDeZoom = uiDocument.rootVisualElement.Q("Button_DeZoom") as Button;
+
+        buttonZoom.RegisterCallback<ClickEvent>(CallZoom);
+        buttonDeZoom.RegisterCallback<ClickEvent>(CallDeZoom);
+
+        buttonUpgrade = uiDocument.rootVisualElement.Q("Button_Upgrade") as Button;
+        buttonInventory = uiDocument.rootVisualElement.Q("Button_Inventory") as Button;
+        buttonTimedPlanet = uiDocument.rootVisualElement.Q("Button_TimedPlanet") as Button;
+        buttonShop = uiDocument.rootVisualElement.Q("Button_Shop") as Button;
 
         buttonUpgrade.RegisterCallback<ClickEvent>(CallButtonUpgrade);
         buttonInventory.RegisterCallback<ClickEvent>(CallButtonInventory);
@@ -75,6 +87,9 @@ public class RUI_MainGame : MonoBehaviour
         buttonGiftsPopUp.UnregisterCallback<ClickEvent>(CallGiftsPopUp);
         buttonFortuneWheelPopUp.UnregisterCallback<ClickEvent>(CallFortuneWheelPopUp);
         buttonQuestsPopUp.UnregisterCallback<ClickEvent>(CallQuestsPopUp);
+
+        buttonZoom.UnregisterCallback<ClickEvent>(CallZoom);
+        buttonDeZoom.UnregisterCallback<ClickEvent>(CallDeZoom);
 
         buttonUpgrade.UnregisterCallback<ClickEvent>(CallButtonUpgrade);
         buttonInventory.UnregisterCallback<ClickEvent>(CallButtonInventory);
@@ -161,6 +176,16 @@ public class RUI_MainGame : MonoBehaviour
     private void CallQuestsPopUp(ClickEvent clickEvent)
     {
         callQuestsPopUp.Fire?.Invoke();
+    }
+
+    private void CallZoom(ClickEvent clickEvent)
+    {
+        callZoom.Fire?.Invoke();
+    }
+
+    private void CallDeZoom(ClickEvent clickEvent)
+    {
+        callDeZoom.Fire?.Invoke();
     }
 
     private void CallButtonUpgrade(ClickEvent clickEvent)
