@@ -72,6 +72,10 @@ public class RUI_MainGame : MonoBehaviour
         root.UnregisterCallback<PointerUpEvent>(GetPointerPosition);
         root.UnregisterCallback<PointerUpEvent>(TriggerPointerUp);
 
+        buttonGiftsPopUp.UnregisterCallback<ClickEvent>(CallGiftsPopUp);
+        buttonFortuneWheelPopUp.UnregisterCallback<ClickEvent>(CallFortuneWheelPopUp);
+        buttonQuestsPopUp.UnregisterCallback<ClickEvent>(CallQuestsPopUp);
+
         buttonUpgrade.UnregisterCallback<ClickEvent>(CallButtonUpgrade);
         buttonInventory.UnregisterCallback<ClickEvent>(CallButtonInventory);
         buttonTimedPlanet.UnregisterCallback<ClickEvent>(CallButtonTimedPlanet);
