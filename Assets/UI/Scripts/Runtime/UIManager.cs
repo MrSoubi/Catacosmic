@@ -29,8 +29,11 @@ public class UIManager : MonoBehaviour
 
     [Title("Input Events Main")]
     public RSE_CallGiftPopUp callGiftPopUp;
+    public RSE_ShutGiftPopUp shutGiftsPopUp;
     public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
+    public RSE_ShutFortuneWheelPopUp shutFortuneWheelPopUp;
     public RSE_CallQuestsPopUp callQuestsPopUp;
+    public RSE_ShutQuestsPopUp shutQuestsPopUp;
 
     [Title("Input Events Challenge")]
     public RSE_CallTimedPlanet callTimedPlanet;
@@ -54,8 +57,11 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         callGiftPopUp.Fire += OnGiftPopUpCalled;
+        shutGiftsPopUp.Fire += OnGiftPopUpShut;
         callFortuneWheelPopUp.Fire += OnFortuneWheelPopUpCalled;
+        shutFortuneWheelPopUp.Fire += OnFortuneWheelPopUpShut;
         callQuestsPopUp.Fire += OnQuestsPopUpCalled;
+        shutQuestsPopUp.Fire += OnQuestsPopUpShut;
 
 
         callTimedPlanet.Fire += OnOpenChallenge;
@@ -78,8 +84,11 @@ public class UIManager : MonoBehaviour
     private void OnDisable()
     {
         callGiftPopUp.Fire -= OnGiftPopUpCalled;
+        shutGiftsPopUp.Fire -= OnGiftPopUpShut;
         callFortuneWheelPopUp.Fire -= OnFortuneWheelPopUpCalled;
+        shutFortuneWheelPopUp.Fire -= OnFortuneWheelPopUpShut;
         callQuestsPopUp.Fire -= OnQuestsPopUpCalled;
+        shutQuestsPopUp.Fire -= OnQuestsPopUpShut;
 
 
         callTimedPlanet.Fire -= OnOpenChallenge;
@@ -108,6 +117,14 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Shut the Gift
+    /// </summary>
+    private void OnGiftPopUpShut()
+    {
+        giftsPopUp.gameObject.SetActive(false);
+    }
+
+    /// <summary>
     /// Open the Wheel
     /// </summary>
     private void OnFortuneWheelPopUpCalled()
@@ -116,11 +133,27 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Shut the Wheel
+    /// </summary>
+    private void OnFortuneWheelPopUpShut()
+    {
+        fortuneWheelPopUp.gameObject.SetActive(false);
+    }
+
+    /// <summary>
     /// Open the Quests
     /// </summary>
     private void OnQuestsPopUpCalled()
     {
         questsPopUp.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Shut the Quests
+    /// </summary>
+    private void OnQuestsPopUpShut()
+    {
+        questsPopUp.gameObject.SetActive(false);
     }
 
     /// <summary>

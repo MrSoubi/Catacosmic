@@ -6,8 +6,8 @@ public class RUI_MainGame : MonoBehaviour
 {
     [Title("Output Events")]
     public RSE_CallGiftPopUp callGiftsPopUp;
-    public RSE_CallQuestsPopUp callQuestsPopUp;
     public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
+    public RSE_CallQuestsPopUp callQuestsPopUp;
 
     public RSE_CallUpgrade callUpgrade;
     public RSE_CallInventory callInventory;

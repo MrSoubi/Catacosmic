@@ -186,8 +186,9 @@ GameObject:
   m_Component:
   - component: {fileID: 139622577}
   - component: {fileID: 139622578}
+  - component: {fileID: 139622579}
   m_Layer: 0
-  m_Name: GameUIGift
+  m_Name: GameUIGifts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,6 +228,19 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &139622579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139622576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d55b7a4bf87ac42a61724633395e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shutGiftsPopUp: {fileID: 11400000, guid: 6c5eb0837f7c5114cbd77f8d1d2d2412, type: 2}
 --- !u!1 &167100971
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,8 +284,11 @@ MonoBehaviour:
   shopAbilitiesTab: {fileID: 1266553611}
   shopMarketTab: {fileID: 2113825627}
   callGiftPopUp: {fileID: 11400000, guid: 4aa4d4eefa72aa543b80d6435a6f7a06, type: 2}
+  shutGiftsPopUp: {fileID: 11400000, guid: 6c5eb0837f7c5114cbd77f8d1d2d2412, type: 2}
   callFortuneWheelPopUp: {fileID: 11400000, guid: 3dd0099e7c7301947bbbe28e9daad300, type: 2}
+  shutFortuneWheelPopUp: {fileID: 11400000, guid: 212d1f076cc4c474b99b4a64dcbaebda, type: 2}
   callQuestsPopUp: {fileID: 11400000, guid: dfd707ddfdd74df46be3304696e69f93, type: 2}
+  shutQuestsPopUp: {fileID: 11400000, guid: babe31d37ced3b541986ffc5c3c0cd09, type: 2}
   callTimedPlanet: {fileID: 11400000, guid: 21e5c9c1bf4ec124c9adaa4b78931426, type: 2}
   callShop: {fileID: 11400000, guid: ba3530f9fcb996844b76c422708681d5, type: 2}
   callInfo: {fileID: 11400000, guid: a448e80e1e1f8aa4781265a41b454f07, type: 2}
@@ -411,6 +428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 500345789}
   - component: {fileID: 500345790}
+  - component: {fileID: 500345791}
   m_Layer: 0
   m_Name: GameUIWheel
   m_TagString: Untagged
@@ -452,6 +470,19 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &500345791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500345788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d63a02d94eee24494509461dd08ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shutFortuneWheelPopUp: {fileID: 11400000, guid: 212d1f076cc4c474b99b4a64dcbaebda, type: 2}
 --- !u!1001 &616550333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -942,6 +973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1378113571}
   - component: {fileID: 1378113572}
+  - component: {fileID: 1378113573}
   m_Layer: 0
   m_Name: GameUIQuests
   m_TagString: Untagged
@@ -983,6 +1015,19 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &1378113573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378113570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef7940835d09ce40aca517e84c4d1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shutQuestsPopUp: {fileID: 11400000, guid: babe31d37ced3b541986ffc5c3c0cd09, type: 2}
 --- !u!1 &1482820175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,8 +1182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   callGiftsPopUp: {fileID: 11400000, guid: 4aa4d4eefa72aa543b80d6435a6f7a06, type: 2}
-  callQuestsPopUp: {fileID: 11400000, guid: dfd707ddfdd74df46be3304696e69f93, type: 2}
   callFortuneWheelPopUp: {fileID: 11400000, guid: 3dd0099e7c7301947bbbe28e9daad300, type: 2}
+  callQuestsPopUp: {fileID: 11400000, guid: dfd707ddfdd74df46be3304696e69f93, type: 2}
   callUpgrade: {fileID: 11400000, guid: 54d966479618e7745af3e6c137d80997, type: 2}
   callInventory: {fileID: 11400000, guid: 16ee3f42fe2aa294f92e9b4653c640db, type: 2}
   callTimedPlanet: {fileID: 11400000, guid: 21e5c9c1bf4ec124c9adaa4b78931426, type: 2}
