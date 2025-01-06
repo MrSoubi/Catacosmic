@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIDocument fortuneWheelPopUp;
     [SerializeField] UIDocument questsPopUp;
 
+    [Title("References Upgrades")]
+    [SerializeField] UIDocument upgradesUI;
+
     [Title("References Challenge")]
     [SerializeField] UIDocument challengeUI;
 
@@ -35,6 +38,9 @@ public class UIManager : MonoBehaviour
     public RSE_ShutFortuneWheelPopUp shutFortuneWheelPopUp;
     public RSE_CallQuestsPopUp callQuestsPopUp;
     public RSE_ShutQuestsPopUp shutQuestsPopUp;
+
+    [Title("Input Events Upgrades")]
+    public RSE_CallUpgrade callUpgrade;
 
     [Title("Input Events Challenge")]
     public RSE_CallTimedPlanet callTimedPlanet;
@@ -67,6 +73,9 @@ public class UIManager : MonoBehaviour
         shutQuestsPopUp.Fire += OnQuestsPopUpShut;
 
 
+        callUpgrade.Fire += OnOpenUpgrades;
+
+
         callTimedPlanet.Fire += OnOpenChallenge;
 
 
@@ -92,6 +101,9 @@ public class UIManager : MonoBehaviour
         shutFortuneWheelPopUp.Fire -= OnFortuneWheelPopUpShut;
         callQuestsPopUp.Fire -= OnQuestsPopUpCalled;
         shutQuestsPopUp.Fire -= OnQuestsPopUpShut;
+
+
+        callUpgrade.Fire -= OnOpenUpgrades;
 
 
         callTimedPlanet.Fire -= OnOpenChallenge;
@@ -164,9 +176,34 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void CleanTab()
     {
+        upgradesUI.gameObject.SetActive(false);
         challengeUI.gameObject.SetActive(false);
 
         CleanShopTab();
+    }
+
+    /// <summary>
+    /// Open the Upgrades
+    /// </summary>
+    private void OnOpenUpgrades()
+    {
+        if (index == 1)
+        {
+            index = 0;
+
+            upgradesUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (index != 0)
+            {
+                CleanTab();
+            }
+
+            index = 1;
+
+            upgradesUI.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
