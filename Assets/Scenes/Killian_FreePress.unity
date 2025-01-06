@@ -574,30 +574,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 935843880061457385, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172068624989016252, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2516628874068686034, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2911901661772878054, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5793865987534550908, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6522756475358319658, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6702791392107367932, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -636,10 +612,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702791392107367932, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8861118330569291675, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

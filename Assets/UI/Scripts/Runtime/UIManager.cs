@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
     public RSE_CallShop callShop;
 
     public RSE_CallInfo callInfo;
+    public RSE_ShutShopInfo shutShopInfo;
 
     public RSE_CallInvoke1 callInvoke1;
     public RSE_CallInvoke10 callInvoke10;
@@ -93,6 +94,7 @@ public class UIManager : MonoBehaviour
         callShop.Fire += OnOpenShop;
 
         callInfo.Fire += OnOpenShopInfo;
+        shutShopInfo.Fire += OnCloseShopInfo;
 
         callInvoke1.Fire += OnOpenShopInvoke;
         callInvoke10.Fire += OnOpenShopInvoke;
@@ -127,6 +129,7 @@ public class UIManager : MonoBehaviour
         callShop.Fire -= OnOpenShop;
 
         callInfo.Fire -= OnOpenShopInfo;
+        shutShopInfo.Fire -= OnCloseShopInfo;
 
         callInvoke1.Fire -= OnOpenShopInvoke;
         callInvoke10.Fire -= OnOpenShopInvoke;
@@ -311,6 +314,14 @@ public class UIManager : MonoBehaviour
     private void OnOpenShopInfo()
     {
         shopInfo.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Close the Shop Info
+    /// </summary>
+    private void OnCloseShopInfo()
+    {
+        shopInfo.gameObject.SetActive(false);
     }
 
     /// <summary>

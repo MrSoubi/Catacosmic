@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 294933484571697862}
   - component: {fileID: 952053653705571025}
+  - component: {fileID: 9052367499347694905}
   m_Layer: 0
   m_Name: GameUIShopInfo
   m_TagString: Untagged
@@ -39,18 +40,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13572949659185215}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: cd8b8515da594624aae3fff731a15762, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: b0802f921afb6d84fb00deb8746ae652, type: 3}
   m_SortingOrder: 2
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &9052367499347694905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13572949659185215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383794d404ee8244ba368289a1561e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shutShopInfo: {fileID: 11400000, guid: b5ec12c0e9fb90449804ab93353cc9ee, type: 2}
 --- !u!1 &386247192759577178
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +142,7 @@ MonoBehaviour:
   callTimedPlanet: {fileID: 11400000, guid: 21e5c9c1bf4ec124c9adaa4b78931426, type: 2}
   callShop: {fileID: 11400000, guid: ba3530f9fcb996844b76c422708681d5, type: 2}
   callInfo: {fileID: 11400000, guid: a448e80e1e1f8aa4781265a41b454f07, type: 2}
+  shutShopInfo: {fileID: 11400000, guid: b5ec12c0e9fb90449804ab93353cc9ee, type: 2}
   callInvoke1: {fileID: 11400000, guid: 6684a11853879bf4ab2df52d7e70d0aa, type: 2}
   callInvoke10: {fileID: 11400000, guid: abb72628f3e17074592256d2caa297c3, type: 2}
   callInvokeAdd: {fileID: 11400000, guid: fdf289be3465bfc4a9bcc14899a10a06, type: 2}
