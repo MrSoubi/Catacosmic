@@ -53,9 +53,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6119155031368649295, guid: c00b662b0c06cd045a5956826297a090, type: 3}
+      propertyPath: m_Size.x
+      value: 1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119155031368649295, guid: c00b662b0c06cd045a5956826297a090, type: 3}
+      propertyPath: m_Size.y
+      value: 2.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119155031368649295, guid: c00b662b0c06cd045a5956826297a090, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1011550387031429660, guid: c5a7d98e57a6f9040a9ba40af8745dca, type: 3}
+      objectReference: {fileID: -7934682889997826194, guid: d0152195c32f6b9469dfb278ef53bfa7, type: 3}
+    - target: {fileID: 6119155031368649295, guid: c00b662b0c06cd045a5956826297a090, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

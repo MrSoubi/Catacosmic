@@ -16,11 +16,16 @@ public class RUI_Game : MonoBehaviour
     public RSE_PointerDown pointerDown;
     public RSE_PointerUp pointerUp;
 
+    [Header("Input Events")]
+    public RSO_PlayerMoney playerMoney;
+
     private VisualElement root;
 
     private Button buttonGiftsPopUp;
     private Button buttonFortuneWheelPopUp;
     private Button buttonQuestsPopUp;
+
+    private Label moneyLabel;
 
     const string POINTER_BLOCKER_STYLE_CLASS = "pointerBlocker";
 
@@ -48,7 +53,16 @@ public class RUI_Game : MonoBehaviour
         buttonFortuneWheelPopUp.RegisterCallback<ClickEvent>(CallFortuneWheelPopUp);
         buttonQuestsPopUp.RegisterCallback<ClickEvent>(CallQuestsPopUp);
 
+        moneyLabel = uiDocument.rootVisualElement.Q("MoneyValue") as Label;
+
         InitializePointerBlockers(root);
+
+        playerMoney.onValueChanged += UpdateMoney;
+    }
+
+    private void UpdateMoney(double amount)
+    {
+        moneyLabel.text = amount.ToString();
     }
 
     // TODO: Make the same thing but for unregistering
@@ -76,6 +90,8 @@ public class RUI_Game : MonoBehaviour
         buttonGiftsPopUp.UnregisterCallback<ClickEvent>(CallGiftsPopUp);
         buttonFortuneWheelPopUp.UnregisterCallback<ClickEvent>(CallFortuneWheelPopUp);
         buttonQuestsPopUp.UnregisterCallback<ClickEvent>(CallQuestsPopUp);
+
+        playerMoney.onValueChanged -= UpdateMoney;
     }
 
     void BlockPointerMovement(PointerMoveEvent pointerMoveEvent)
