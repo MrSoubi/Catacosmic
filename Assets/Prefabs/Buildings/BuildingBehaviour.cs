@@ -33,9 +33,6 @@ public class BuildingBehaviour : MonoBehaviour
     {
         healthComponent.SetHealth(health);
         hurtbox.Initialize(tsunamiMultiplicator, tornadoMultiplicator, earthquakeMultiplicator);
-
-        // Permet de gérer l'affichage des bâtiments qui se superposent. Un bâtiment plus au Sud qu'un autre s'affichera par dessus ce dernier.
-        transform.position = transform.position + new Vector3(0, 0, transform.position.y);
     }
 
     private void Destroy()
