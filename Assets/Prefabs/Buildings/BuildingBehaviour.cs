@@ -12,6 +12,7 @@ public class BuildingBehaviour : MonoBehaviour
     public GameObject hitMarkerPrefab;
 
     public RSE_MoneyGain moneyGain;
+    public RSE_BuildingDestroyed buildingDestroyed;
 
     public Hurtbox hurtbox;
     public Health healthComponent;
@@ -41,6 +42,7 @@ public class BuildingBehaviour : MonoBehaviour
     {
         moneyGain.Fire?.Invoke(reward);
         LaunchHitMarker(reward, Color.yellow);
+        buildingDestroyed.Fire();
         Destroy(gameObject);
     }
 

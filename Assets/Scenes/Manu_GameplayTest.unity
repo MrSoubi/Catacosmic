@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerFreePress
       objectReference: {fileID: 0}
+    - target: {fileID: 1824902610923418886, guid: e2648666f5b3118469951f1eb397248d, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 7790157645342034703, guid: be911ed2855601346abb98cc3ec937c1, type: 3}
     - target: {fileID: 5778474694985841871, guid: e2648666f5b3118469951f1eb397248d, type: 3}
       propertyPath: orthographic size
       value: 5
