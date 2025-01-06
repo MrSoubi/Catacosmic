@@ -1,6 +1,3 @@
-using System;
-using System.Numerics;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class Hurtbox : MonoBehaviour
