@@ -80,7 +80,9 @@ public class RUI_MainGame : MonoBehaviour
 
         InitializePointerBlockers(root);
 
-        playerMoney.onValueChanged += TextMoney;
+        textMoney = uiDocument.rootVisualElement.Q("Text_Money") as Label;
+
+        playerMoney.onValueChanged += UpdateMoney;
     }
 
     private void OnDisable()
@@ -105,7 +107,7 @@ public class RUI_MainGame : MonoBehaviour
 
         DeInitializePointerBlockers(root);
 
-        playerMoney.onValueChanged -= TextMoney;
+        playerMoney.onValueChanged -= UpdateMoney;
     }
 
     // Searches recursively all children of the VisualElement and registers the PointerMoveEvent to BlockPointerMovement of each child if it has the pointerBlocker class in its style
@@ -217,12 +219,8 @@ public class RUI_MainGame : MonoBehaviour
         callShop.Fire?.Invoke();
     }
 
-    private void TextMoney(double money)
+    private void UpdateMoney(double money)
     {
-        var uiDocument = GetComponent<UIDocument>();
-
-        textMoney = uiDocument.rootVisualElement.Q("Text_Money") as Label;
-
         textMoney.text = money.ToString();
     }
 }
