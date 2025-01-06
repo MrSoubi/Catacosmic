@@ -106,6 +106,7 @@ MonoBehaviour:
   fortuneWheelPopUp: {fileID: 1436864513494627985}
   questsPopUp: {fileID: 2369779564757825887}
   upgradesUI: {fileID: 4157162527905817529}
+  inventoryUI: {fileID: 8213142932147872880}
   challengeUI: {fileID: 1252713980874461722}
   shopUI: {fileID: 7168182526028173722}
   shopInfo: {fileID: 952053653705571025}
@@ -122,6 +123,7 @@ MonoBehaviour:
   callQuestsPopUp: {fileID: 11400000, guid: dfd707ddfdd74df46be3304696e69f93, type: 2}
   shutQuestsPopUp: {fileID: 11400000, guid: babe31d37ced3b541986ffc5c3c0cd09, type: 2}
   callUpgrade: {fileID: 11400000, guid: 54d966479618e7745af3e6c137d80997, type: 2}
+  callInventory: {fileID: 11400000, guid: 16ee3f42fe2aa294f92e9b4653c640db, type: 2}
   callTimedPlanet: {fileID: 11400000, guid: 21e5c9c1bf4ec124c9adaa4b78931426, type: 2}
   callShop: {fileID: 11400000, guid: ba3530f9fcb996844b76c422708681d5, type: 2}
   callInfo: {fileID: 11400000, guid: a448e80e1e1f8aa4781265a41b454f07, type: 2}
