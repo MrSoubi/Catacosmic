@@ -17,6 +17,8 @@ public class RUI_Wheel : MonoBehaviour
     private Button buttonBack;
     private Button buttonLaunch;
 
+    private float rotationAngle;
+
     private void OnEnable()
     {
         var uiDocument = GetComponent<UIDocument>();
@@ -48,8 +50,12 @@ public class RUI_Wheel : MonoBehaviour
 
     private IEnumerator RotateWheel()
     {
-        float totalRotation = 360f * numberTurn;
-        float rotationAngle = 0f;
+        int step = 15;
+        int maxSteps = 360 / step;
+        int randomStep = Random.Range(0, maxSteps + 1);
+        int randomNumber = randomStep * step;
+
+        float totalRotation = rotationAngle + 360f * numberTurn + randomNumber;
 
         wheel.transform.rotation = Quaternion.Euler(0, 0, 0);
 
