@@ -4,6 +4,9 @@ using Sirenix.OdinInspector;
 
 public class RUI_MainGame : MonoBehaviour
 {
+    [Title("Inputs Events")]
+    public RSO_PlayerMoney playerMoney;
+
     [Title("Output Events")]
     public RSE_CallGiftPopUp callGiftsPopUp;
     public RSE_CallFortuneWheelPopUp callFortuneWheelPopUp;
@@ -36,6 +39,8 @@ public class RUI_MainGame : MonoBehaviour
     private Button buttonShop;
 
     private const string POINTER_BLOCKER_STYLE_CLASS = "pointerBlocker";
+
+    private Label textMoney;
 
     private void OnEnable()
     {
@@ -74,6 +79,10 @@ public class RUI_MainGame : MonoBehaviour
         buttonShop.RegisterCallback<ClickEvent>(CallButtonShop);
 
         InitializePointerBlockers(root);
+
+        textMoney = uiDocument.rootVisualElement.Q("Text_Money") as Label;
+
+        playerMoney.onValueChanged += UpdateMoney;
     }
 
     private void OnDisable()
@@ -97,6 +106,8 @@ public class RUI_MainGame : MonoBehaviour
         buttonShop.UnregisterCallback<ClickEvent>(CallButtonShop);
 
         DeInitializePointerBlockers(root);
+
+        playerMoney.onValueChanged -= UpdateMoney;
     }
 
     // Searches recursively all children of the VisualElement and registers the PointerMoveEvent to BlockPointerMovement of each child if it has the pointerBlocker class in its style
@@ -206,5 +217,10 @@ public class RUI_MainGame : MonoBehaviour
     private void CallButtonShop(ClickEvent clickEvent)
     {
         callShop.Fire?.Invoke();
+    }
+
+    private void UpdateMoney(double money)
+    {
+        textMoney.text = money.ToString();
     }
 }

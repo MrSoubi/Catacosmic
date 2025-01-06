@@ -43,8 +43,6 @@ public class RUI_Wheel : MonoBehaviour
     }
     private void CallButtonLaunch(ClickEvent clickEvent)
     {
-        Debug.Log("Launch");
-
         StartCoroutine(RotateWheel());
     }
 
@@ -73,7 +71,5 @@ public class RUI_Wheel : MonoBehaviour
 
             yield return null;
         }
-
-        Debug.Log("Rotation complete!");
     }
 }
