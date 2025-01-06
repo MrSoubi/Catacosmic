@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     [Title("References Upgrades")]
     [SerializeField] UIDocument upgradesUI;
 
+    [Title("References Inventory")]
+    [SerializeField] UIDocument inventoryUI;
+
     [Title("References Challenge")]
     [SerializeField] UIDocument challengeUI;
 
@@ -41,6 +44,10 @@ public class UIManager : MonoBehaviour
 
     [Title("Input Events Upgrades")]
     public RSE_CallUpgrade callUpgrade;
+    public RSE_ShutUpgrade shutUpgrade;
+
+    [Title("Input Events Inventory")]
+    public RSE_CallInventory callInventory;
 
     [Title("Input Events Challenge")]
     public RSE_CallTimedPlanet callTimedPlanet;
@@ -74,6 +81,10 @@ public class UIManager : MonoBehaviour
 
 
         callUpgrade.Fire += OnOpenUpgrades;
+        shutUpgrade.Fire += OnShutUpgrades;
+
+
+        callInventory.Fire += OnOpenInventory;
 
 
         callTimedPlanet.Fire += OnOpenChallenge;
@@ -104,6 +115,10 @@ public class UIManager : MonoBehaviour
 
 
         callUpgrade.Fire -= OnOpenUpgrades;
+        shutUpgrade.Fire -= OnShutUpgrades;
+
+
+        callInventory.Fire -= OnOpenInventory;
 
 
         callTimedPlanet.Fire -= OnOpenChallenge;
@@ -177,6 +192,7 @@ public class UIManager : MonoBehaviour
     private void CleanTab()
     {
         upgradesUI.gameObject.SetActive(false);
+        inventoryUI.gameObject.SetActive(false);
         challengeUI.gameObject.SetActive(false);
 
         CleanShopTab();
@@ -203,6 +219,41 @@ public class UIManager : MonoBehaviour
             index = 1;
 
             upgradesUI.gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Close the Upgrades
+    /// </summary>
+    private void OnShutUpgrades()
+    {
+        index = 0;
+
+        upgradesUI.gameObject.SetActive(false);
+        inventoryUI.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Open the Inventory
+    /// </summary>
+    private void OnOpenInventory()
+    {
+        if (index == 2)
+        {
+            index = 0;
+
+            inventoryUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (index != 0)
+            {
+                CleanTab();
+            }
+
+            index = 2;
+
+            inventoryUI.gameObject.SetActive(true);
         }
     }
 

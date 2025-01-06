@@ -12,6 +12,7 @@ public class BuildingBehaviour : MonoBehaviour
     public GameObject hitMarkerPrefab;
 
     public RSE_MoneyGain moneyGain;
+    public RSE_BuildingDestroyed buildingDestroyed;
 
     public Hurtbox hurtbox;
     public Health healthComponent;
@@ -32,15 +33,13 @@ public class BuildingBehaviour : MonoBehaviour
     {
         healthComponent.SetHealth(health);
         hurtbox.Initialize(tsunamiMultiplicator, tornadoMultiplicator, earthquakeMultiplicator);
-
-        // Permet de gérer l'affichage des bâtiments qui se superposent. Un bâtiment plus au Sud qu'un autre s'affichera par dessus ce dernier.
-        transform.position = transform.position + new Vector3(0, 0, transform.position.y);
     }
 
     private void Destroy()
     {
         moneyGain.Fire?.Invoke(reward);
         LaunchHitMarker(reward, Color.yellow);
+        buildingDestroyed.Fire();
         Destroy(gameObject);
     }
 
