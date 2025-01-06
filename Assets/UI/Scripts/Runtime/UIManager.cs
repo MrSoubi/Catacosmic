@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     [Title("Input Events Upgrades")]
     public RSE_CallUpgrade callUpgrade;
+    public RSE_ShutUpgrade shutUpgrade;
 
     [Title("Input Events Inventory")]
     public RSE_CallInventory callInventory;
@@ -80,6 +81,7 @@ public class UIManager : MonoBehaviour
 
 
         callUpgrade.Fire += OnOpenUpgrades;
+        shutUpgrade.Fire += OnShutUpgrades;
 
 
         callInventory.Fire += OnOpenInventory;
@@ -113,6 +115,7 @@ public class UIManager : MonoBehaviour
 
 
         callUpgrade.Fire -= OnOpenUpgrades;
+        shutUpgrade.Fire -= OnShutUpgrades;
 
 
         callInventory.Fire -= OnOpenInventory;
@@ -217,6 +220,17 @@ public class UIManager : MonoBehaviour
 
             upgradesUI.gameObject.SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// Close the Upgrades
+    /// </summary>
+    private void OnShutUpgrades()
+    {
+        index = 0;
+
+        upgradesUI.gameObject.SetActive(false);
+        inventoryUI.gameObject.SetActive(false);
     }
 
     /// <summary>
