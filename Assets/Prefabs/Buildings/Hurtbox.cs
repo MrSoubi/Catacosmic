@@ -15,7 +15,7 @@ public class Hurtbox : MonoBehaviour
         this.earthquakeMultiplicator = earthquakeMultiplicator;
     }
 
-    public void TakeDamage(double strength, Attack attack)
+    public void TakeDamage(float strength, Attack attack)
     {
         switch (attack)
         {

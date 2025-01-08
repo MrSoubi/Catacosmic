@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class BuildingBehaviour : MonoBehaviour
 {
-    public double health;
-    public double reward;
+    public float health;
+    public float reward;
     public float tornadoMultiplicator;
     public float tsunamiMultiplicator;
     public float earthquakeMultiplicator;
@@ -39,16 +39,16 @@ public class BuildingBehaviour : MonoBehaviour
     {
         moneyGain.Fire?.Invoke(reward);
         LaunchHitMarker(reward, Color.yellow);
-        buildingDestroyed.Fire();
+        //buildingDestroyed.Fire();
         Destroy(gameObject);
     }
 
-    private void DisplayDamage(double damage)
+    private void DisplayDamage(float damage)
     {
         LaunchHitMarker(damage, Color.red);
     }
 
-    private void LaunchHitMarker(double value, Color color)
+    private void LaunchHitMarker(float value, Color color)
     {
         var hitMarker = Instantiate(hitMarkerPrefab, transform.position, Quaternion.identity);
         hitMarker.GetComponent<HitMarkerBehaviour>().Initialize(value, color);

@@ -5,18 +5,18 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    double health;
+    float health;
 
     public Action onDeath;
-    public Action<double> onHealthChanged;
-    public Action<double> onTookDamage;
+    public Action<float> onHealthChanged;
+    public Action<float> onTookDamage;
 
-    public void SetHealth(double maxHealth)
+    public void SetHealth(float maxHealth)
     {
         health = maxHealth;
     }
 
-    public void TakeDamage(double damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

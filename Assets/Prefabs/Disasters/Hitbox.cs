@@ -27,7 +27,7 @@ public class Hitbox : MonoBehaviour
         attackEvent.Fire -= Attack;
     }
 
-    void Attack(double strength)
+    void Attack(float strength)
     {
         for (int i = targets.Count - 1; i >= 0; i--)
         {

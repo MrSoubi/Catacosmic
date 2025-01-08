@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RSE_DisasterAttack", menuName = "Catacosmic/RSE/DisasterAttack")]
 public class RSE_DisasterAttack : ScriptableObject
 {
-    public Action<double> Fire;
+    public Action<float> Fire;
 
     [Button]
-    public void FireEvent(double strength)
+    public void FireEvent(float strength)
     {
         Fire?.Invoke(strength);
     }
