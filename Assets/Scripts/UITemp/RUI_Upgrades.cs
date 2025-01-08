@@ -7,6 +7,15 @@ public class RUI_Upgrades : MonoBehaviour
     [Title("Output Events")]
     public RSE_ShutUpgrade shutUpgrade;
 
+    public RSO_CurrentDisasterAttackSpeed currentDisasterAttackSpeed;
+    public RSO_CurrentDisasterCriticChance currentDisasterCriticChance;
+    public RSO_CurrentDisasterCriticMultiplier currentDisasterCriticMultiplier;
+    public RSO_CurrentDisasterSize currentDisasterSize;
+    public RSO_CurrentDisasterStrength currentDisasterStrength;
+    public RSO_CurrentDisasterVelocity currentDisasterVelocity;
+
+    public RSO_PlayerMoney currentPlayerMoney;
+
     private Button buttonGame;
 
     private Button buttonSpeed;
@@ -58,31 +67,37 @@ public class RUI_Upgrades : MonoBehaviour
 
     private void CallButtonSpeed(ClickEvent clickEvent)
     {
-        Debug.Log("Speed");
+        currentDisasterVelocity.Value += 1;
     }
 
     private void CallButtonSize(ClickEvent clickEvent)
     {
-        Debug.Log("Size");
+        currentDisasterSize.Value += 1;
     }
 
     private void CallButtonDamage(ClickEvent clickEvent)
     {
-        Debug.Log("Damage");
+        float price = 40 * Mathf.Pow(3, currentDisasterStrength.Value - 1);
+
+        if (currentPlayerMoney.Value >= price)
+        {
+            currentDisasterStrength.Value += 1;
+            currentPlayerMoney.Value -= price;
+        }
     }
 
     private void CallButtonFrequency(ClickEvent clickEvent)
     {
-        Debug.Log("Frequency");
+        currentDisasterAttackSpeed.Value += 1;
     }
 
     private void CallButtonCriticChance(ClickEvent clickEvent)
     {
-        Debug.Log("Critic Chance");
+        currentDisasterCriticChance.Value += 1;
     }
 
     private void CallButtonCriticMultipler(ClickEvent clickEvent)
     {
-        Debug.Log("Critic Multiplier");
+        currentDisasterCriticMultiplier.Value += 1;
     }
 }

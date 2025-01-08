@@ -157,7 +157,7 @@ public class Disaster : MonoBehaviour
     {
         yield return new WaitForSeconds(disasterData.AttackSpeed);
 
-        disasterAttack.FireEvent(currentDisasterStrength.Value);
+        disasterAttack.FireEvent(Mathf.Pow(1.8f, currentDisasterStrength.Value));
 
         StartCoroutine(Damage());
     }

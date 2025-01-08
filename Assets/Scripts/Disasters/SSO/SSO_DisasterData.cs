@@ -9,7 +9,7 @@ public class SSO_DisasterData : ScriptableObject
     [SerializeField] private Sprite sprite;
     [SerializeField] private int size;
     [SerializeField] private float velocity;
-    [SerializeField] private double strength;
+    [SerializeField] private float strength;
     [SerializeField, SuffixLabel("%")] private float criticChance;
     [SerializeField] private float criticMultiplier;
     [SerializeField, SuffixLabel("s")] private float attackSpeed;
@@ -71,7 +71,7 @@ public class SSO_DisasterData : ScriptableObject
         set => velocity = Mathf.Max(value, 0);
     }
 
-    public double Strength
+    public float Strength
     {
         get => strength;
         set
