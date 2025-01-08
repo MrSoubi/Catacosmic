@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraFreePress : MonoBehaviour
 {
     [Title("Output Data")]
+    [SerializeField] private RSO_CurrentMapBounds currentMapBounds;
+    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
     [SerializeField] private RSO_CameraPosition cameraPosition;
 
     [Title("Input Data")]
@@ -72,6 +74,27 @@ public class CameraFreePress : MonoBehaviour
         cameraPosition.Value = transform.position;
     }
 
+    private Vector3 LockToCameraBorder(Vector3 newPosition)
+    {
+        if (currentMapBounds.MapBounds.extents.x > 0 && currentMapBounds.MapBounds.extents.y > 0)
+        {
+            Vector2 confinerBounds = currentMapBounds.MapBounds.extents;
+            Vector2 confinerCenter = currentMapBounds.MapBounds.center;
+
+            Vector2 playerSize = currentPlayerSize.Value;
+
+            float minX = confinerCenter.x - confinerBounds.x + playerSize.x;
+            float maxX = confinerCenter.x + confinerBounds.x - playerSize.x;
+            float minY = confinerCenter.y - confinerBounds.y + playerSize.y;
+            float maxY = confinerCenter.y + confinerBounds.y - playerSize.y;
+
+            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+            newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+        }
+
+        return newPosition;
+    }
+
     private void MoveCamera()
     {
         if (isTouch)
@@ -81,6 +104,8 @@ public class CameraFreePress : MonoBehaviour
             velocity = (movement / Time.deltaTime) * speedDecelaration;
 
             transform.position -= new Vector3(movement.x, movement.y, 0);
+
+            transform.position = LockToCameraBorder(transform.position);
 
             cameraPosition.Value = transform.position;
         }
@@ -93,6 +118,8 @@ public class CameraFreePress : MonoBehaviour
             velocity = Vector2.Lerp(velocity, Vector2.zero, 0.1f);
 
             transform.position -= new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime;
+
+            transform.position = LockToCameraBorder(transform.position);
 
             cameraPosition.Value = transform.position;
 

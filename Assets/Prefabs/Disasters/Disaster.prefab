@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disasterData: {fileID: 11400000, guid: 890de4cb83016c641b05a6d4af77fc46, type: 2}
+  currentPlayerSize: {fileID: 11400000, guid: dd275d92655209540a265ee3ad4af0a1, type: 2}
   cameraPosition: {fileID: 11400000, guid: c50886e1ca748a34bb401827cec717c1, type: 2}
   disasterPosition: {fileID: 11400000, guid: e79382620735b884e9e1569758433e46, type: 2}
   currentDisasterName: {fileID: 11400000, guid: ea428baba29a76d44aae967d80b6d99a, type: 2}

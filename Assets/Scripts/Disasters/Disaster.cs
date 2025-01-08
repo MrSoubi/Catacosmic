@@ -8,7 +8,7 @@ public class Disaster : MonoBehaviour
     [SerializeField] private SSO_DisasterData disasterData;
 
     [Title("Output Data")]
-    //[SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
+    [SerializeField] private RSO_CurrentPlayerSize currentPlayerSize;
     [SerializeField] private RSO_CameraPosition cameraPosition;
     [SerializeField] private RSO_DisasterPosition disasterPosition;
     [SerializeField] private RSO_CurrentDisasterName currentDisasterName;
@@ -49,6 +49,7 @@ public class Disaster : MonoBehaviour
     private void Start()
     {
         disasterPosition.Value = transform.position;
+        currentPlayerSize.Value = sr.bounds.size / 2;
 
         transform.localScale = new Vector3(disasterData.Size / 5f, disasterData.Size / 5f, 1);
         transform.GetChild(0).localScale = new Vector3(5f / disasterData.Size, 5f / disasterData.Size, 1);
@@ -174,6 +175,6 @@ public class Disaster : MonoBehaviour
         arrowGenerator.tipLength = sr.size.x / 2f;
         arrowGenerator.tipWidth = sr.size.x / 2f;
 
-        //currentPlayerSize.Value = sr.bounds.size / 2;
+        currentPlayerSize.Value = sr.bounds.size / 2;
     }
 }
