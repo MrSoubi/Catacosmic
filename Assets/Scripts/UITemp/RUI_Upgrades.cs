@@ -19,12 +19,35 @@ public class RUI_Upgrades : MonoBehaviour
 
     private Button buttonGame;
 
+    private Label textLevelVelocity;
     private Button buttonVelocity;
+    private Label textStatVelocity;
+    private Label textCostVelocity;
+
+    private Label textLevelSize;
     private Button buttonSize;
+    private Label textStatSize;
+    private Label textCostSize;
+
+    private Label textLevelStrength;
     private Button buttonStrength;
+    private Label textStatStrength;
+    private Label textCostStrength;
+
+    private Label textLevelAttackSpeed;
     private Button buttonAttackSpeed;
+    private Label textStatAttackSpeed;
+    private Label textCostAttackSpeed;
+
+    private Label textLevelCriticChance;
     private Button buttonCriticChance;
+    private Label textStatCriticChance;
+    private Label textCostCriticChance;
+
+    private Label textLevelCriticMultiplier;
     private Button buttonCriticMultiplier;
+    private Label textStatCriticMultiplier;
+    private Label textCostCriticMultiplier;
 
     private void OnEnable()
     {
@@ -32,12 +55,35 @@ public class RUI_Upgrades : MonoBehaviour
 
         buttonGame = uiDocument.rootVisualElement.Q("Button_Game") as Button;
 
+        textLevelVelocity = uiDocument.rootVisualElement.Q("Text_LevelVelocity") as Label;
         buttonVelocity = uiDocument.rootVisualElement.Q("Button_UpgradeVelocity") as Button;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_UpgradeStatVelocity") as Label;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostVelocity") as Label;
+
+        textLevelSize = uiDocument.rootVisualElement.Q("Text_LevelSize") as Label;
         buttonSize = uiDocument.rootVisualElement.Q("Button_UpgradeSize") as Button;
+        textStatSize = uiDocument.rootVisualElement.Q("Text_UpgradeStatSize") as Label;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostSize") as Label;
+
+        textLevelStrength = uiDocument.rootVisualElement.Q("Text_LevelStrength") as Label;
         buttonStrength = uiDocument.rootVisualElement.Q("Button_UpgradeStrength") as Button;
+        textStatStrength = uiDocument.rootVisualElement.Q("Text_UpgradeStatStrength") as Label;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostStrength") as Label;
+
+        textLevelAttackSpeed = uiDocument.rootVisualElement.Q("Text_LevelAttackSpeed") as Label;
         buttonAttackSpeed = uiDocument.rootVisualElement.Q("Button_UpgradeAttackSpeed") as Button;
+        textStatAttackSpeed = uiDocument.rootVisualElement.Q("Text_UpgradeStatAttackSpeed") as Label;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostAttackSpeed") as Label;
+
+        textLevelCriticChance = uiDocument.rootVisualElement.Q("Text_LevelCriticChance") as Label;
         buttonCriticChance = uiDocument.rootVisualElement.Q("Button_UpgradeCriticChance") as Button;
+        textStatCriticChance = uiDocument.rootVisualElement.Q("Text_UpgradeStatCriticChance") as Label;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostCriticChance") as Label;
+
+        textLevelCriticMultiplier = uiDocument.rootVisualElement.Q("Text_LevelCriticMultiplier") as Label;
         buttonCriticMultiplier = uiDocument.rootVisualElement.Q("Button_UpgradeCriticMultiplier") as Button;
+        textStatCriticMultiplier = uiDocument.rootVisualElement.Q("Text_UpgradeStatCriticMultiplier") as Label;
+        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostCriticMultiplier") as Label;
 
         buttonGame.RegisterCallback<ClickEvent>(CallButtonGame);
 
