@@ -5,13 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RSO_CurrentDisasterSize", menuName = "Catacosmic/RSO/CurrentDisasterSize")]
 public class RSO_CurrentDisasterSize : ScriptableObject
 {
-    public Action<int> onValueChanged;
+    public Action<float> onValueChanged;
 
     [Title("Parameters")]
     [ShowInInspector]
-    private int _value;
+    private float _value;
 
-    public int Value
+    public float Value
     {
         get => _value;
         set

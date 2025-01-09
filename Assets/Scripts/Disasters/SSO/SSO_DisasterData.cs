@@ -7,7 +7,7 @@ public class SSO_DisasterData : ScriptableObject
     [Title("Parameters")]
     [SerializeField] private string name;
     [SerializeField] private Sprite sprite;
-    [SerializeField] private int size;
+    [SerializeField] private float size;
     [SerializeField] private float velocity;
     [SerializeField] private float strength;
     [SerializeField, SuffixLabel("%")] private float criticChance;
@@ -16,9 +16,9 @@ public class SSO_DisasterData : ScriptableObject
 
     private void OnValidate()
     {
-        if (size < 1)
+        if (size < 0.01f)
         {
-            size = 1;
+            size = 0.01f;
         }
 
         if (velocity < 0)
@@ -59,7 +59,7 @@ public class SSO_DisasterData : ScriptableObject
         set => sprite = value;
     }
 
-    public int Size
+    public float Size
     {
         get => size;
         set => size = Mathf.Max(value, 1);
