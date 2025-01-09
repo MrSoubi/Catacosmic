@@ -51,8 +51,8 @@ public class Disaster : MonoBehaviour
         disasterPosition.Value = transform.position;
         currentPlayerSize.Value = sr.bounds.size / 2;
 
-        transform.localScale = new Vector3(disasterData.Size / 5f, disasterData.Size / 5f, 1);
-        transform.GetChild(0).localScale = new Vector3(5f / disasterData.Size, 5f / disasterData.Size, 1);
+        transform.localScale = new Vector3(disasterData.Size, disasterData.Size, 1);
+        transform.GetChild(0).localScale = new Vector3(disasterData.Size, disasterData.Size, 1);
 
         currentDisasterName.Value = disasterData.Name;
         currentDisasterSprite.Value = disasterData.Sprite;
@@ -168,8 +168,8 @@ public class Disaster : MonoBehaviour
     /// </summary>
     private void ChangeSize(int size)
     {
-        transform.localScale = new Vector3(size / 5f, size / 5f, 1);
-        transform.GetChild(0).localScale = new Vector3(5f / size, 5f / size, 1);
+        transform.localScale = new Vector3(size, size, 1);
+        transform.GetChild(0).localScale = new Vector3(size, size, 1);
 
         arrowGenerator.stemWidth = sr.size.x / 5f;
         arrowGenerator.tipLength = sr.size.x / 2f;
