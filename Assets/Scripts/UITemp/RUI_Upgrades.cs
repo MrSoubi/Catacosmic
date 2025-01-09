@@ -19,10 +19,10 @@ public class RUI_Upgrades : MonoBehaviour
 
     private Button buttonGame;
 
-    private Button buttonSpeed;
+    private Button buttonVelocity;
     private Button buttonSize;
-    private Button buttonDamage;
-    private Button buttonFrequency;
+    private Button buttonStrength;
+    private Button buttonAttackSpeed;
     private Button buttonCriticChance;
     private Button buttonCriticMultiplier;
 
@@ -32,19 +32,19 @@ public class RUI_Upgrades : MonoBehaviour
 
         buttonGame = uiDocument.rootVisualElement.Q("Button_Game") as Button;
 
-        buttonSpeed = uiDocument.rootVisualElement.Q("Button_UpgradeSpeed") as Button;
+        buttonVelocity = uiDocument.rootVisualElement.Q("Button_UpgradeVelocity") as Button;
         buttonSize = uiDocument.rootVisualElement.Q("Button_UpgradeSize") as Button;
-        buttonDamage = uiDocument.rootVisualElement.Q("Button_UpgradeDamage") as Button;
-        buttonFrequency = uiDocument.rootVisualElement.Q("Button_UpgradeFrequency") as Button;
+        buttonStrength = uiDocument.rootVisualElement.Q("Button_UpgradeStrength") as Button;
+        buttonAttackSpeed = uiDocument.rootVisualElement.Q("Button_UpgradeAttackSpeed") as Button;
         buttonCriticChance = uiDocument.rootVisualElement.Q("Button_UpgradeCriticChance") as Button;
         buttonCriticMultiplier = uiDocument.rootVisualElement.Q("Button_UpgradeCriticMultiplier") as Button;
 
         buttonGame.RegisterCallback<ClickEvent>(CallButtonGame);
 
-        buttonSpeed.RegisterCallback<ClickEvent>(CallButtonSpeed);
+        buttonVelocity.RegisterCallback<ClickEvent>(CallButtonVelocity);
         buttonSize.RegisterCallback<ClickEvent>(CallButtonSize);
-        buttonDamage.RegisterCallback<ClickEvent>(CallButtonDamage);
-        buttonFrequency.RegisterCallback<ClickEvent>(CallButtonFrequency);
+        buttonStrength.RegisterCallback<ClickEvent>(CallButtonStrength);
+        buttonAttackSpeed.RegisterCallback<ClickEvent>(CallButtonAttackSpeed);
         buttonCriticChance.RegisterCallback<ClickEvent>(CallButtonCriticChance);
         buttonCriticMultiplier.RegisterCallback<ClickEvent>(CallButtonCriticMultipler);
     }
@@ -53,10 +53,10 @@ public class RUI_Upgrades : MonoBehaviour
     {
         buttonGame.UnregisterCallback<ClickEvent>(CallButtonGame);
 
-        buttonSpeed.UnregisterCallback<ClickEvent>(CallButtonSpeed);
+        buttonVelocity.UnregisterCallback<ClickEvent>(CallButtonVelocity);
         buttonSize.UnregisterCallback<ClickEvent>(CallButtonSize);
-        buttonDamage.UnregisterCallback<ClickEvent>(CallButtonDamage);
-        buttonFrequency.UnregisterCallback<ClickEvent>(CallButtonFrequency);
+        buttonStrength.UnregisterCallback<ClickEvent>(CallButtonStrength);
+        buttonAttackSpeed.UnregisterCallback<ClickEvent>(CallButtonAttackSpeed);
         buttonCriticChance.UnregisterCallback<ClickEvent>(CallButtonCriticChance);
         buttonCriticMultiplier.UnregisterCallback<ClickEvent>(CallButtonCriticMultipler);
     }
@@ -66,7 +66,7 @@ public class RUI_Upgrades : MonoBehaviour
         shutUpgrade.Fire?.Invoke();
     }
 
-    private void CallButtonSpeed(ClickEvent clickEvent)
+    private void CallButtonVelocity(ClickEvent clickEvent)
     {
         float price = 50 * Mathf.Pow(1, 1);
 
@@ -88,7 +88,7 @@ public class RUI_Upgrades : MonoBehaviour
         }
     }
 
-    private void CallButtonDamage(ClickEvent clickEvent)
+    private void CallButtonStrength(ClickEvent clickEvent)
     {
         float price = 40 * Mathf.Pow(3, 1);
 
@@ -99,7 +99,7 @@ public class RUI_Upgrades : MonoBehaviour
         }
     }
 
-    private void CallButtonFrequency(ClickEvent clickEvent)
+    private void CallButtonAttackSpeed(ClickEvent clickEvent)
     {
         float price = 50 * Mathf.Pow(3.2f, 1);
 
