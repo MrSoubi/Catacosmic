@@ -63,27 +63,27 @@ public class RUI_Upgrades : MonoBehaviour
         textLevelSize = uiDocument.rootVisualElement.Q("Text_LevelSize") as Label;
         buttonSize = uiDocument.rootVisualElement.Q("Button_UpgradeSize") as Button;
         textStatSize = uiDocument.rootVisualElement.Q("Text_UpgradeStatSize") as Label;
-        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostSize") as Label;
+        textStatSize = uiDocument.rootVisualElement.Q("Text_CostSize") as Label;
 
         textLevelStrength = uiDocument.rootVisualElement.Q("Text_LevelStrength") as Label;
         buttonStrength = uiDocument.rootVisualElement.Q("Button_UpgradeStrength") as Button;
         textStatStrength = uiDocument.rootVisualElement.Q("Text_UpgradeStatStrength") as Label;
-        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostStrength") as Label;
+        textStatStrength = uiDocument.rootVisualElement.Q("Text_CostStrength") as Label;
 
         textLevelAttackSpeed = uiDocument.rootVisualElement.Q("Text_LevelAttackSpeed") as Label;
         buttonAttackSpeed = uiDocument.rootVisualElement.Q("Button_UpgradeAttackSpeed") as Button;
         textStatAttackSpeed = uiDocument.rootVisualElement.Q("Text_UpgradeStatAttackSpeed") as Label;
-        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostAttackSpeed") as Label;
+        textStatAttackSpeed = uiDocument.rootVisualElement.Q("Text_CostAttackSpeed") as Label;
 
         textLevelCriticChance = uiDocument.rootVisualElement.Q("Text_LevelCriticChance") as Label;
         buttonCriticChance = uiDocument.rootVisualElement.Q("Button_UpgradeCriticChance") as Button;
         textStatCriticChance = uiDocument.rootVisualElement.Q("Text_UpgradeStatCriticChance") as Label;
-        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostCriticChance") as Label;
+        textStatCriticChance = uiDocument.rootVisualElement.Q("Text_CostCriticChance") as Label;
 
         textLevelCriticMultiplier = uiDocument.rootVisualElement.Q("Text_LevelCriticMultiplier") as Label;
         buttonCriticMultiplier = uiDocument.rootVisualElement.Q("Button_UpgradeCriticMultiplier") as Button;
         textStatCriticMultiplier = uiDocument.rootVisualElement.Q("Text_UpgradeStatCriticMultiplier") as Label;
-        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostCriticMultiplier") as Label;
+        textStatCriticMultiplier = uiDocument.rootVisualElement.Q("Text_CostCriticMultiplier") as Label;
 
         buttonGame.RegisterCallback<ClickEvent>(CallButtonGame);
 
