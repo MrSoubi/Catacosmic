@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
+using System.Diagnostics;
 
 public class RUI_Upgrades : MonoBehaviour
 {
@@ -67,37 +68,67 @@ public class RUI_Upgrades : MonoBehaviour
 
     private void CallButtonSpeed(ClickEvent clickEvent)
     {
-        currentDisasterVelocity.Value += 1;
+        float price = 50 * Mathf.Pow(1, 1);
+
+        if (currentPlayerMoney.Value >= price)
+        {
+            currentDisasterVelocity.Value = 1 * 1;
+            currentPlayerMoney.Value -= price;
+        }
     }
 
     private void CallButtonSize(ClickEvent clickEvent)
     {
-        currentDisasterSize.Value += 1;
+        float price = 60 * Mathf.Pow(3.4f, 1);
+
+        if (currentPlayerMoney.Value >= price)
+        {
+            currentDisasterSize.Value = 0.2f * 1;
+            currentPlayerMoney.Value -= price;
+        }
     }
 
     private void CallButtonDamage(ClickEvent clickEvent)
     {
-        float price = 40 * Mathf.Pow(3, currentDisasterStrength.Value - 1);
+        float price = 40 * Mathf.Pow(3, 1);
 
         if (currentPlayerMoney.Value >= price)
         {
-            currentDisasterStrength.Value += 1;
+            currentDisasterStrength.Value = Mathf.Pow(1, 1.8f);
             currentPlayerMoney.Value -= price;
         }
     }
 
     private void CallButtonFrequency(ClickEvent clickEvent)
     {
-        currentDisasterAttackSpeed.Value += 1;
+        float price = 50 * Mathf.Pow(3.2f, 1);
+
+        if (currentPlayerMoney.Value >= price)
+        {
+            currentDisasterAttackSpeed.Value = 1 * 1;
+            currentPlayerMoney.Value -= price;
+        }
     }
 
     private void CallButtonCriticChance(ClickEvent clickEvent)
     {
-        currentDisasterCriticChance.Value += 1;
+        float price = 80 * Mathf.Pow(3.8f, 1);
+
+        if (currentPlayerMoney.Value >= price)
+        {
+            currentDisasterCriticChance.Value = Mathf.Pow(1, 1.1f);
+            currentPlayerMoney.Value -= price;
+        }
     }
 
     private void CallButtonCriticMultipler(ClickEvent clickEvent)
     {
-        currentDisasterCriticMultiplier.Value += 1;
+        float price = 70 * Mathf.Pow(3.6f, 1);
+
+        if (currentPlayerMoney.Value >= price)
+        {
+            currentDisasterCriticMultiplier.Value = 1 * 0.01f;
+            currentPlayerMoney.Value -= price;
+        }
     }
 }

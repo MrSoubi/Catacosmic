@@ -92,11 +92,11 @@ public class Disaster : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, targetPosition);
 
-        if (distance > sr.bounds.size.x)
+        if (distance > sr.bounds.size.x / 2)
         {
             isNeedArrow = true;
 
-            arrowGenerator.stemLength = distance - sr.bounds.size.x;
+            arrowGenerator.stemLength = distance - sr.bounds.size.x / 2;
 
             if (!arrow.activeInHierarchy)
             {
@@ -170,9 +170,9 @@ public class Disaster : MonoBehaviour
     {
         transform.GetChild(1).localScale = new Vector3(size, size, 1);
 
-        arrowGenerator.stemWidth = 1 / 5f;
-        arrowGenerator.tipLength = 1 / 2f;
-        arrowGenerator.tipWidth = 1 / 2f;
+        arrowGenerator.stemWidth = sr.size.x / 5f;
+        arrowGenerator.tipLength = sr.size.x / 2f;
+        arrowGenerator.tipWidth = sr.size.x / 2f;
 
         currentPlayerSize.Value = sr.bounds.size / 2;
     }
