@@ -1,21 +1,25 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
-using System.Diagnostics;
+using System.Collections.Generic;
 
 public class RUI_Upgrades : MonoBehaviour
 {
     [Title("Output Events")]
     public RSE_ShutUpgrade shutUpgrade;
 
+    public RSO_CurrentDisasterVelocity currentDisasterVelocity;
+    public RSO_CurrentDisasterSize currentDisasterSize;
+    public RSO_CurrentDisasterStrength currentDisasterStrength;
     public RSO_CurrentDisasterAttackSpeed currentDisasterAttackSpeed;
     public RSO_CurrentDisasterCriticChance currentDisasterCriticChance;
     public RSO_CurrentDisasterCriticMultiplier currentDisasterCriticMultiplier;
-    public RSO_CurrentDisasterSize currentDisasterSize;
-    public RSO_CurrentDisasterStrength currentDisasterStrength;
-    public RSO_CurrentDisasterVelocity currentDisasterVelocity;
 
     public RSO_PlayerMoney currentPlayerMoney;
+
+    [Title("Parameters TEMP")]
+    public List<int> levels;
+    public List<int> costs;
 
     private Button buttonGame;
 
@@ -58,32 +62,32 @@ public class RUI_Upgrades : MonoBehaviour
         textLevelVelocity = uiDocument.rootVisualElement.Q("Text_LevelVelocity") as Label;
         buttonVelocity = uiDocument.rootVisualElement.Q("Button_UpgradeVelocity") as Button;
         textStatVelocity = uiDocument.rootVisualElement.Q("Text_UpgradeStatVelocity") as Label;
-        textStatVelocity = uiDocument.rootVisualElement.Q("Text_CostVelocity") as Label;
+        textCostVelocity = uiDocument.rootVisualElement.Q("Text_CostVelocity") as Label;
 
         textLevelSize = uiDocument.rootVisualElement.Q("Text_LevelSize") as Label;
         buttonSize = uiDocument.rootVisualElement.Q("Button_UpgradeSize") as Button;
         textStatSize = uiDocument.rootVisualElement.Q("Text_UpgradeStatSize") as Label;
-        textStatSize = uiDocument.rootVisualElement.Q("Text_CostSize") as Label;
+        textCostSize = uiDocument.rootVisualElement.Q("Text_CostSize") as Label;
 
         textLevelStrength = uiDocument.rootVisualElement.Q("Text_LevelStrength") as Label;
         buttonStrength = uiDocument.rootVisualElement.Q("Button_UpgradeStrength") as Button;
         textStatStrength = uiDocument.rootVisualElement.Q("Text_UpgradeStatStrength") as Label;
-        textStatStrength = uiDocument.rootVisualElement.Q("Text_CostStrength") as Label;
+        textCostStrength = uiDocument.rootVisualElement.Q("Text_CostStrength") as Label;
 
         textLevelAttackSpeed = uiDocument.rootVisualElement.Q("Text_LevelAttackSpeed") as Label;
         buttonAttackSpeed = uiDocument.rootVisualElement.Q("Button_UpgradeAttackSpeed") as Button;
         textStatAttackSpeed = uiDocument.rootVisualElement.Q("Text_UpgradeStatAttackSpeed") as Label;
-        textStatAttackSpeed = uiDocument.rootVisualElement.Q("Text_CostAttackSpeed") as Label;
+        textCostAttackSpeed = uiDocument.rootVisualElement.Q("Text_CostAttackSpeed") as Label;
 
         textLevelCriticChance = uiDocument.rootVisualElement.Q("Text_LevelCriticChance") as Label;
         buttonCriticChance = uiDocument.rootVisualElement.Q("Button_UpgradeCriticChance") as Button;
         textStatCriticChance = uiDocument.rootVisualElement.Q("Text_UpgradeStatCriticChance") as Label;
-        textStatCriticChance = uiDocument.rootVisualElement.Q("Text_CostCriticChance") as Label;
+        textCostCriticChance = uiDocument.rootVisualElement.Q("Text_CostCriticChance") as Label;
 
         textLevelCriticMultiplier = uiDocument.rootVisualElement.Q("Text_LevelCriticMultiplier") as Label;
         buttonCriticMultiplier = uiDocument.rootVisualElement.Q("Button_UpgradeCriticMultiplier") as Button;
         textStatCriticMultiplier = uiDocument.rootVisualElement.Q("Text_UpgradeStatCriticMultiplier") as Label;
-        textStatCriticMultiplier = uiDocument.rootVisualElement.Q("Text_CostCriticMultiplier") as Label;
+        textCostCriticMultiplier = uiDocument.rootVisualElement.Q("Text_CostCriticMultiplier") as Label;
 
         buttonGame.RegisterCallback<ClickEvent>(CallButtonGame);
 
@@ -93,6 +97,31 @@ public class RUI_Upgrades : MonoBehaviour
         buttonAttackSpeed.RegisterCallback<ClickEvent>(CallButtonAttackSpeed);
         buttonCriticChance.RegisterCallback<ClickEvent>(CallButtonCriticChance);
         buttonCriticMultiplier.RegisterCallback<ClickEvent>(CallButtonCriticMultipler);
+
+        textStatVelocity.text = currentDisasterVelocity.Value.ToString();
+        textStatSize.text = currentDisasterSize.Value.ToString();
+        textStatStrength.text = currentDisasterStrength.Value.ToString();
+        textStatAttackSpeed.text = currentDisasterAttackSpeed.Value.ToString();
+        textStatCriticChance.text = currentDisasterCriticChance.Value.ToString();
+        textStatCriticMultiplier.text = currentDisasterCriticMultiplier.Value.ToString();
+
+        textLevelVelocity.text = "LvL. " + levels[0].ToString();
+        textCostVelocity.text = costs[0].ToString();
+
+        textLevelSize.text = "LvL. " + levels[1].ToString();
+        textCostSize.text = costs[1].ToString();
+
+        textLevelStrength.text = "LvL. " + levels[2].ToString();
+        textCostStrength.text = costs[2].ToString();
+
+        textLevelAttackSpeed.text = "LvL. " + levels[3].ToString();
+        textCostAttackSpeed.text = costs[3].ToString();
+
+        textLevelCriticChance.text = "LvL. " + levels[4].ToString();
+        textCostCriticChance.text = costs[4].ToString();
+
+        textLevelCriticMultiplier.text = "LvL. " + levels[5].ToString();
+        textCostCriticMultiplier.text = costs[5].ToString();
     }
 
     private void OnDisable()
@@ -114,67 +143,73 @@ public class RUI_Upgrades : MonoBehaviour
 
     private void CallButtonVelocity(ClickEvent clickEvent)
     {
-        float price = 50 * Mathf.Pow(1, 1);
-
-        if (currentPlayerMoney.Value >= price)
+        if (currentPlayerMoney.Value >= costs[0])
         {
-            currentDisasterVelocity.Value = 1 * 1;
-            currentPlayerMoney.Value -= price;
+            currentPlayerMoney.Value -= costs[0];
+
+            levels[0] = levels[0] + 1;
+
+            costs[0] = costs[0] * levels[0];
+
+            currentDisasterVelocity.Value = 1 * levels[0];
+
+            textLevelVelocity.text = "LvL. " + levels[0].ToString();
+            textStatVelocity.text = currentDisasterVelocity.Value.ToString();
+            textCostVelocity.text = costs[0].ToString();
         }
     }
 
     private void CallButtonSize(ClickEvent clickEvent)
     {
-        float price = 60 * Mathf.Pow(3.4f, 1);
-
-        if (currentPlayerMoney.Value >= price)
+        if (currentPlayerMoney.Value >= costs[1])
         {
-            currentDisasterSize.Value = 0.2f * 1;
-            currentPlayerMoney.Value -= price;
+            currentPlayerMoney.Value -= costs[1];
+
+            levels[1] = levels[1] + 1;
+
+            costs[1] = costs[1] * levels[1];
+
+            currentDisasterSize.Value = 0.2f * levels[1];
+
+            textLevelSize.text = "LvL. " + levels[1].ToString();
+            textStatSize.text = currentDisasterSize.Value.ToString();
+            textCostSize.text = costs[1].ToString();
         }
     }
 
     private void CallButtonStrength(ClickEvent clickEvent)
     {
-        float price = 40 * Mathf.Pow(3, 1);
-
-        if (currentPlayerMoney.Value >= price)
+        if (currentPlayerMoney.Value >= costs[2])
         {
-            currentDisasterStrength.Value = Mathf.Pow(1, 1.8f);
-            currentPlayerMoney.Value -= price;
+            currentDisasterStrength.Value = Mathf.Pow(levels[2], 1.8f);
+            currentPlayerMoney.Value -= costs[2];
         }
     }
 
     private void CallButtonAttackSpeed(ClickEvent clickEvent)
     {
-        float price = 50 * Mathf.Pow(3.2f, 1);
-
-        if (currentPlayerMoney.Value >= price)
+        if (currentPlayerMoney.Value >= costs[3])
         {
-            currentDisasterAttackSpeed.Value = 1 * 1;
-            currentPlayerMoney.Value -= price;
+            currentDisasterAttackSpeed.Value = 1 / (0.3f * levels[3]);
+            currentPlayerMoney.Value -= costs[3];
         }
     }
 
     private void CallButtonCriticChance(ClickEvent clickEvent)
     {
-        float price = 80 * Mathf.Pow(3.8f, 1);
-
-        if (currentPlayerMoney.Value >= price)
+        if (currentPlayerMoney.Value >= costs[4])
         {
-            currentDisasterCriticChance.Value = Mathf.Pow(1, 1.1f);
-            currentPlayerMoney.Value -= price;
+            currentDisasterCriticChance.Value = Mathf.Pow(levels[4], 1.1f);
+            currentPlayerMoney.Value -= costs[4];
         }
     }
 
     private void CallButtonCriticMultipler(ClickEvent clickEvent)
     {
-        float price = 70 * Mathf.Pow(3.6f, 1);
-
-        if (currentPlayerMoney.Value >= price)
+        if (currentPlayerMoney.Value >= costs[5])
         {
-            currentDisasterCriticMultiplier.Value = 1 * 0.01f;
-            currentPlayerMoney.Value -= price;
+            currentDisasterCriticMultiplier.Value = 0.01f * levels[5];
+            currentPlayerMoney.Value -= costs[5];
         }
     }
 }

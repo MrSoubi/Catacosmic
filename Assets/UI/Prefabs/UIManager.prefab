@@ -215,13 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shutUpgrade: {fileID: 11400000, guid: 09c18c3bb73563241a84aa6ca05d046a, type: 2}
+  currentDisasterVelocity: {fileID: 11400000, guid: da53deedbdcd724468542b4f8911f886, type: 2}
+  currentDisasterSize: {fileID: 11400000, guid: 46c6089687dcd5b42b6534c7ab71f798, type: 2}
+  currentDisasterStrength: {fileID: 11400000, guid: e2a9a3e9cd0c61e479c2a6bb5df1554e, type: 2}
   currentDisasterAttackSpeed: {fileID: 11400000, guid: 82602e185e497cc4bb08bea3a5618d03, type: 2}
   currentDisasterCriticChance: {fileID: 11400000, guid: 30559acfe4c862245898110ba05e5e05, type: 2}
   currentDisasterCriticMultiplier: {fileID: 11400000, guid: 0079ffa80f913624aaefac92f50b09ac, type: 2}
-  currentDisasterSize: {fileID: 11400000, guid: 46c6089687dcd5b42b6534c7ab71f798, type: 2}
-  currentDisasterStrength: {fileID: 11400000, guid: e2a9a3e9cd0c61e479c2a6bb5df1554e, type: 2}
-  currentDisasterVelocity: {fileID: 11400000, guid: da53deedbdcd724468542b4f8911f886, type: 2}
   currentPlayerMoney: {fileID: 11400000, guid: 76b0bd6285d1cde47926615e80e16e52, type: 2}
+  levels: 010000000100000001000000010000000100000001000000
+  costs: 3c0000003c00000028000000320000005000000046000000
 --- !u!1 &935843880061457385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,10 +1289,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shutUpgrade: {fileID: 11400000, guid: 09c18c3bb73563241a84aa6ca05d046a, type: 2}
+  currentDisasterVelocity: {fileID: 11400000, guid: da53deedbdcd724468542b4f8911f886, type: 2}
+  currentDisasterSize: {fileID: 11400000, guid: 46c6089687dcd5b42b6534c7ab71f798, type: 2}
+  currentDisasterStrength: {fileID: 11400000, guid: e2a9a3e9cd0c61e479c2a6bb5df1554e, type: 2}
   currentDisasterAttackSpeed: {fileID: 11400000, guid: 82602e185e497cc4bb08bea3a5618d03, type: 2}
   currentDisasterCriticChance: {fileID: 11400000, guid: 30559acfe4c862245898110ba05e5e05, type: 2}
   currentDisasterCriticMultiplier: {fileID: 11400000, guid: 0079ffa80f913624aaefac92f50b09ac, type: 2}
-  currentDisasterSize: {fileID: 11400000, guid: 46c6089687dcd5b42b6534c7ab71f798, type: 2}
-  currentDisasterStrength: {fileID: 11400000, guid: e2a9a3e9cd0c61e479c2a6bb5df1554e, type: 2}
-  currentDisasterVelocity: {fileID: 11400000, guid: da53deedbdcd724468542b4f8911f886, type: 2}
   currentPlayerMoney: {fileID: 11400000, guid: 76b0bd6285d1cde47926615e80e16e52, type: 2}
+  levels: 
+  costs: 
