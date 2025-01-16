@@ -39,6 +39,9 @@ public class CameraFreePress : MonoBehaviour
     private bool isDecelerating;
 
     private Coroutine decelerationCoroutine;
+    private Coroutine zoomCoroutine;
+
+    private float refVelocity;
 
     private void OnValidate()
     {
@@ -175,13 +178,40 @@ public class CameraFreePress : MonoBehaviour
 
     private void Zoom()
     {
-        cameraMain.orthographicSize = Mathf.Clamp(cameraMain.orthographicSize - stepZoom, maxZoom, minZoom);
-        circleCamera.localScale = new Vector3(cameraMain.orthographicSize / 50f, cameraMain.orthographicSize / 50f, 1);
+        if (zoomCoroutine != null)
+        {
+            StopCoroutine(zoomCoroutine);
+        }
+
+        zoomCoroutine = StartCoroutine(SmoothDeZoomCoroutine(-stepZoom));
     }
 
     private void DeZoom()
     {
-        cameraMain.orthographicSize = Mathf.Clamp(cameraMain.orthographicSize + stepZoom, maxZoom, minZoom);
+        if (zoomCoroutine != null)
+        {
+            StopCoroutine(zoomCoroutine);
+        }
+
+        zoomCoroutine = StartCoroutine(SmoothDeZoomCoroutine(stepZoom));
+    }
+
+    private IEnumerator SmoothDeZoomCoroutine(float value)
+    {
+        float targetValue = Mathf.Clamp(cameraMain.orthographicSize + value, maxZoom, minZoom);
+
+        while (!Mathf.Approximately(cameraMain.orthographicSize, targetValue))
+        {
+            cameraMain.orthographicSize = Mathf.SmoothDamp(cameraMain.orthographicSize, targetValue, ref refVelocity, 0.1f);
+
+            circleCamera.localScale = new Vector3(cameraMain.orthographicSize / 50f, cameraMain.orthographicSize / 50f, 1);
+
+            yield return null;
+        }
+
+        cameraMain.orthographicSize = targetValue;
         circleCamera.localScale = new Vector3(cameraMain.orthographicSize / 50f, cameraMain.orthographicSize / 50f, 1);
+
+        zoomCoroutine = null;
     }
 }

@@ -298,5 +298,5 @@ MonoBehaviour:
   speedDecelaration: 1
   velocityMinDecelaration: 1
   maxZoom: 5
-  minZoom: 105
-  stepZoom: 10
+  minZoom: 50
+  stepZoom: 5
