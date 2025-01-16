@@ -1968,6 +1968,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2342198434413574984, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
+      propertyPath: 'costs.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342198434413574984, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
+      propertyPath: 'costs.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342198434413574984, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
+      propertyPath: 'costs.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342198434413574984, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
+      propertyPath: 'costs.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342198434413574984, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
+      propertyPath: 'costs.Array.data[4]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342198434413574984, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
+      propertyPath: 'costs.Array.data[5]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6702791392107367932, guid: 7e4b529e743df09448d7a6eae5637d65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
