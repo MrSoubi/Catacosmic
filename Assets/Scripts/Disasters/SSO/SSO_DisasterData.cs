@@ -5,7 +5,7 @@ using UnityEngine;
 public class SSO_DisasterData : ScriptableObject
 {
     [Title("Parameters")]
-    [SerializeField] private string name;
+    [SerializeField] private string disasterName;
     [SerializeField] private Sprite sprite;
     [SerializeField] private float size;
     [SerializeField] private float velocity;
@@ -49,8 +49,8 @@ public class SSO_DisasterData : ScriptableObject
 
     public string Name
     {
-        get => name;
-        set => name = value;
+        get => disasterName;
+        set => disasterName = value;
     }
 
     public Sprite Sprite
