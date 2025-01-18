@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System;
 
 public class RUI_Upgrades : MonoBehaviour
 {
@@ -134,6 +135,34 @@ public class RUI_Upgrades : MonoBehaviour
         buttonAttackSpeed.UnregisterCallback<ClickEvent>(CallButtonAttackSpeed);
         buttonCriticChance.UnregisterCallback<ClickEvent>(CallButtonCriticChance);
         buttonCriticMultiplier.UnregisterCallback<ClickEvent>(CallButtonCriticMultipler);
+    }
+
+    private void UpgradeUI(Button button, Label text, int index)
+    {
+        if (levels[index] >= 50)
+        {
+            button.SetEnabled(false);
+            text.text = "0";
+        }
+        else if (currentPlayerMoney.Value >= costs[index])
+        {
+            text.style.color = new StyleColor(Color.white);
+        }
+        else
+        {
+            text.style.color = new StyleColor(Color.gray);
+        }
+    }
+
+    private void Update()
+    {
+        UpgradeUI(buttonVelocity, textCostVelocity, 0);
+        UpgradeUI(buttonSize, textCostSize, 1);
+        UpgradeUI(buttonStrength, textCostStrength, 2);
+        UpgradeUI(buttonAttackSpeed, textCostAttackSpeed, 3);
+        UpgradeUI(buttonCriticChance, textCostCriticChance, 4);
+        UpgradeUI(buttonCriticMultiplier, textCostCriticMultiplier, 5);
+
     }
 
     private void CallButtonGame(ClickEvent clickEvent)
