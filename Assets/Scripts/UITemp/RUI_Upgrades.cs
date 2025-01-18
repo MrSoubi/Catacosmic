@@ -143,7 +143,7 @@ public class RUI_Upgrades : MonoBehaviour
 
     private void CallButtonVelocity(ClickEvent clickEvent)
     {
-        if (currentPlayerMoney.Value >= costs[0])
+        if (currentPlayerMoney.Value >= costs[0] && levels[0] < 50)
         {
             currentPlayerMoney.Value -= costs[0];
 
@@ -151,7 +151,7 @@ public class RUI_Upgrades : MonoBehaviour
 
             costs[0] = costs[0] * levels[0];
 
-            currentDisasterVelocity.Value = 1 * levels[0];
+            currentDisasterVelocity.Value = 0.4f + 0.1f * levels[0];
 
             textLevelVelocity.text = "LvL. " + levels[0].ToString();
             textStatVelocity.text = currentDisasterVelocity.Value.ToString();
@@ -161,7 +161,7 @@ public class RUI_Upgrades : MonoBehaviour
 
     private void CallButtonSize(ClickEvent clickEvent)
     {
-        if (currentPlayerMoney.Value >= costs[1])
+        if (currentPlayerMoney.Value >= costs[1] && levels[1] < 50)
         {
             currentPlayerMoney.Value -= costs[1];
 
@@ -169,7 +169,7 @@ public class RUI_Upgrades : MonoBehaviour
 
             costs[1] = costs[1] * levels[1];
 
-            currentDisasterSize.Value = 0.2f * levels[1];
+            currentDisasterSize.Value = 0.2f + 0.05f * levels[1];
 
             textLevelSize.text = "LvL. " + levels[1].ToString();
             textStatSize.text = currentDisasterSize.Value.ToString();
@@ -179,37 +179,69 @@ public class RUI_Upgrades : MonoBehaviour
 
     private void CallButtonStrength(ClickEvent clickEvent)
     {
-        if (currentPlayerMoney.Value >= costs[2])
+        if (currentPlayerMoney.Value >= costs[2] && levels[2] < 50)
         {
-            currentDisasterStrength.Value = Mathf.Pow(levels[2], 1.8f);
             currentPlayerMoney.Value -= costs[2];
+
+            levels[2] = levels[2] + 1;
+
+            costs[2] = costs[2] * levels[2];
+
+            currentDisasterStrength.Value = Mathf.Pow(levels[2], 1f);
+
+            textLevelStrength.text = "LvL. " + levels[2].ToString();
+            textStatStrength.text = currentDisasterStrength.Value.ToString();
+            textCostStrength.text = costs[2].ToString();
         }
     }
 
     private void CallButtonAttackSpeed(ClickEvent clickEvent)
     {
-        if (currentPlayerMoney.Value >= costs[3])
+        if (currentPlayerMoney.Value >= costs[3] && levels[3] < 50)
         {
-            currentDisasterAttackSpeed.Value = 1 / (0.3f * levels[3]);
             currentPlayerMoney.Value -= costs[3];
+
+            levels[3] = levels[3] + 1;
+
+            costs[3] = costs[3] * levels[3];
+
+            currentDisasterAttackSpeed.Value = 1 / (1f * levels[3]);
+
+            textLevelAttackSpeed.text = "LvL. " + levels[3].ToString();
+            textStatAttackSpeed.text = currentDisasterAttackSpeed.Value.ToString();
+            textCostAttackSpeed.text = costs[3].ToString();
         }
     }
 
     private void CallButtonCriticChance(ClickEvent clickEvent)
     {
-        if (currentPlayerMoney.Value >= costs[4])
+        if (currentPlayerMoney.Value >= costs[4] && levels[4] < 50)
         {
-            currentDisasterCriticChance.Value = Mathf.Pow(levels[4], 1.1f);
             currentPlayerMoney.Value -= costs[4];
+
+            levels[4] = levels[4] + 1;
+
+            currentDisasterCriticChance.Value = Mathf.Pow(levels[4], 1f);
+
+            textLevelCriticChance.text = "LvL. " + levels[4].ToString();
+            textStatCriticChance.text = currentDisasterCriticChance.Value.ToString();
+            textCostCriticChance.text = costs[4].ToString();
         }
     }
 
     private void CallButtonCriticMultipler(ClickEvent clickEvent)
     {
-        if (currentPlayerMoney.Value >= costs[5])
+        if (currentPlayerMoney.Value >= costs[5] && levels[5] < 50)
         {
-            currentDisasterCriticMultiplier.Value = 0.01f * levels[5];
             currentPlayerMoney.Value -= costs[5];
+
+            levels[5] = levels[5] + 1;
+
+            currentDisasterCriticMultiplier.Value = 1.1f + 0.05f * levels[5];
+
+            textLevelCriticMultiplier.text = "LvL. " + levels[5].ToString();
+            textStatCriticMultiplier.text = currentDisasterCriticMultiplier.Value.ToString();
+            textCostCriticMultiplier.text = costs[5].ToString();
         }
     }
 }

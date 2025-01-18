@@ -135,7 +135,7 @@ public class Disaster : MonoBehaviour
 
             Vector2 direction = (targetPosition - rb.position).normalized;
 
-            rb.linearVelocity = direction * disasterData.Velocity;
+            rb.linearVelocity = direction * currentDisasterVelocity.Value;
 
             disasterPosition.Value = transform.position;
         }
@@ -156,9 +156,18 @@ public class Disaster : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Damage()
     {
-        yield return new WaitForSeconds(disasterData.AttackSpeed);
+        yield return new WaitForSeconds(currentDisasterAttackSpeed.Value);
 
-        disasterAttack.FireEvent(Mathf.Pow(1.8f, currentDisasterStrength.Value));
+        int rand = Random.Range(1, 101);
+
+        if(rand <= currentDisasterCriticChance.Value)
+        {
+            disasterAttack.FireEvent(currentDisasterStrength.Value * currentDisasterCriticMultiplier.Value);
+        }
+        else
+        {
+            disasterAttack.FireEvent(currentDisasterStrength.Value);
+        }
 
         StartCoroutine(Damage());
     }
